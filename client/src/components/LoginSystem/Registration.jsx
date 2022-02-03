@@ -8,7 +8,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import { deepPurple, purple } from '@mui/material/colors';
 import axios from 'axios'
 import { useState } from 'react';
@@ -55,6 +55,7 @@ export default function Registration() {
             "pass": pass,
             "role": role
         }
+        console.log(dat);
         console.log(imgpath);
         axios.post("http://localhost:5000/add-user", dat)
             .then(res => {
@@ -69,12 +70,16 @@ export default function Registration() {
         event.preventDefault();
         Resizer.imageFileResizer(
             pic,
-            480,
-            480,
+            300,
+            300,
             "JPEG",
             100,
             0,
-            (uri) => { setimgpath(uri) })
+            (uri) => {
+              setimgpath(uri);
+            },
+            "base64"
+          );
         var emaildata = []
         if (data.length === 0) {
             emaildata = []
@@ -106,8 +111,8 @@ export default function Registration() {
         else if (pass !== conpass) {
             alert("password Does't Match try again..")
         }
-        else if(role === "admin"){
-            if(key !== "harsh123"){
+        else if (role === "admin") {
+            if (key !== "harsh123") {
                 alert("Enter Valid Secrate Key")
             }
         }
@@ -134,20 +139,27 @@ export default function Registration() {
                     <Typography component="h1" variant="h5">
                         Sign up
                     </Typography>
-                    <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+                    <Box component="form" noValidate sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
                                 <FormControl fullWidth>
-                                    <InputLabel id="demo-simple-select-label">Role</InputLabel>
-                                    <Select
+                                    {/* <InputLabel id="demo-simple-select-label">Role</InputLabel> */}
+                                    {/* <Select
                                         labelId="demo-simple-select-label"
-                                        id="role"
+                                        
                                         label="Role"
-                                        onChange={(e) => (setrole(e.target.value))}
+                                        
+                                        
                                     >
                                         <MenuItem value={"admin"}>Admin</MenuItem>
                                         <MenuItem value={"member"}>Job Seeker</MenuItem>
-                                    </Select>
+                                    </Select> */}
+
+                                    <Form.Select id="role" onChange={(e) => (setrole(e.target.value))} defaultValue={""}>
+                                        <option value={""}>Role</option>
+                                        <option value={"admin"}>Admin</option>
+                                        <option value={"member"}>Job Seeker</option>
+                                    </Form.Select>
                                 </FormControl>
 
                             </Grid>
@@ -243,6 +255,7 @@ export default function Registration() {
                         </Grid>
                         <Button
                             type="submit"
+                            onClick={(e) => { handleSubmit(e) }}
                             fullWidth
                             className='my-4 w-100 btn'
                             sx={{ mt: 3, mb: 2 }}

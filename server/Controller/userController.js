@@ -24,22 +24,27 @@ exports.OneUser = async (req, res) => {
 
 //New user create function
 exports.CreateUser = async (req, res) => {
-    console.log(req.body);
-    const { name, email, phone, pic, pass, conpass,role } = req.body
-    var path = await uploadsingle(pic)
-    console.log(path);
-    if (path.length !== 0) {
-        var createUser = await User.create({
-            name: name,
-            email: email,
-            phone: phone,
-            pic: path,
-            pass: pass,
-            conpass: conpass,
-            role:role
-        })
-        createUser.save()
-        if (createUser) res.json({ success: "User added Successfully" })
+    try {
+        console.log(req.body);
+        const { name, email, phone, pic, pass, conpass, role } = req.body
+        var path = await uploadsingle(pic)
+        console.log(path);
+        if (path.length !== 0) {
+            var createUser = await User.create({
+                name: name,
+                email: email,
+                phone: phone,
+                pic: path,
+                pass: pass,
+                conpass: conpass,
+                role: role
+            })
+            createUser.save()
+            if (createUser) res.json({ success: "User added Successfully" })
+        }
+    }
+    catch{
+        res.json({msg:"user creation fail"})
     }
 }
 
@@ -49,7 +54,7 @@ exports.Login = async (req, res) => {
     const { email, pass } = req.body
     const authUser = await User.findOne({ email: email, pass: pass })
     if (authUser) {
-        res.send({user: authUser })
+        res.send({ user: authUser })
     }
     else {
         res.status(400).send({ msg: 'Error' })

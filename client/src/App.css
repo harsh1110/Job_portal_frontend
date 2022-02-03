@@ -36,6 +36,13 @@
 .css-cveggr-MuiListItemIcon-root {
   min-width: 46px !important;
 }
+.MuiBox-root.css-8atqhb{
+  width: 80% !important;
+  margin-left: 17%;
+}
+.table-title{
+  margin-left: -120px !important
+}
 
 
 
@@ -58,8 +65,14 @@
     margin-left: 20px !important;
     width: 90% !important;
   }
-
+  .table-title{
+    margin-left: 0px !important
+  }
   .MuiPaper-root.MuiPaper-elevation.MuiPaper-elevation16.MuiDrawer-paper.MuiDrawer-paperAnchorLeft.css-4t3x6l-MuiPaper-root-MuiDrawer-paper {
     background: linear-gradient(120deg, rgb(102, 0, 150), rgb(247, 2, 255)) !important;
+  }
+  .MuiBox-root.css-8atqhb{
+    width: 100% !important;
+    margin-left: 0% !important;
   }
 }

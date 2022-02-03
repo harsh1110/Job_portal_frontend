@@ -31,18 +31,15 @@ export default function LoginPage() {
 
 
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
     const data = {
       email:email,
       pass:pass
     }
-
-
     axios.post("http://localhost:5000/login", data)
       .then((value) => {
-        console.log(value.data.user.role);
-        setAuthUser(value.data.user)
+        setAuthUser(value.data)
         if (authUser) {
           localStorage.setItem("user", authUser._id)
           localStorage.setItem("role", authUser.role)
@@ -53,9 +50,9 @@ export default function LoginPage() {
            window.location = "/profile"
          }
         }
-        else {
-          alert("try again")
-        }
+        // else {
+        //   handleSubmit(event)
+        // }
       })
       .catch((err) => {
         console.log(err);

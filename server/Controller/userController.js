@@ -54,7 +54,7 @@ exports.Login = async (req, res) => {
     const { email, pass } = req.body
     const authUser = await User.findOne({ email: email, pass: pass })
     if (authUser) {
-        res.send({ user: authUser })
+        res.send(authUser)
     }
     else {
         res.status(400).send({ msg: 'Error' })

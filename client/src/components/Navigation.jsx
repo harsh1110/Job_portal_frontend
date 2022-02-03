@@ -22,8 +22,8 @@ const Navigation = () => {
 
   
 
-const getData = () => {
-  axios.get(`http://localhost:5000/user/${date}`)
+const getData = (id) => {
+  axios.get(`http://localhost:5000/user/${id}`)
       .then((value) => {
         setauthUser(value.data)
       })
@@ -33,8 +33,7 @@ const getData = () => {
 }
   if(localStorage.getItem("user")) {
     const id = localStorage.getItem("user")
-    var date = id.slice(1, id.length-1)
-    // getData()
+    getData(id)
   };
 
 
@@ -93,7 +92,7 @@ const getData = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" sx={{ bgcolor: "pink" }} src={authUser.pic} />
+                <Avatar alt="Remy Sharp" src={authUser.pic} onBackdropClick="false"/>
               </IconButton>
             </Tooltip>
             <Menu

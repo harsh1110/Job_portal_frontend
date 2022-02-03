@@ -82,6 +82,12 @@ const headCells = [
     numeric: false,
     disablePadding: false,
     label: 'Job Description',
+  },
+  {
+    id: 'Actions',
+    numeric: false,
+    disablePadding: false,
+    label: 'Actions',
   }
 ];
 
@@ -146,16 +152,6 @@ const EnhancedTableToolbar = (props) => {
         }),
       }}
     >
-      {numSelected > 0 ? (
-        <Typography
-          sx={{ flex: '1 1 100%' }}
-          color="inherit"
-          variant="subtitle1"
-          component="div"
-        >
-          {numSelected} selected
-        </Typography>
-      ) : (
         <Typography
           sx={{ flex: '1 1 100%' }}
           variant="h4"
@@ -165,7 +161,6 @@ const EnhancedTableToolbar = (props) => {
         >
           All Job Post List
         </Typography>
-      )}
     </Toolbar>
   );
 };
@@ -300,6 +295,7 @@ React.useEffect(() => {
                       <TableCell align="start">{job.positions}</TableCell>
                       <TableCell align="start">{job.limit}</TableCell>
                       <TableCell align="start">{job.jobDescription}</TableCell>
+                      <TableCell align="start"><button className="btn text-white" onClick={(e)=>(window.location = `/job/${job._id}`)}>Apply</button></TableCell>
                     </TableRow>
                   );
                 })}

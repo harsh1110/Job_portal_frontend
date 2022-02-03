@@ -1,8 +1,6 @@
 import { Typography } from "@mui/material";
 import { Grid } from "@mui/material";
 import React from "react";
-import MediaCard from "./Home/Cards";
-import CrouselCompo from "./Home/CrouselCompo";
 
 const HomePage = () => {
   return (

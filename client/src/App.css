@@ -56,7 +56,11 @@ body::-webkit-scrollbar-thumb
   min-width: 46px !important;
 }
 .MuiBox-root.css-8atqhb{
+/* <<<<<<< Updated upstream */
   width: 77% !important;
+/* ======= */
+  width: 76% !important;
+/* >>>>>>> Stashed changes */
   margin-left: 17%;
 }
 .table-title{

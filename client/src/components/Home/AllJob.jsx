@@ -22,6 +22,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import axios from 'axios'
+import { Button } from '@mui/material';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -182,6 +183,7 @@ export default function AllJob() {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [alljobs, setAlljobs] = React.useState([]);
+
 React.useEffect(() => {
   axios.get("http://localhost:5000/job/all")
   .then((value) => {
@@ -242,6 +244,11 @@ React.useEffect(() => {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - alljobs.length) : 0;
 
+    const JobApply = () => {
+      localStorage.clear()
+      window.location="/JobApply"
+    }
+
   return (
     <Box sx={{ width: '100%' }} className="all-job">
       <Paper sx={{ width: '100%', mb: 2 }}>
@@ -300,6 +307,7 @@ React.useEffect(() => {
                       <TableCell align="start">{job.positions}</TableCell>
                       <TableCell align="start">{job.limit}</TableCell>
                       <TableCell align="start">{job.jobDescription}</TableCell>
+                      <TableCell><Button onClick={(e)=>JobApply(e)}>Apply</Button></TableCell>
                     </TableRow>
                   );
                 })}

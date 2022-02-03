@@ -14,6 +14,7 @@ import ShowAllJob from "./components/Admin/ShowAllJob";
 import MemberProfile from "./components/Home/MemberProfile";
 import AllJob from "./components/Home/AllJob";
 import AppliedJob from "./components/Home/AppliedJob";
+import JobForm from "./components/Home/JobForm";
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
                 <Route exact path="/Profile" element={<MemberProfile />} />
                 <Route exact path="/All%20Job%20List" element={<AllJob />} />
                 <Route exact path="/Applied%20Job" element={<AppliedJob />} />
+                <Route exact path="/JobApply" element={<JobForm />} />
               </Routes>
             </BrowserRouter>
           )}

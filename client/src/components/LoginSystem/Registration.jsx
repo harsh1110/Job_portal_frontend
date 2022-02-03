@@ -88,9 +88,9 @@ export default function Registration() {
         if (name === "" || email === "" || phone === "" || pic === "" || pass === "" || conpass === "") {
             alert("fields can not Empty...!!")
         }
-        else if (!(/[a-zA-Z]{5}/).test(name)) {
-            alert("Name is not valid...!!")
-        }
+        // else if (!(/[a-zA-Z]{5}/).test(name)) {
+        //     alert("Name is not valid...!!")
+        // }
         else if (!(/^[a-zA-Z0-9]+@[a-zA-Z0-9.-]+.[a-zA-Z]$/).test(email)) {
             alert("email is not valid...!!")
         }

@@ -9,6 +9,7 @@ import ResponsiveDrawer from './components/Admin/SideBar';
 import Profile from './components/Admin/Profile';
 import TopSection from './components/Admin/TopSection';
 import Logout from './components/LoginSystem/Logout';
+import CreateJob from './components/Admin/CreateJob'; 
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
                   <Routes>
                     <Route exact path="/Profile" element={<Profile />} />
                     <Route exact path="/Dashboard" element={<TopSection />} />
+                    <Route exact path="/Create%20Job%20Post" element={<CreateJob/>}/>
                     <Route exact path="/Log%20Out" element={<Logout />} />
                   </Routes>
                 </BrowserRouter>

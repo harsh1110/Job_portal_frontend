@@ -303,7 +303,6 @@ React.useEffect(() => {
                       <TableCell align="start">{job.limit}</TableCell>
                       <TableCell align="start">{job.jobDescription}</TableCell>
                       <TableCell align="start"><button className="btn text-white" onClick={(e)=>(window.location = `/job/${job._id}`)}>Apply</button></TableCell>
-                      <TableCell><Button onClick={(e)=>JobApply(e)}>Apply</Button></TableCell>
                     </TableRow>
                   );
                 })}

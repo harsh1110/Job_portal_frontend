@@ -50,7 +50,7 @@ export default function LoginPage() {
            window.location = "/Profile"
          }
          else{
-           window.location = "/"
+           window.location = "/profile"
          }
         }
         else {

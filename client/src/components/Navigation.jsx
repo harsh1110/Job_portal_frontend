@@ -13,7 +13,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { useEffect } from 'react';
 import axios from 'axios';
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'All Job List', 'Applied Job', 'Logout'];
 const withoutAuth = ['Login', 'Register'];
 
 const Navigation = () => {
@@ -56,6 +56,9 @@ const getData = () => {
       }
       else if(name === "Register"){
           window.location = "/create-user"
+      }
+      else{
+        window.location = `/${name}`
       }
     setAnchorElUser(null);
   };

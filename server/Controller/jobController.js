@@ -4,12 +4,13 @@ const Job = require('../Models/jobModel')
 exports.CreateNewJob = async (req, res) => {
     try {
         console.log(req.body);
-        const { designation, position, limit, jobDescription } = req.body
+        const { designation, position, limit, jobDescription, userId } = req.body
         var createJob = await Job.create({
             designation: designation,
             jobDescription: jobDescription,
             positions: position,
             limit: limit,
+            createdBy: userId
         })
         createJob.save()
         if (createJob) res.json({ success: "Job added Successfully" })

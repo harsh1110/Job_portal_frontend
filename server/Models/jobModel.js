@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { ObjectId } = mongoose.Schema;
 
 const Job = mongoose.Schema({
     designation: {
@@ -13,9 +14,10 @@ const Job = mongoose.Schema({
     limit: {
         type: Number
     },
-    user: {
-        type: String
-    }
+    createdBy: {
+        type: ObjectId,
+        ref: "Users" 
+    },
 }, { timestamps: true })
 
 module.exports = mongoose.model("Jobs", Job)

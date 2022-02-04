@@ -13,22 +13,25 @@ import MenuItem from '@mui/material/MenuItem';
 import { useEffect } from 'react';
 import axios from 'axios';
 
+
+
 const settings = ['Profile', 'All Job List', 'Applied Job', 'Logout'];
 const withoutAuth = ['Login', 'Register'];
 
 const Navigation = () => {
+  // const window.localtion =  = usewindow.localtion = ();
   const [authUser, setauthUser] = React.useState([]);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
-
-
+  
+  
+  
   const getData = (id) => {
     axios.get(`http://localhost:5000/user/${id}`)
-      .then((value) => {
-        setauthUser(value.data)
-      })
-      .catch((err) => {
-        console.log(err);
+    .then((value) => {
+      setauthUser(value.data)
+    })
+    .catch((err) => {
+      console.log(err);
       })
   }
   useEffect(() => {
@@ -72,7 +75,6 @@ const Navigation = () => {
           <Typography
             variant="h6"
             noWrap
-            // style={{color:"green"}}
             component="div"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
@@ -94,7 +96,7 @@ const Navigation = () => {
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="Remy Sharp" src={authUser.pic} onBackdropClick="false" />
+                    <Avatar alt="Remy Sharp" src={authUser.pic} />
                   </IconButton>
                 </Tooltip>
                 <Menu

@@ -12,48 +12,46 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
 import axios from "axios"
-import { useJwt } from "react-jwt";
-
+import { toast } from 'react-toastify';
 const theme = createTheme();
 
 export default function LoginPage() {
-
+  
+  // const window.location =  = usewindow.location = ()
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [authUser, setAuthUser] = useState();
+  
+  // console.log(window.location = );
   // var token = "harsh"
   // const { decodedToken, isExpired } = useJwt(token);
   // if(authUser){
-  //   token = authUser._id
-  // }
-  // console.log(decodedToken);
-  // console.log(isExpired);
-
-
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = {
-      email:email,
-      pass:pass
+    //   token = authUser._id
+    // }
+    // console.log(decodedToken);
+    // console.log(isExpired);
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      const data = {
+      email: email,
+      pass: pass
     }
     axios.post("http://localhost:5000/login", data)
       .then((value) => {
         setAuthUser(value.data)
         if (authUser) {
-          alert("login successfully")
           localStorage.setItem("user", authUser._id)
           localStorage.setItem("role", authUser.role)
-         if(authUser.role === "admin"){
-           window.location = "/Profile"
-         }
-         else{
-           window.location = "/profile"
-         }
+          if (authUser.role === "admin") {
+            window.location = ("/profile")
+          }
+          else {
+            window.location = ("/profile")
+          }
         }
         else {
-          if(authUser){
-            window.location = "/profile"
+          if (authUser) {
+            window.location = ("/profile")
           }
         }
       })
@@ -61,10 +59,12 @@ export default function LoginPage() {
         console.log(err);
       })
   };
-
-
-
-
+  console.log(window.document.referrer);
+  // if (window.document.referrer === "/logout") {
+  //   toast.success("Successfully logout",{
+  //     position:"top-center"
+  //   });
+  // }
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: '100vh' }}>

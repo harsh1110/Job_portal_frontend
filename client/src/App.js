@@ -15,12 +15,15 @@ import MemberProfile from "./components/Home/MemberProfile";
 import AllJob from "./components/Home/AllJob";
 import AppliedJob from "./components/Home/AppliedJob";
 import ApplyJob from "./components/Home/ApplyJob";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
     <>
       {localStorage.getItem("user") ? (
         <>
+          <ToastContainer style={{ marginTop: "80px" }} />
           {localStorage.getItem("role") === "admin" ? (
             <BrowserRouter>
               <ResponsiveDrawer />
@@ -41,6 +44,7 @@ function App() {
               </Routes>
             </BrowserRouter>
           ) : (
+
             <BrowserRouter>
               <Navigation />
               <Routes>
@@ -55,6 +59,7 @@ function App() {
         </>
       ) : (
         <>
+        <ToastContainer style={{ marginTop: "80px" }} />
           <Navigation />
           <BrowserRouter>
             <Routes>

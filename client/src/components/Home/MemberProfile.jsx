@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EditIcon from "@mui/icons-material/Edit";
+import { toast } from 'react-toastify';
+
 
 const MemberProfile = () => {
   const id = localStorage.getItem("user");
@@ -13,6 +15,7 @@ const MemberProfile = () => {
       .get(`http://localhost:5000/user/${id}`)
       .then((res) => {
         setUser(res.data);
+        toast.success("Successfully login");
       })
       .catch((err) => console.log(err));
   }, []);
@@ -28,7 +31,7 @@ const MemberProfile = () => {
           <div className="col-4">
             <img
               className="my-4 "
-              
+
               src={user.pic}
               style={{ borderRadius: "50%", border: "5px double purple" }}
               height={"250px"}

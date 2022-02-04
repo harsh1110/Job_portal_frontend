@@ -20,21 +20,23 @@ const Navigation = () => {
   const [authUser, setauthUser] = React.useState([]);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  
 
-const getData = (id) => {
-  axios.get(`http://localhost:5000/user/${id}`)
+
+  const getData = (id) => {
+    axios.get(`http://localhost:5000/user/${id}`)
       .then((value) => {
         setauthUser(value.data)
       })
       .catch((err) => {
         console.log(err);
       })
-}
-  if(localStorage.getItem("user")) {
-    const id = localStorage.getItem("user")
-    getData(id)
-  };
+  }
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      const id = localStorage.getItem("user")
+      getData(id)
+    };
+  }, []);
 
 
 
@@ -44,21 +46,21 @@ const getData = (id) => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseUserMenu = (e,name) => {
-      e.preventDefault()
-      if(name==="Logout") {
-          localStorage.clear()
-          window.location = "/login"
-      }
-      else if(name==="Login") {
-          window.location = "/login"
-      }
-      else if(name === "Register"){
-          window.location = "/create-user"
-      }
-      else{
-        window.location = `/${name}`
-      }
+  const handleCloseUserMenu = (e, name) => {
+    e.preventDefault()
+    if (name === "Logout") {
+      localStorage.clear()
+      window.location = "/login"
+    }
+    else if (name === "Login") {
+      window.location = "/login"
+    }
+    else if (name === "Register") {
+      window.location = "/create-user"
+    }
+    else {
+      window.location = `/${name}`
+    }
     setAnchorElUser(null);
   };
 
@@ -88,66 +90,66 @@ const getData = (id) => {
           </Box>
 
           {
-              localStorage.getItem("user")?
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src={authUser.pic} onBackdropClick="false"/>
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={(e)=>(handleCloseUserMenu(e,setting))}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-          :
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <MenuIcon/>
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {withoutAuth.map((setting) => (
-                <MenuItem key={setting} onClick={(e)=>(handleCloseUserMenu(e,setting))}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+            localStorage.getItem("user") ?
+              <Box sx={{ flexGrow: 0 }}>
+                <Tooltip title="Open settings">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar alt="Remy Sharp" src={authUser.pic} onBackdropClick="false" />
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: '45px' }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  {settings.map((setting) => (
+                    <MenuItem key={setting} onClick={(e) => (handleCloseUserMenu(e, setting))}>
+                      <Typography textAlign="center">{setting}</Typography>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </Box>
+              :
+              <Box sx={{ flexGrow: 0 }}>
+                <Tooltip title="Open settings">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <MenuIcon />
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: '45px' }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  {withoutAuth.map((setting) => (
+                    <MenuItem key={setting} onClick={(e) => (handleCloseUserMenu(e, setting))}>
+                      <Typography textAlign="center">{setting}</Typography>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </Box>
           }
         </Toolbar>
       </Container>

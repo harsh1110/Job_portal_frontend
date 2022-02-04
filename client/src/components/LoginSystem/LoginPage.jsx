@@ -31,7 +31,7 @@ export default function LoginPage() {
 
 
 
-  const handleSubmit = async(event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const data = {
       email:email,
@@ -41,6 +41,7 @@ export default function LoginPage() {
       .then((value) => {
         setAuthUser(value.data)
         if (authUser) {
+          alert("login successfully")
           localStorage.setItem("user", authUser._id)
           localStorage.setItem("role", authUser.role)
          if(authUser.role === "admin"){
@@ -50,9 +51,11 @@ export default function LoginPage() {
            window.location = "/profile"
          }
         }
-        // else {
-        //   handleSubmit(event)
-        // }
+        else {
+          if(authUser){
+            window.location = "/profile"
+          }
+        }
       })
       .catch((err) => {
         console.log(err);

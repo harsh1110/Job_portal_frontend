@@ -137,6 +137,7 @@ export default function ApplyJob() {
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
+                  fullWidth
                     id="date"
                     label="Birthday"
                     type="date"

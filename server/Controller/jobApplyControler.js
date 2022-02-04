@@ -26,8 +26,9 @@ exports.JobApply = async (req, res) => {
         
         })
     
+        console.log(jobApply)
         jobApply.save()
-        if (jobApply) res.send({ success : "job Applied Sucessfully"})
+        if (jobApply) res.send({ success : "job Applied Sucessfully", data:jobApply})
     }
     catch {
         res.json({ error: "Job Apply fail" })

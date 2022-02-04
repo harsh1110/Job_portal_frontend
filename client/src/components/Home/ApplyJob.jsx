@@ -51,6 +51,7 @@ export default function ApplyJob() {
     axios
       .post(`http://localhost:5000/job/user/apply`,data )
       .then((res) =>{
+        console.log(res)
       alert("Job Applied Successfully")});
     e.preventDefault();
   };
@@ -136,6 +137,7 @@ export default function ApplyJob() {
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
+                  fullWidth
                     id="date"
                     label="Birthday"
                     type="date"

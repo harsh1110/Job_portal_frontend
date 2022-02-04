@@ -38,6 +38,7 @@ export default function ApplyJob() {
   const [jobid, setjobid] = useState("");
 
   const handleSubmit = (e) => {
+    e.preventDefault()
     const data = {
       jobid: jobid,
       name: name,
@@ -49,16 +50,16 @@ export default function ApplyJob() {
       userId: user,
     };
     axios
-      .post(`http://localhost:5000/job/user/apply`,data )
-      .then((res) =>{
-      alert("Job Applied Successfully")});
-    e.preventDefault();
+      .post(`http://localhost:5000/job/user/apply`, data)
+      .then((res) => {
+        alert("Job Applied Successfully")
+      });
   };
   React.useEffect(() => {
     axios.get(`http://localhost:5000/job/one/${id}`).then((res) => {
       // console.log(res.data);
       setdesignation(res.data.designation);
-      setjobid(res.data.id);
+      setjobid(res.data._id);
     });
     // console.log(jobid);
 
@@ -204,7 +205,7 @@ export default function ApplyJob() {
                       value="true"
                       control={<Radio />}
                       label="Yes"
-                      // onClick={handleOpen}
+                    // onClick={handleOpen}
                     />
 
                     <FormControlLabel

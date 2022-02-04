@@ -16,7 +16,7 @@ const JobApply = mongoose.Schema({
         type: Number
     },
     date: {
-        type: Date
+        type: String
     },
     employStatus: {
         type: String
@@ -27,7 +27,7 @@ const JobApply = mongoose.Schema({
     Resume: {
         type: String
     },
-    createdBy: {
+    AppliedBy: {
         type: ObjectId,
         ref: "Users" 
     },

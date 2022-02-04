@@ -5,7 +5,7 @@ import React from "react";
 const HomePage = () => {
   return (
     <>
-      <div
+      {/* <div
       className="admin row  container "
         style={{
           justifyContent: "center",
@@ -25,7 +25,7 @@ const HomePage = () => {
           </Typography>
         
         </Grid>
-      </div>
+      </div> */}
       {/* <CrouselCompo/> */}
       {/* <div className="text-center my-4">
       <h3 className="text-primary my-4">

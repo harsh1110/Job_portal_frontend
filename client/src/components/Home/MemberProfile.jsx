@@ -8,6 +8,9 @@ import { toast } from 'react-toastify';
 
 
 const MemberProfile = () => {
+  if (window.document.referrer === "http://localhost:3000/login") {
+    toast.success("Successfully login");
+  }
   const id = localStorage.getItem("user");
   const [user, setUser] = useState([]);
   useEffect(() => {
@@ -15,7 +18,6 @@ const MemberProfile = () => {
       .get(`http://localhost:5000/user/${id}`)
       .then((res) => {
         setUser(res.data);
-        toast.success("Successfully login");
       })
       .catch((err) => console.log(err));
   }, []);

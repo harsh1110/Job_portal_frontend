@@ -4,14 +4,18 @@ import React, { useEffect, useState } from 'react';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EditIcon from '@mui/icons-material/Edit';
+import { toast } from 'react-toastify';
 
 const Profile = () => {
     const id = localStorage.getItem("user")
     const [user, setUser] = useState([]);
     useEffect(() => {
         axios.get(`http://localhost:5000/user/${id}`)
-            .then((res) => {
-                setUser(res.data)
+        .then((res) => {
+            setUser(res.data)
+            if (window.document.referrer === "http://localhost:3000/login") {
+                toast.success("Successfully login");
+            }
             })
             .catch((err) => console.log(err))
     }, []);
@@ -27,12 +31,12 @@ const Profile = () => {
                     </div>
                     <div className="col-lg-6 col-xs-12 my-4">
                         <h1 className='purple my-4'>{user.name}</h1>
-                        <h5 className='purple my-4'><EmailIcon/>&nbsp;&nbsp;&nbsp;{user.email}</h5>
-                        <h5 className='purple'><PhoneIcon/>&nbsp;&nbsp;&nbsp;{user.phone}</h5>
+                        <h5 className='purple my-4'><EmailIcon />&nbsp;&nbsp;&nbsp;{user.email}</h5>
+                        <h5 className='purple'><PhoneIcon />&nbsp;&nbsp;&nbsp;{user.phone}</h5>
                     </div>
                     <div className="col-4"></div>
                     <div className="col-6">
-                        <button className="btn btn-lg text-white"><EditIcon/>&nbsp;&nbsp;Edit Profile</button>
+                        <button className="btn btn-lg text-white"><EditIcon />&nbsp;&nbsp;Edit Profile</button>
                     </div>
                 </>
         }

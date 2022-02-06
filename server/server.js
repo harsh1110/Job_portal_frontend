@@ -7,6 +7,7 @@ const dbConnect = require("./Config/dbConnect")
 const port = process.env.PORT
 const userRoute = require("./Routes/userRoute")
 const jobRoute = require("./Routes/jobRoute")
+const jobApplyRoute = require("./Routes/applyJobRoute")
 app.use(cors())
 app.use(express.json())
 dbConnect()
@@ -15,6 +16,7 @@ dbConnect()
 //User-Routes
 app.use("/",userRoute)
 app.use("/job",jobRoute)
+app.use("/job/apply",jobApplyRoute)
 
 
 

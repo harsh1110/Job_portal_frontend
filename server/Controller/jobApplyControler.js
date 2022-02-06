@@ -1,14 +1,20 @@
 const JobApply = require('../Models/jobApplyModel')
 
-exports.allUser = async (req, res) => {
-    var allUser = await User.find({}).lean()
-    res.send(allUser)
+exports.allApplyJob = async (req, res) => {
+    var allJobApply = await JobApply.find({}).lean()
+    res.send(allJobApply)
 }
 
-exports.OneUser = async (req, res) => {
+exports.OneJob = async (req, res) => {
     var id = req.params.id
-    var oneuser = await User.findOne({ _id: id }).lean()
-    res.send(oneuser)
+    var onejob = await JobApply.findOne({ _id: id }).lean()
+    res.send(onejob)
+}
+
+exports.JobApplyPerUser = async(req,res) => {
+    var id = req.params.id
+    var allAppliedJobPerUser = await JobApply.find({ AppliedBy: id }).lean()
+    res.send(allAppliedJobPerUser)
 }
 
 exports.JobApply = async (req, res) => {

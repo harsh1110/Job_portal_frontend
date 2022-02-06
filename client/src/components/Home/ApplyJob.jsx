@@ -40,7 +40,7 @@ export default function ApplyJob() {
   const handleSubmit = (e) => {
     e.preventDefault()
     const data = {
-      jobid: jobid,
+      jobId: jobid,
       name: name,
       email: email,
       phone: number,
@@ -49,11 +49,14 @@ export default function ApplyJob() {
       reference: reference,
       userId: user,
     };
-    axios
-      .post(`http://localhost:5000/job/user/apply`, data)
+    axios.post(`http://localhost:5000/job/apply/user`, data)
       .then((res) => {
         alert("Job Applied Successfully")
-      });
+        window.location = "/Applied%20Job"
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   };
   React.useEffect(() => {
     axios.get(`http://localhost:5000/job/one/${id}`).then((res) => {

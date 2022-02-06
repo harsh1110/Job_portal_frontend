@@ -59,12 +59,15 @@ export default function LoginPage() {
         console.log(err);
       })
   };
-  console.log(window.document.referrer);
-  // if (window.document.referrer === "/logout") {
-  //   toast.success("Successfully logout",{
-  //     position:"top-center"
-  //   });
-  // }
+  if (window.document.referrer === "http://localhost:3000/profile") {
+    toast.success("Successfully logout");
+  }
+  if (window.document.referrer === "http://localhost:3000/create-user`") {
+    toast.success("Registration Successfully");
+  }
+  if (window.document.referrer === "http://localhost:3000/Log%20Out`") {
+    toast.success("Successfully Logout");
+  }
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: '100vh' }}>

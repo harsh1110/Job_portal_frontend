@@ -15,7 +15,7 @@ exports.allUser = async (req, res) => {
 }
 
 
-
+//one user api
 exports.OneUser = async (req, res) => {
     var id = req.params.id
     var oneuser = await User.findOne({ _id: id }).lean()

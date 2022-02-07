@@ -20,7 +20,12 @@ exports.JobApplyPerUser = async(req,res) => {
 exports.JobApply = async (req, res) => {
     try {
         console.log(req.body);
-        const { jobId, name, email, phone, date, employstatus, reference,userId} = req.body
+        const { jobId, name, email, phone, date, employstatus, refname,refphone} = req.body
+
+        var refObj={
+            refname:refname,
+            refphone:refphone
+        }
         var createApply = await JobApply.create({
             jobId: jobId,
             name: name,
@@ -28,15 +33,15 @@ exports.JobApply = async (req, res) => {
             phone: phone,
             date: date,
             employStatus: employstatus,
-            Reference: reference,
-            AppliedBy:userId
+            // Reference: refObj,
+        
         })
     
         await createApply.save()
-        if (createApply) res.send({ success : "job Applied Sucessfully"})
+        if (createApply) res.send({success:"Job Applied Sucessfully",data:JobApply})
     }
     catch {
-        res.json({ error: "Job Apply fail" })
+        res.json({ error: "Job Apply fail",data:JobApply })
     }
 
 }

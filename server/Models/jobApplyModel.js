@@ -22,15 +22,15 @@ const JobApply = mongoose.Schema({
         type: String
     },
     Reference: {
-        type: String
+        type: ObjectId
     },
     Resume: {
         type: String
     },
-    AppliedBy: {
-        type: ObjectId,
-        ref: "Users" 
-    },
+    // AppliedBy: {
+    //     type: ObjectId,
+    //     ref: "Users" 
+    // },
 }, { timestamps: true })
 
 module.exports = mongoose.model("JobApply", JobApply)

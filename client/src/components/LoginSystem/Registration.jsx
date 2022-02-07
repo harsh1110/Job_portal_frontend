@@ -70,8 +70,8 @@ export default function Registration() {
         event.preventDefault();
         Resizer.imageFileResizer(
             pic,
-            300,
-            300,
+            480,
+            480,
             "JPEG",
             100,
             0,

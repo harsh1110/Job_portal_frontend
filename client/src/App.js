@@ -9,6 +9,7 @@ import TopSection from "./components/Admin/TopSection";
 import Logout from "./components/LoginSystem/Logout";
 import CreateJob from "./components/Admin/CreateJob";
 import ShowAllJob from "./components/Admin/ShowAllJob";
+import JobApplyForm from "./components/Home/JobApplyForm"
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -39,7 +40,7 @@ function App() {
               <Routes>
                 <Route exact path="/create-user" element={<Registration />} />
                 <Route exact path="/login" element={<LoginPage />} />
-                <Route exact path="/job/:id" element={<h1>Apply Job Form</h1>} />
+                <Route exact path="/job/:id" element={<JobApplyForm/>} />
                 <Route exact path="/thankyou" element={<h1>Thank You</h1>} />
               </Routes>
             </BrowserRouter>

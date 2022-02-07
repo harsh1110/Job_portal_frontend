@@ -22,25 +22,46 @@ import AddIcon from '@mui/icons-material/Add';
 import TocIcon from '@mui/icons-material/Toc';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Link } from 'react-router-dom';
+import Container from '@mui/material/Container'
+import { Card, Grid } from '@mui/material';
+import axios from 'axios';
 
 const drawerWidth = 250;
 
 function ResponsiveDrawer(props) {
     const [active, setActive] = React.useState('Profile');
     const { window } = props;
+    const id = localStorage.getItem("user")
     const [mobileOpen, setMobileOpen] = React.useState(false);
+    const [user, setUser] = React.useState([]);
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
+    React.useEffect(() => {
+        axios.get(`http://localhost:5000/user/${id}`)
+        .then((value) => {
+            setUser(value.data)
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }, []);
     const icon = [<PersonIcon />, <DashboardIcon />, <AddIcon />, <TocIcon />, <LogoutIcon />]
 
     const drawer = (
         <div>
-            <Typography variant='h5' className='my-4 text-center'>logo</Typography>
-            <Divider />
+            <Typography variant='h5' className='my-4 text-center'><img src="https://www.webbrainstechnologies.com/wp-content/uploads/2016/02/logo-3.png" height={"50px"} width={"100px"} alt="" srcset="" /></Typography>
+            {/* <Container maxWidth="lg"> */}
+                <Card className='user-card mx-2'>
+                    <Grid className='d-flex' xs={12}>
+                        <img className='m-3' src={user.pic} height={"45px"} width={"45px"} alt="" />
+                        <Typography marginTop={"25px"} marginLeft={"10px"} fontWeight={600}>{user.name}</Typography>
+                    </Grid>
+                </Card>
+            {/* </Container> */}
             <List>
                 {['Profile', 'Dashboard', 'Create Job Post', "Show All Data", "Log Out"].map((text, index) => (
-                    <Link className='text-decoration-none' onClick={(e) => (setActive(text))} to={`/${text}`}>
+                    <Link className='text-decoration-none text-dark' onClick={(e) => (setActive(text))} to={`/${text}`}>
                         {
                             active === text ?
                                 <ListItem className='active' name={text} button key={text}>

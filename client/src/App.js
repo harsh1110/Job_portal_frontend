@@ -20,7 +20,7 @@ function App() {
         localStorage.getItem("user") ?
           //Admin Routes 
           <>
-            <ToastContainer style={{ marginTop: "80px" }} />
+            <ToastContainer/>
             <BrowserRouter>
               <ResponsiveDrawer />
               <Routes>

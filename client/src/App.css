@@ -1,3 +1,10 @@
+:root {
+  --darkblue: #2d82f8;
+  --lightblue: rgb(208,242,255);
+  --darkgray:rgb(99,115,129);
+  --lightgray:rgb(244,246,248);
+  --darkyellow:rgb(196,209,64);
+}
 /* @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,300&display=swap'); */
  body::-webkit-scrollbar 
 {
@@ -9,23 +16,16 @@ body::-webkit-scrollbar-track
 }
 body::-webkit-scrollbar-thumb
 {
- background-color: #991c9985;
+ background-color: var(--lightgray);
  border-radius:10px;
-}
-:root {
-  --darkblue: rgb(0, 183, 255);
-  --lightblue: rgb(215, 233, 245);
-  --darkgray:rgb(99,115,129);
-  --lightgray:rgb(244,246,248);
-  --darkyellow:rgb(196,209,64);
 }
 .navbar{
   background-color: white !important;
   box-shadow: none !important;
 }
 .admin {
-  margin-left: 195px !important;
-  width: 90% !important;
+  margin-left: 280px !important;
+  width: 80% !important;
   font-family: 'Montserrat', sans-serif;
   font-weight: 900 !important;
 }
@@ -52,3 +52,73 @@ body::-webkit-scrollbar-thumb
 .user-card img{
   border-radius: 50% !important;
 }
+.title{
+  color: var(--darkblue);
+  margin-top: -30px;
+  margin-left: 10px;
+  margin-bottom: 50px;
+}
+.number{
+  font-weight: 900 !important;
+}
+.sub-title{
+  font-weight: 400 !important;
+}
+.green{
+  background-color:rgb(200,250,205) !important;
+  color: rgb(0,123,85) !important;
+  border: none !important;
+  font-weight: 900 !important;
+}
+.green-icon{
+  padding-top: 9px !important;
+  margin-left: 41%;
+  background-image: linear-gradient(135deg, rgba(0, 123, 85, 0) 0%, rgba(0, 123, 85, 0.24) 100%);
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 50%;
+}
+.blue{
+  background-color: rgb(208,242,255) !important;
+  color: #0c53b7 !important;
+  border: none !important;
+  font-weight: 900 !important;
+}
+.blue-icon{
+  padding-top: 9px;
+  margin-left: 41%;
+  background-image: linear-gradient(135deg, rgba(12, 83, 183, 0) 0%, rgba(12, 83, 183, 0.24) 100%);
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 50%;
+}
+.yellow{
+  background-color: #fff7cd !important;
+  color: #b78103 !important;
+  border: none !important;
+  font-weight: 900 !important;
+}
+.yellow-icon{
+  padding-top: 9px;
+  margin-left: 41%;
+  background-image: linear-gradient(135deg, rgba(183, 129, 3, 0) 0%, rgba(183, 129, 3, 0.24) 100%);
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 50%;
+}
+.red{
+  background-color: #ffe7d9 !important;
+  color: #b72136 !important;
+  border: none !important;
+  font-weight: 900 !important;
+}
+.red-icon{
+  padding-top: 9px;
+  margin-left: 41%;
+  background-image: linear-gradient(135deg, rgba(183, 33, 54, 0) 0%, rgba(183, 33, 54, 0.24) 100%);
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 50%;
+}
+
+

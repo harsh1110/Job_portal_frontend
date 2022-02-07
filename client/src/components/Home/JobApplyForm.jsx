@@ -1,8 +1,6 @@
 import * as React from "react";
-// import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-// import Paper from "@mui/material/Paper";
 import axios from "axios";
 import { FormControlLabel, FormLabel, FormControl } from "@mui/material";
 import { Button, Grid, TextField } from "@mui/material";
@@ -12,7 +10,6 @@ import {useParams} from "react-router-dom"
 
 export default function JobApplyForm() {
   const {id} = useParams()
-  // const userId = localStorage.getItem("user");
   const [ref, setref] = useState("false");
   const [name, setname] = useState("");
   const [email, setemail] = useState("");

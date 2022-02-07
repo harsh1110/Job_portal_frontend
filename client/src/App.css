@@ -46,7 +46,7 @@ body::-webkit-scrollbar-thumb
 .user-card{
   color: var(--darkgray) !important;
   background-color: var(--lightgray) !important;
-  border-radius: 25px !important;
+  border-radius: 10px !important;
   box-shadow: none !important;
 }
 .user-card img{

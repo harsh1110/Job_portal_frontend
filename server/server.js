@@ -10,6 +10,7 @@ const jobRoute = require("./Routes/jobRoute")
 const jobApplyRoute = require("./Routes/applyJobRoute")
 app.use(cors())
 app.use(express.json())
+app.use("/public",express.static(__dirname + "/public"))
 dbConnect()
 
 

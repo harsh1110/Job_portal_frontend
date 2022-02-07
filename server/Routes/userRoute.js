@@ -1,5 +1,6 @@
 const express = require('express');
 const { homePage, CreateUser, allUser, Login, OneUser } = require('../Controller/userController');
+const upload = require('../Middlewares/multer');
 const router = express.Router()
 
 
@@ -9,7 +10,7 @@ router.get('/all',allUser)
 router.get('/user/:id',OneUser)
 
 
-router.post('/add-user',CreateUser)
+router.post('/add-user', upload.single("pic"),CreateUser)
 router.post('/login',Login)
 
 

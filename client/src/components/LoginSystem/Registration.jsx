@@ -31,9 +31,7 @@ export default function Registration() {
     const [email, setemail] = useState("");
     const [phone, setphone] = useState("");
     const [pic, setpic] = useState()
-    const [imgpath, setimgpath] = useState("")
     const [pass, setpass] = useState("");
-    const [role, setrole] = useState("");
     const [conpass, setconpass] = useState("");
     const [data, setdata] = useState();
     const [key, setKey] = useState("");
@@ -47,16 +45,15 @@ export default function Registration() {
 
 
     var sendData = () => {
-        const dat = {
-            "name": name,
-            "email": email,
-            "phone": phone,
-            "pic": imgpath,
-            "pass": pass,
-            "role": role
-        }
+        const dat = new FormData
+        
+        
+        dat.append("name", name)
+        dat.append("email", email)
+        dat.append("phone", phone)
+        dat.append("pass", pass)
+        dat.append("pic", pic)
         console.log(dat);
-        console.log(imgpath);
         axios.post("http://localhost:5000/add-user", dat)
             .then(res => {
                 alert('Data send successfully...!!')
@@ -68,18 +65,6 @@ export default function Registration() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        Resizer.imageFileResizer(
-            pic,
-            480,
-            480,
-            "JPEG",
-            100,
-            0,
-            (uri) => {
-              setimgpath(uri);
-            },
-            "base64"
-          );
         var emaildata = []
         if (data.length === 0) {
             emaildata = []
@@ -111,10 +96,8 @@ export default function Registration() {
         else if (pass !== conpass) {
             alert("password Does't Match try again..")
         }
-        else if (role === "admin") {
-            if (key !== "harsh123") {
-                alert("Enter Valid Secrate Key")
-            }
+        else if (key !== "harsh123") {
+            alert("Enter Valid Secrate Key")
         }
         else {
             sendData()
@@ -142,45 +125,18 @@ export default function Registration() {
                     <Box component="form" noValidate sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
-                                <FormControl fullWidth>
-                                    {/* <InputLabel id="demo-simple-select-label">Role</InputLabel> */}
-                                    {/* <Select
-                                        labelId="demo-simple-select-label"
-                                        
-                                        label="Role"
-                                        
-                                        
-                                    >
-                                        <MenuItem value={"admin"}>Admin</MenuItem>
-                                        <MenuItem value={"member"}>Job Seeker</MenuItem>
-                                    </Select> */}
-
-                                    <Form.Select id="role" onChange={(e) => (setrole(e.target.value))} defaultValue={""}>
-                                        <option value={""}>Role</option>
-                                        <option value={"admin"}>Admin</option>
-                                        <option value={"member"}>Job Seeker</option>
-                                    </Form.Select>
-                                </FormControl>
-
+                                <TextField
+                                    autoComplete="given-name"
+                                    name="fullname"
+                                    required
+                                    fullWidth
+                                    id="key"
+                                    onChange={(e) => (setKey(e.target.value))}
+                                    label="Secrate Key"
+                                    autoFocus
+                                    color={"secondary"}
+                                />
                             </Grid>
-                            {role === "admin" ?
-                                <Grid item xs={12}>
-                                    <TextField
-                                        autoComplete="given-name"
-                                        name="fullname"
-                                        required
-                                        fullWidth
-                                        id="key"
-                                        onChange={(e) => (setKey(e.target.value))}
-                                        label="Secrate Key"
-                                        autoFocus
-                                        color={"secondary"}
-                                    />
-                                </Grid> :
-                                null
-
-                            }
-
                             <Grid item xs={12}>
                                 <TextField
                                     autoComplete="given-name"

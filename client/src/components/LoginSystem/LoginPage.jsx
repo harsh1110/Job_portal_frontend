@@ -96,7 +96,7 @@ export default function LoginPage() {
               alignItems: 'center',
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <Avatar sx={{ m: 1 }}>
               <LoginIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
@@ -112,7 +112,6 @@ export default function LoginPage() {
                 name="email"
                 onChange={(e) => (setEmail(e.target.value))}
                 autoComplete="email"
-                color="secondary"
                 autoFocus
               />
               <TextField
@@ -123,7 +122,6 @@ export default function LoginPage() {
                 label="Password"
                 onChange={(e) => (setPass(e.target.value))}
                 type="password"
-                color="secondary"
                 id="password"
                 autoComplete="current-password"
               />
@@ -131,14 +129,14 @@ export default function LoginPage() {
                 type="submit"
                 fullWidth
                 variant="contained"
-                color='secondary'
+                // color='secondary'
                 sx={{ mt: 3, mb: 2 }}
               >
                 Login
               </Button>
               <Grid container>
                 <Grid item>
-                  <Link color={"secondary"} className='text-decoration-none' href="/create-user" variant="body2">
+                  <Link className='text-decoration-none' href="/create-user" variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>

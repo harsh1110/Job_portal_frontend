@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,300&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,300&display=swap'); */
 
 /* custom scroll bar css */
-body::-webkit-scrollbar 
+/* body::-webkit-scrollbar 
 {
  width: 8px;
 }
@@ -21,7 +21,7 @@ body::-webkit-scrollbar-thumb
 
 /* other css */
 
-.navbar {
+/* .navbar {
   background: linear-gradient(120deg, rgb(102, 0, 150), rgb(247, 2, 255)) !important;
 }
 
@@ -40,6 +40,8 @@ body::-webkit-scrollbar-thumb
   color: white !important;
   font-size: 25px !important;
 }
+*/
+
 
 .admin {
   margin-left: 195px !important;
@@ -47,7 +49,7 @@ body::-webkit-scrollbar-thumb
   font-family: 'Montserrat', sans-serif;
   font-weight: 900 !important;
 }
-
+/*
 .purple {
   color: #9c27b0;
 }
@@ -70,21 +72,15 @@ body::-webkit-scrollbar-thumb
 .all-job.MuiBox-root.css-8atqhb .table-title{
   text-align: center !important;
   margin-left: 7% !important;
-}
-
-
-
-
-
-
-
+} 
+ */
 
 
 
 
 
 /* responsive css */
-@media screen and (max-width: 900px) {
+/* @media screen and (max-width: 900px) {
   .MuiButtonBase-root.MuiIconButton-root.MuiIconButton-colorInherit.MuiIconButton-edgeStart.MuiIconButton-sizeMedium.css-6iz4mj-MuiButtonBase-root-MuiIconButton-root {
     margin-left: -250%;
   }
@@ -106,4 +102,4 @@ body::-webkit-scrollbar-thumb
   .all-job.MuiBox-root.css-8atqhb{
     padding: 10px;
   }
-}
+} */

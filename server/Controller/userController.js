@@ -2,6 +2,7 @@ const express = require('express');
 const User = require('../Models/userModel');
 const { uploadsingle } = require("../Middlewares/cloudinary")
 const jwt = require('jsonwebtoken');
+const fs = require('fs')
 
 //homepage function
 exports.homePage = async (req, res) => {
@@ -26,8 +27,10 @@ exports.OneUser = async (req, res) => {
 exports.CreateUser = async (req, res) => {
     try {
         console.log(req.body);
-        const { name, email, phone, pic, pass, conpass, role } = req.body
-        var path = await uploadsingle(pic)
+        const { name, email, phone, pass } = req.body
+        const pic = req.file
+        var path = await uploadsingle(pic.path)
+        fs.unlink(`./${pic.path}`)
         console.log(path);
         if (path.length !== 0) {
             var createUser = await User.create({
@@ -36,8 +39,6 @@ exports.CreateUser = async (req, res) => {
                 phone: phone,
                 pic: path,
                 pass: pass,
-                conpass: conpass,
-                role: role
             })
             createUser.save()
             if (createUser) res.json({ success: "User added Successfully" })

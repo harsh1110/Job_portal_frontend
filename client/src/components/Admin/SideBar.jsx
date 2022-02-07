@@ -23,9 +23,10 @@ import TocIcon from '@mui/icons-material/Toc';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Link } from 'react-router-dom';
 
-const drawerWidth = 210;
+const drawerWidth = 250;
 
 function ResponsiveDrawer(props) {
+    const [active, setActive] = React.useState('Profile');
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const handleDrawerToggle = () => {
@@ -35,17 +36,27 @@ function ResponsiveDrawer(props) {
 
     const drawer = (
         <div>
-            <Typography variant='h5' className='my-4 text-center text-white'>Job Portal</Typography>
+            <Typography variant='h5' className='my-4 text-center'>logo</Typography>
             <Divider />
             <List>
                 {['Profile', 'Dashboard', 'Create Job Post', "Show All Data", "Log Out"].map((text, index) => (
-                    <Link className='text-decoration-none text-white' to={`/${text}`}>
-                        <ListItem button key={text}>
-                            <ListItemIcon className='text-white'>
-                                {icon[index]}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
+                    <Link className='text-decoration-none' onClick={(e) => (setActive(text))} to={`/${text}`}>
+                        {
+                            active === text ?
+                                <ListItem className='active' name={text} button key={text}>
+                                    <ListItemIcon className='active'>
+                                        {icon[index]}
+                                    </ListItemIcon>
+                                    <ListItemText primary={text} />
+                                </ListItem>
+                                :
+                                <ListItem name={text} button key={text}>
+                                    <ListItemIcon>
+                                        {icon[index]}
+                                    </ListItemIcon>
+                                    <ListItemText primary={text} />
+                                </ListItem>
+                        }
                     </Link>
                 ))}
             </List>

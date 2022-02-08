@@ -35,8 +35,10 @@ function App() {
             </BrowserRouter>
           </>
           :
+          // job seeker routes
           <>
             <BrowserRouter>
+            
               <Routes>
                 <Route exact path="/create-user" element={<Registration />} />
                 <Route exact path="/login" element={<LoginPage />} />

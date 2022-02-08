@@ -126,7 +126,7 @@ body::-webkit-scrollbar-thumb
   box-shadow: rgb(145 158 171 / 24%) 0px 0px 2px 0px, rgb(145 158 171 / 24%) 0px 16px 32px -4px !important;
 }
 .login-card-img{
-  margin-block: 35px !important;
+  margin-block: 40px !important;
 }
 .btn{
   background-color: var(--darkblue) !important;
@@ -146,6 +146,24 @@ body::-webkit-scrollbar-thumb
 .job-apply-card{
   border-radius: 10px !important;
   box-shadow: rgb(145 158 171 / 24%) 0px 0px 2px 0px, rgb(145 158 171 / 24%) 0px 16px 32px -4px !important;
+}
+.cover{
+  background:url("./assets/images/profile-cover2.jpg");
+  height:350px!important;
+  margin-top: -112px !important;
+  background-size: cover;
+}
+.profile{
+  margin-top: -150px !important;
+}
+.image-name img{
+  box-shadow: rgba(106, 180, 253, 0.24) 0px 0px 2px 0px, rgba(77, 147, 218, 0.24) 0px 6px 20px 12px !important;
+  border-radius: 50% !important;
+}
+.name h4{
+  margin-top: 50px !important;
+  font-weight: 600 !important;
+  color: var(--darkblue) !important;
 }
 
 

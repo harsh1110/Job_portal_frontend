@@ -1,4 +1,4 @@
-import { CircularProgress } from '@mui/material';
+import { Card, CircularProgress, Grid } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import EmailIcon from '@mui/icons-material/Email';
@@ -11,32 +11,67 @@ const Profile = () => {
     const [user, setUser] = useState([]);
     useEffect(() => {
         axios.get(`http://localhost:5000/user/${id}`)
-        .then((res) => {
-            setUser(res.data)
-            if (window.document.referrer === "http://localhost:3000/login") {
-                toast.success("Successfully login");
-            }
+            .then((res) => {
+                setUser(res.data)
+                if (window.document.referrer === "http://localhost:3000/login") {
+                    toast.success("Successfully login");
+                }
             })
             .catch((err) => console.log(err))
     }, []);
-    return <div className='admin row container'>
+    return <div className=''>
         {
             user.length === 0 ?
                 <div className="text-center">
                     <CircularProgress color="secondary" />
                 </div> :
                 <>
-                    <div className="col-4">
-                        <img className='mx-4' src={user.pic} style={{ borderRadius: "50%", border: "5px double purple" }} height={"250px"} width={"250px"} alt="" srcset="" />
-                    </div>
-                    <div className="col-lg-6 col-xs-12 my-4">
-                        <h1 className='purple my-4'>{user.name}</h1>
-                        <h5 className='purple my-4'><EmailIcon />&nbsp;&nbsp;&nbsp;{user.email}</h5>
-                        <h5 className='purple'><PhoneIcon />&nbsp;&nbsp;&nbsp;{user.phone}</h5>
-                    </div>
-                    <div className="col-4"></div>
-                    <div className="col-6">
-                        <button className="btn btn-lg text-white"><EditIcon />&nbsp;&nbsp;Edit Profile</button>
+                    <div>
+                        <div className="cover">
+                        </div>
+                        <Card className='profile admin row container'>
+                            <div className='image-name m-4 col-1'>
+                                <img className='my-4' src={user.pic} height={"100px"} width={"100px"} alt="" srcset="" />
+                            </div>
+                            <div className="name m-4 col-10">
+                                <h4>{user.name}</h4>
+                                <p className='text-secondary'>HR Manager</p>
+                            </div>
+                            <hr />
+                            <div className="col-4">
+                               <h5 className="title my-4">Profile Deatils</h5>
+                                {user.email}
+                                <br />
+                                {user.phone}
+                                <br />
+                                {user.role}
+                            </div>
+                            <div className="col-8">
+                               <h5 className="title my-4"> Recently Added Application</h5>
+                                <Grid className='row' spacing={2}>
+                                    <Grid className='my-4' sm={6}>
+                                        <Card className='p-3'>
+                                            Hello
+                                        </Card>
+                                    </Grid>
+                                    <Grid className='my-4' sm={6}>
+                                        <Card className='p-3'>
+                                            Hello
+                                        </Card>
+                                    </Grid>
+                                    <Grid className='my-4' sm={6}>
+                                        <Card className='p-3'>
+                                            Hello
+                                        </Card>
+                                    </Grid>
+                                    <Grid className='my-4' sm={6}>
+                                        <Card className='p-3'>
+                                            Hello
+                                        </Card>
+                                    </Grid>
+                                </Grid>
+                            </div>
+                        </Card>
                     </div>
                 </>
         }

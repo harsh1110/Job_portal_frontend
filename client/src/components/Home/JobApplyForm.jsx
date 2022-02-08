@@ -7,6 +7,7 @@ import { Button, Grid, TextField } from "@mui/material";
 import { Radio, RadioGroup } from "@mui/material";
 import { useState } from "react";
 import {useParams} from "react-router-dom"
+import Card from '@mui/material/Card'
 
 export default function JobApplyForm() {
   const {id} = useParams()
@@ -45,7 +46,10 @@ const handleSubmit = (e) => {
     <div
       className="row"
       style={{
+        backgroundImage: 'url(https://images.pexels.com/photos/733857/pexels-photo-733857.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1/)',
+        backgroundSize:"cover",
         width: "100%",
+        height:"100%",
         justifyContent: "center",
         alignItems: "center",
         textAlign: "center",
@@ -59,7 +63,8 @@ const handleSubmit = (e) => {
             flexDirection: "column",
           }}
         >
-          <div>
+          <div style={{padding:"30px"}}>
+            <Card style={{padding:"20px"}}>
             <Grid item sm={12}>
               <Typography
                 component="h1"
@@ -92,7 +97,7 @@ const handleSubmit = (e) => {
               />
             </Grid>
             <Grid container spacing={2}>
-              <Grid item sm={6}>
+              <Grid item sm={6} xs={12}>
                 <TextField
                   className="mt-4"
                   required
@@ -102,8 +107,9 @@ const handleSubmit = (e) => {
                   color={"primary"}
                 />
               </Grid>
-              <Grid item sm={6}>
+              <Grid item sm={6} xs={12}>
                 <TextField
+                 required
                   fullWidth
                   className="mt-4"
                   id="date"
@@ -217,9 +223,13 @@ const handleSubmit = (e) => {
               Submit
             </Button>
             {/* </Box> */}
+          
+            </Card>
           </div>
+          
         </Box>
       </Grid>
+      
     </div>
   );
 }

@@ -136,7 +136,7 @@ const EnhancedTableToolbar = (props) => {
 
   return (
     <Toolbar
-    className='admin row text-center container'
+    
       sx={{
         pl: { sm: 2 },
         pr: { xs: 1, sm: 1 },
@@ -244,8 +244,7 @@ React.useEffect(() => {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Paper sx={{ width: '100%', mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+      <Paper className='admin row text-center' sx={{ width: '100%', mb: 2 }}>
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}

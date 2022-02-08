@@ -44,16 +44,15 @@ const handleSubmit = (e) => {
 
   return (
     <div
-      className="row"
+      className="row job-apply"
       style={{
-        backgroundImage: 'url(https://images.pexels.com/photos/733857/pexels-photo-733857.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1/)',
         backgroundSize:"cover",
         width: "100%",
         height:"100%",
-        justifyContent: "center",
+        // justifyContent: "center",
         alignItems: "center",
         textAlign: "center",
-        align: "center",
+        // align: "center",
       }}
     >
       <Grid item xs={12} sm={8} md={5}>
@@ -62,14 +61,14 @@ const handleSubmit = (e) => {
             display: "flex",
             flexDirection: "column",
           }}
-        >
+          >
           <div style={{padding:"30px"}}>
-            <Card style={{padding:"20px"}}>
+            <Card className="job-apply-card" style={{padding:"20px"}}>
             <Grid item sm={12}>
               <Typography
                 component="h1"
                 variant="h4"
-                className="my-4 purple"
+                className="title my-4"
                 sx={{ alignItems: "center" }}
               >
                 Job Application Form
@@ -215,6 +214,7 @@ const handleSubmit = (e) => {
             <Button
               type="submit"
               fullWidth
+              className="btn"
               variant="contained"
               color="primary"
               sx={{ mt: 3, mb: 2 }}

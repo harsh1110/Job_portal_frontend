@@ -15,7 +15,16 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
-const theme = createTheme();
+const theme = createTheme({
+  palette: {
+    primary:{
+      main:"#2d82f8"
+    },
+    secondary:{
+      main:"rgb(196,209,64)"
+    },
+  },
+});
 
 export default function LoginPage() {
   // const window.location =  = usewindow.location = ()
@@ -77,14 +86,6 @@ export default function LoginPage() {
           xs={false}
           sm={4}
           md={5}
-          // sx={{
-          //   backgroundImage: 'url(https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80)',
-          //   backgroundRepeat: 'no-repeat',
-          //   backgroundColor: (t) =>
-          //     t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-          //   backgroundSize: 'cover',
-          //   backgroundPosition: 'center',
-          // }}
         >
           <div style={{padding:"15px"}}>
           <Card className="login-card">

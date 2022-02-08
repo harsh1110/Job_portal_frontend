@@ -138,7 +138,15 @@ body::-webkit-scrollbar-thumb
   background: url("./assets/images/background.jpg") !important;
   height: 100% !important;
 }
-
+.job-apply.row{
+  background: url("./assets/images/job-apply.jpg");
+  margin-right: 0px !important;
+ --bs-gutter-x: 0rem !important;
+}
+.job-apply-card{
+  border-radius: 10px !important;
+  box-shadow: rgb(145 158 171 / 24%) 0px 0px 2px 0px, rgb(145 158 171 / 24%) 0px 16px 32px -4px !important;
+}
 
 
 
@@ -162,6 +170,9 @@ body::-webkit-scrollbar-thumb
     margin-top: 30px !important;
   }
   .job-card .title{
+    font-size: 20px !important;
+  }
+  .job-apply-card .title{
     font-size: 20px !important;
   }
 }

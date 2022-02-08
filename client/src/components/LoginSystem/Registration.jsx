@@ -14,18 +14,18 @@ import axios from 'axios'
 import { useState } from 'react';
 import { useEffect } from 'react';
 import Resizer from 'react-image-file-resizer'
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { Card, CardMedia, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 
-
-const theme = createTheme(
-    {
-        palette: {
-            primary: deepPurple,
-            secondary: purple,
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: "#2d82f8"
         },
-    }
-);
-
+        secondary: {
+            main: "rgb(196,209,64)"
+        },
+    },
+});
 export default function Registration() {
     const [name, setname] = useState("");
     const [email, setemail] = useState("");
@@ -46,8 +46,8 @@ export default function Registration() {
 
     var sendData = () => {
         const dat = new FormData
-        
-        
+
+
         dat.append("name", name)
         dat.append("email", email)
         dat.append("phone", phone)
@@ -106,121 +106,152 @@ export default function Registration() {
 
     return (
         <ThemeProvider theme={theme}>
-            <Container component="main" maxWidth="xs">
+            <Grid container component="main" sx={{ height: "100vh", boxShadow: "none" }}>
                 <CssBaseline />
-                <Box
-                    sx={{
-                        marginTop: 8,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                    }}
+                <Grid
+                    item
+                    xs={false}
+                    sm={4}
+                    md={5}
                 >
-                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                        <LockOutlinedIcon />
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
-                        Sign up
-                    </Typography>
-                    <Box component="form" noValidate sx={{ mt: 3 }}>
-                        <Grid container spacing={2}>
-                            <Grid item xs={12}>
-                                <TextField
-                                    autoComplete="given-name"
-                                    name="fullname"
-                                    required
-                                    fullWidth
-                                    id="key"
-                                    onChange={(e) => (setKey(e.target.value))}
-                                    label="Secrate Key"
-                                    autoFocus
-                                    color={"secondary"}
-                                />
+                    <div style={{ padding: "15px" }}>
+                        <Card className="login-card">
+                            <Typography style={{ marginBlock: "50px" }} variant='h5' className='text-center'><img src="https://www.webbrainstechnologies.com/wp-content/uploads/2016/02/logo-3.png" height={"50px"} width={"100px"} alt="" srcset="" /></Typography>
+
+                            <h3 className="m-4 text-center title">Hii, Welcome</h3>
+                            <CardMedia
+                                className="login-card-img"
+                                width="100%"
+                                component="img"
+                                height="100%"
+                                image="https://minimal-kit-react.vercel.app/static/illustrations/illustration_login.png"
+                                alt="green iguana"
+                            />
+                        </Card>
+                    </div>
+                </Grid>
+                <Grid item xs={12} sm={8} md={7} elevation={6} square>
+                    <Box
+                        sx={{
+                            my: 4,
+                            mx: 4,
+                            px: 20,
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                        }}
+                    >
+                        <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
+                            <LockOutlinedIcon />
+                        </Avatar>
+                        <Typography component="h1" variant="h5">
+                            Sign up
+                        </Typography>
+                        <Box component="form" noValidate sx={{ mt: 3 }}>
+                            <Grid container spacing={2}>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        autoComplete="given-name"
+                                        name="fullname"
+                                        required
+                                        fullWidth
+                                        id="key"
+                                        onChange={(e) => (setKey(e.target.value))}
+                                        label="Secrate Key"
+                                        autoFocus
+                                        color={"primary"}
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        autoComplete="given-name"
+                                        name="fullname"
+                                        required
+                                        fullWidth
+                                        id="fullname"
+                                        onChange={(e) => (setname(e.target.value))}
+                                        label="Full Name"
+                                        autoFocus
+                                        color={"primary"}
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        required
+                                        fullWidth
+                                        id="phone"
+                                        onChange={(e) => (setphone(e.target.value))}
+                                        label="Mobile Number"
+                                        name="phone"
+                                        color={"primary"}
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Form.Group controlId="formFile" className="mb-3">
+                                        <Form.Label className='mx-1 text-secondary'>Profile Picture</Form.Label>
+                                        <Form.Control
+                                        type="file" 
+                                        size='lg'
+                                        required
+                                        fullWidth
+                                        id="pic"
+                                        onChange={(e) => (setpic(e.target.files[0]))}
+                                        name="pic" 
+                                        />
+                                    </Form.Group>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        required
+                                        fullWidth
+                                        id="email"
+                                        label="Email Address"
+                                        name="email"
+                                        onChange={(e) => (setemail(e.target.value))}
+                                        autoComplete="email"
+                                        color={"primary"}
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        required
+                                        fullWidth
+                                        name="password"
+                                        label="Password"
+                                        type="password"
+                                        onChange={(e) => (setpass(e.target.value))}
+                                        id="password"
+                                        color={"primary"}
+                                        autoComplete="new-password"
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        required
+                                        fullWidth
+                                        name="conpass"
+                                        onChange={(e) => (setconpass(e.target.value))}
+                                        label="Confirm Password"
+                                        type="password"
+                                        color={"primary"}
+                                        id="conpass"
+                                    />
+                                </Grid>
                             </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    autoComplete="given-name"
-                                    name="fullname"
-                                    required
-                                    fullWidth
-                                    id="fullname"
-                                    onChange={(e) => (setname(e.target.value))}
-                                    label="Full Name"
-                                    autoFocus
-                                    color={"secondary"}
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    id="phone"
-                                    onChange={(e) => (setphone(e.target.value))}
-                                    label="Mobile Number"
-                                    name="phone"
-                                    color={"secondary"}
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <input
-                                    type="file"
-                                    required
-                                    fullWidth
-                                    id="pic"
-                                    onChange={(e) => (setpic(e.target.files[0]))}
-                                    name="pic"
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    id="email"
-                                    label="Email Address"
-                                    name="email"
-                                    onChange={(e) => (setemail(e.target.value))}
-                                    autoComplete="email"
-                                    color={"secondary"}
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    name="password"
-                                    label="Password"
-                                    type="password"
-                                    onChange={(e) => (setpass(e.target.value))}
-                                    id="password"
-                                    color={"secondary"}
-                                    autoComplete="new-password"
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    name="conpass"
-                                    onChange={(e) => (setconpass(e.target.value))}
-                                    label="Confirm Password"
-                                    type="password"
-                                    color={"secondary"}
-                                    id="conpass"
-                                />
-                            </Grid>
-                        </Grid>
-                        <Button
-                            type="submit"
-                            onClick={(e) => { handleSubmit(e) }}
-                            fullWidth
-                            className='my-4 w-100 btn'
-                            sx={{ mt: 3, mb: 2 }}
-                        >
-                            Sign Up
-                        </Button>
+                            <Button
+                                type="submit"
+                                onClick={(e) => { handleSubmit(e) }}
+                                fullWidth
+                                className='my-4 w-100 btn'
+                                sx={{ mt: 3, mb: 2 }}
+                            >
+                                Sign Up
+                            </Button>
+                        </Box>
+
                     </Box>
-                </Box>
-            </Container>
+                </Grid>
+            </Grid>
         </ThemeProvider>
     );
 }

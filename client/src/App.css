@@ -20,7 +20,7 @@ body::-webkit-scrollbar-thumb
  border-radius:10px;
 }
 .navbar{
-  background-color: white !important;
+  background-color: transparent !important;
   box-shadow: none !important;
 }
 .admin {
@@ -56,6 +56,7 @@ body::-webkit-scrollbar-thumb
   color: var(--darkblue);
   margin-top: -30px;
   margin-left: 10px;
+  font-weight: 700 !important;
   margin-bottom: 50px;
 }
 .number{
@@ -120,5 +121,48 @@ body::-webkit-scrollbar-thumb
   height: 50px !important;
   border-radius: 50%;
 }
+.login-card{
+  border-radius: 20px !important;
+  box-shadow: rgb(145 158 171 / 24%) 0px 0px 2px 0px, rgb(145 158 171 / 24%) 0px 16px 32px -4px !important;
+}
+.login-card-img{
+  margin-block: 35px !important;
+}
+.btn{
+  background-color: var(--darkblue) !important;
+}
+.background{
+  margin-top: -110px !important;
+  padding-block: 102px;
+  background-size: cover !important;
+  background: url("./assets/images/background.jpg") !important;
+  height: 100% !important;
+}
 
 
+
+
+/* responsive css code */
+
+/*mobile size code*/
+@media screen and (max-width :600px) {
+  .admin{
+    margin-left: 20px !important;
+    width: 90% !important;
+  }
+  .navbar svg{
+    fill: var(--darkblue);
+    margin-left: -280px !important;
+  }
+  .background{
+    margin-top: -105px !important;
+    padding-block: 59px !important;
+  }
+  .job-card{
+    margin-top: 30px !important;
+  }
+  .job-card .title{
+    font-size: 20px !important;
+  }
+}
+/*tablate size code*/

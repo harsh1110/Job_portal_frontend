@@ -14,6 +14,9 @@ const Job = mongoose.Schema({
     limit: {
         type: Number
     },
+    appliedBy: {
+        type: Array
+    },
     createdBy: {
         type: ObjectId,
         ref: "Users" 

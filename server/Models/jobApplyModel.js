@@ -4,10 +4,13 @@ const { ObjectId } = mongoose.Schema;
 const JobApply = mongoose.Schema({
     jobId: {
         type: ObjectId,
-        ref:"Jobs"
+        ref: "Jobs"
+    },
+    designation: {
+        type: String
     },
     name: {
-        type: String,
+        type: String
     },
     email: {
         type: String
@@ -22,15 +25,11 @@ const JobApply = mongoose.Schema({
         type: String
     },
     Reference: {
-        type: ObjectId
+        type: Object
     },
     Resume: {
         type: String
     },
-    // AppliedBy: {
-    //     type: ObjectId,
-    //     ref: "Users" 
-    // },
 }, { timestamps: true })
 
 module.exports = mongoose.model("JobApply", JobApply)

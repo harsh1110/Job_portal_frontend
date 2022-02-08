@@ -1,3 +1,4 @@
+const { uploadsingle } = require('../Middlewares/cloudinary')
 const JobApply = require('../Models/jobApplyModel')
 
 exports.allApplyJob = async (req, res) => {
@@ -22,11 +23,15 @@ exports.JobApplyPerUser = async(req,res) => {
     res.send(allAppliedJobPerUser)
 }
 
-exports.JobApply = async (req, res) => {
+exports.NewJobApply = async (req, res) => {
     try {
         console.log(req.body);
-        const { jobId, name, email, phone, date, employstatus, refname,refphone} = req.body
-
+        const { jobId, designation, name, email, phone, date, employment, refname,refphone} = req.body
+        const resume = req.file
+        console.log(resume)
+        var path = await uploadsingle(resume.path)
+        console.log(path);
+        // fs.unlink(`/${resume.path}`)
         var refObj={
             refname:refname,
             refphone:refphone
@@ -37,16 +42,16 @@ exports.JobApply = async (req, res) => {
             email: email,
             phone: phone,
             date: date,
-            employStatus: employstatus,
-            // Reference: refObj,
-        
+            designation:designation,
+            employStatus: employment,
+            Reference: refObj,
+            Resume:path,
         })
-    
         await createApply.save()
-        if (createApply) res.send({success:"Job Applied Sucessfully",data:JobApply})
+        if (createApply) res.json({success:"Job Applied Sucessfully"})
     }
     catch {
-        res.json({ error: "Job Apply fail",data:JobApply })
+        res.json({ error: "Job Apply fail"})
     }
 
 }

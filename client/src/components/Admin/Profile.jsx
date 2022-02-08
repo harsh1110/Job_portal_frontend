@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 const Profile = () => {
     const id = localStorage.getItem("user")
     const [user, setUser] = useState([]);
+    const [recentdata, setRecenteData] = useState([]);
     useEffect(() => {
         axios.get(`http://localhost:5000/user/${id}`)
             .then((res) => {
@@ -16,6 +17,11 @@ const Profile = () => {
                 if (window.document.referrer === "http://localhost:3000/login") {
                     toast.success("Successfully login");
                 }
+            })
+            .catch((err) => console.log(err))
+        axios.get("http://localhost:5000/job/apply/all")
+            .then((res) => {
+                setRecenteData(res.data.slice(-4,).reverse())
             })
             .catch((err) => console.log(err))
     }, []);
@@ -29,7 +35,7 @@ const Profile = () => {
                     <div>
                         <div className="cover">
                         </div>
-                        <Card className='profile admin row container'>
+                        <Card className='profile admin row container mb-4'>
                             <div className='image-name m-4 col-1'>
                                 <img className='my-4' src={user.pic} height={"100px"} width={"100px"} alt="" srcset="" />
                             </div>
@@ -39,53 +45,27 @@ const Profile = () => {
                             </div>
                             <hr />
                             <div className="col-4">
-                               <h5 className="title my-4 mx-0">Profile Deatils</h5>
-                                {user.email}
-                                <br />
-                                {user.phone}
-                                <br />
-                                {user.role}
+                                <h5 className="title my-4 mx-0">Profile Deatils</h5>
+                                <p><EmailIcon />{user.email}</p>
+                                <p><PhoneIcon />{user.phone}</p>
+                                <p>{user.role}</p>
                             </div>
                             <div className="col-8">
-                               <h5 className="title my-4"> Recently Added Application</h5>
+                                <h5 className="title my-4"> Recently Added Application</h5>
                                 <Grid className='row' spacing={2}>
-                                    <Grid className='my-4' sm={6}>
-                                        <Card className='p-3'>
-                                            <p>React Full Stack Developer</p>
-                                            <p>Name : Gohil Harsh</p>
-                                            <p>Status : Pending</p>
-                                            <p>Referance : no</p>
-                                            <button className="btn">View Application</button>
-                                        </Card>
-                                    </Grid>
-                                    <Grid className='my-4' sm={6}>
-                                        <Card className='p-3'>
-                                            <p>React Full Stack Developer</p>
-                                            <p>Name : Gohil Harsh</p>
-                                            <p>Status : Pending</p>
-                                            <p>Referance : no</p>
-                                            <button className="btn">View Application</button>
-
-                                        </Card>
-                                    </Grid> <Grid className='my-4' sm={6}>
-                                        <Card className='p-3'>
-                                            <p>React Full Stack Developer</p>
-                                            <p>Name : Gohil Harsh</p>
-                                            <p>Status : Pending</p>
-                                            <p>Referance : no</p>
-                                            <button className="btn">View Application</button>
-
-                                        </Card>
-                                    </Grid> <Grid className='my-4' sm={6}>
-                                        <Card className='p-3'>
-                                            <p>React Full Stack Developer</p>
-                                            <p>Name : Gohil Harsh</p>
-                                            <p>Status : Pending</p>
-                                            <p>Referance : no</p>
-                                            <button className="btn">View Application</button>
-
-                                        </Card>
-                                    </Grid>
+                                    {
+                                        recentdata.map((application) => (
+                                            <Grid className='my-4' sm={6}>
+                                                <Card className='app-card p-3'>
+                                                    <p className='designation'>{application.designation}</p>
+                                                    <p>Name :- {application.name}</p>
+                                                    <p>Status :- Pending</p>
+                                                    <p>Employee Status :- {application.employStatus}</p>
+                                                    <button className="btn text-white">View Application</button>
+                                                </Card>
+                                            </Grid>
+                                        ))
+                                    }
                                 </Grid>
                             </div>
                         </Card>

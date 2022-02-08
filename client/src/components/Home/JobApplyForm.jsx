@@ -16,29 +16,37 @@ export default function JobApplyForm() {
   const [email, setemail] = useState("");
   const [phone, setphone] = useState("");
   const [date, setdate] = useState("");
+  const [resume, setresume] = useState();
   const [employment, setemployment] = useState("");
   const [refname, setrefname] = useState("");
   const [refphone, setrefphone] = useState("");
+  const [designation, setdesignation] = useState("");
  
   const handleEmployment = (e) =>{
     setemployment(e.target.value)
 }
 const handleSubmit = (e) => {
   e.preventDefault();
-    const data = {
-      jobId:id,
-      // userId:userId,
-      name:name,
-      email:email,
-      phone:phone,
-      date:date,
-      employment:employment,
-      refname:refname,
-      refphone:refphone
-    }
-    axios.post("http://localhost:5000/job/user/apply", data)
+    const data = new FormData
+    
+    data.append("jobId", id)
+    data.append("name", name)
+    data.append("email", email)
+    data.append("phone", phone)
+    data.append("date", date)
+    data.append("designation", designation)
+    data.append("employment", employment)
+    data.append("resume", resume)
+    data.append("refname", refname)
+    data.append("refphone", refphone)
+
+    axios.post("http://localhost:5000/job/apply/user", data)
       .then((res) => {
         console.log(res)
+        alert("applied successfully")
+      })
+      .catch((err) => {
+        console.log(err);
       })
 }
 
@@ -49,10 +57,8 @@ const handleSubmit = (e) => {
         backgroundSize:"cover",
         width: "100%",
         height:"100%",
-        // justifyContent: "center",
         alignItems: "center",
         textAlign: "center",
-        // align: "center",
       }}
     >
       <Grid item xs={12} sm={8} md={5}>
@@ -121,7 +127,16 @@ const handleSubmit = (e) => {
                 />
               </Grid>
             </Grid>
-
+            <Grid item sm={12}>
+              <TextField
+                className="mt-4"
+                required
+                fullWidth
+                onChange={(e) => setdesignation(e.target.value)}
+                label="Job Designation"
+                color={"primary"}
+              />
+            </Grid>
             <Grid item sm={12} style={{ textAlign: "start", marginTop: "2%" }}>
               <FormControl>
                 <FormLabel>What is your current employment status?</FormLabel>
@@ -205,7 +220,7 @@ const handleSubmit = (e) => {
                 required
                 fullWidth
                 type="file"
-                // onChange={(e) => setdesignation(e.target.value)}
+                onChange={(e) => setresume(e.target.files[0])}
                 label="Resume"
                 color={"primary"}
               />

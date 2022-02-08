@@ -9,10 +9,7 @@ cloudinary.config({
 });
 
 exports.uploadsingle = (locaFilePath) => {
-    return cloudinary.uploader.upload(locaFilePath,{
-        folder:"/ecommerce/user",
-        public_id:Date.now()
-    })
+    return cloudinary.uploader.upload(locaFilePath)
         .then((value) => {
             return value.url
         })

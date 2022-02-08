@@ -154,7 +154,8 @@ body::-webkit-scrollbar-thumb
   background-size: cover;
 }
 .profile{
-  margin-top: -150px !important;
+  margin-top: -200px !important;
+  box-shadow: rgba(106, 180, 253, 0.24) 0px 0px 2px 0px, rgba(77, 147, 218, 0.24) 0px 6px 20px 12px !important;
 }
 .image-name img{
   box-shadow: rgba(106, 180, 253, 0.24) 0px 0px 2px 0px, rgba(77, 147, 218, 0.24) 0px 6px 20px 12px !important;
@@ -165,7 +166,12 @@ body::-webkit-scrollbar-thumb
   font-weight: 600 !important;
   color: var(--darkblue) !important;
 }
-
+.app-card{
+  box-shadow: rgba(77, 77, 77, 0.24) 0px 0px 2px 0px, rgba(71, 71, 71, 0.24) 0px 6px 20px 12px !important;
+}
+.designation{
+  color: var(--darkyellow);
+}
 
 
 /* responsive css code */

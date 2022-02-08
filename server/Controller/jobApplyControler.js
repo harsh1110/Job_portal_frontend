@@ -12,7 +12,7 @@ exports.OneJob = async (req, res) => {
 }
 exports.AllPerticularJobId = async (req, res) => {
     var id = req.params.id
-    var onejob = await JobApply.find({ _id: id }).lean()
+    var onejob = await JobApply.find({ jobId: id }).lean()
     res.send(onejob)
 }
 

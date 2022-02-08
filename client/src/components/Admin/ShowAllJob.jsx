@@ -22,6 +22,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import axios from 'axios'
+import Button from '@mui/material/Button';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -82,6 +84,12 @@ const headCells = [
     numeric: false,
     disablePadding: false,
     label: 'Job Description',
+  },
+  {
+    id: 'actions',
+    numeric: false,
+    disablePadding: false,
+    label: 'Actions',
   }
 ];
 
@@ -186,8 +194,16 @@ React.useEffect(() => {
   axios.get("http://localhost:5000/job/all")
   .then((value) => {
     setAlljobs(value.data)
+    console.log(value.data)
   })
 }, []);
+const handleView = (e,id) => {
+  axios.get(`http://localhost:5000/job/apply/all/${id}`)
+  .then((res) => {
+    
+    console.log(res)
+  })
+}
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -287,6 +303,7 @@ React.useEffect(() => {
                           }}
                         />
                       </TableCell> */}
+                      
                       <TableCell
                         component="th"
                         id={labelId}
@@ -299,6 +316,7 @@ React.useEffect(() => {
                       <TableCell align="start">{job.positions}</TableCell>
                       <TableCell align="start">{job.limit}</TableCell>
                       <TableCell align="start">{job.jobDescription}</TableCell>
+                      <TableCell><Button className="btn" onClick={(e)=>handleView(e,job._id)}><RemoveRedEyeIcon className='text-white'/></Button></TableCell>
                     </TableRow>
                   );
                 })}

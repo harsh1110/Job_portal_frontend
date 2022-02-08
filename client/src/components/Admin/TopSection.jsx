@@ -9,10 +9,18 @@ import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutli
 const TopSection = () => {
     const id = localStorage.getItem("user")
     const [user, setUser] = useState([]);
+    const [totalapplication,settotalapplication] = useState("");
     useEffect(() => {
         axios.get(`http://localhost:5000/user/${id}`)
             .then((res) => {
                 setUser(res.data)
+                console.log(res.data)
+            })
+            .catch((err) => console.log(err))
+
+            axios.get(`http://localhost:5000/job/apply/all`)
+            .then((res) => {
+                settotalapplication(res.data.length)
             })
             .catch((err) => console.log(err))
     }, []);
@@ -22,7 +30,7 @@ const TopSection = () => {
             <Grid item xs={12} md={3}>
                 <div style={{ borderRadius: "15px" }} className="card blue text-center py-2">
                     <h4 className='blue-icon text-center my-4'><AccountCircleOutlinedIcon /></h4>
-                    <h3 className='number mt-2'>210</h3>
+                    <h3 className='number mt-2'>{totalapplication}</h3>
                     <p className='sub-title mb-4'>Total Applicatios</p>
                 </div>
             </Grid>
@@ -30,7 +38,7 @@ const TopSection = () => {
                 <div style={{ borderRadius: "15px" }} className="card yellow text-center py-2">
                     <h4 className='yellow-icon text-center my-4'><AccessTimeIcon /></h4>
                     <h3 className='number mt-2'>150</h3>
-                    <p className='sub-title mb-4'>Pennding Applications</p>
+                    <p className='sub-title mb-4'>Pending Applications</p>
                 </div>
             </Grid>
             <Grid item xs={12} md={3}>

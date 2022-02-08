@@ -194,7 +194,7 @@ React.useEffect(() => {
   axios.get("http://localhost:5000/job/all")
   .then((value) => {
     setAlljobs(value.data)
-    console.log(value.data)
+    // console.log(value.data)
   })
 }, []);
 const handleView = (e,id) => {
@@ -202,6 +202,7 @@ const handleView = (e,id) => {
   .then((res) => {
     
     console.log(res)
+    window.location = `/jobdetails/${id}`
   })
 }
   const handleRequestSort = (event, property) => {

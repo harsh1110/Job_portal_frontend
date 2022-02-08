@@ -39,7 +39,7 @@ const Profile = () => {
                             </div>
                             <hr />
                             <div className="col-4">
-                               <h5 className="title my-4">Profile Deatils</h5>
+                               <h5 className="title my-4 mx-0">Profile Deatils</h5>
                                 {user.email}
                                 <br />
                                 {user.phone}
@@ -51,22 +51,39 @@ const Profile = () => {
                                 <Grid className='row' spacing={2}>
                                     <Grid className='my-4' sm={6}>
                                         <Card className='p-3'>
-                                            Hello
+                                            <p>React Full Stack Developer</p>
+                                            <p>Name : Gohil Harsh</p>
+                                            <p>Status : Pending</p>
+                                            <p>Referance : no</p>
+                                            <button className="btn">View Application</button>
                                         </Card>
                                     </Grid>
                                     <Grid className='my-4' sm={6}>
                                         <Card className='p-3'>
-                                            Hello
+                                            <p>React Full Stack Developer</p>
+                                            <p>Name : Gohil Harsh</p>
+                                            <p>Status : Pending</p>
+                                            <p>Referance : no</p>
+                                            <button className="btn">View Application</button>
+
                                         </Card>
-                                    </Grid>
-                                    <Grid className='my-4' sm={6}>
+                                    </Grid> <Grid className='my-4' sm={6}>
                                         <Card className='p-3'>
-                                            Hello
+                                            <p>React Full Stack Developer</p>
+                                            <p>Name : Gohil Harsh</p>
+                                            <p>Status : Pending</p>
+                                            <p>Referance : no</p>
+                                            <button className="btn">View Application</button>
+
                                         </Card>
-                                    </Grid>
-                                    <Grid className='my-4' sm={6}>
+                                    </Grid> <Grid className='my-4' sm={6}>
                                         <Card className='p-3'>
-                                            Hello
+                                            <p>React Full Stack Developer</p>
+                                            <p>Name : Gohil Harsh</p>
+                                            <p>Status : Pending</p>
+                                            <p>Referance : no</p>
+                                            <button className="btn">View Application</button>
+
                                         </Card>
                                     </Grid>
                                 </Grid>

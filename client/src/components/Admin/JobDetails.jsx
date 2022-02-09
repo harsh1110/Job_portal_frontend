@@ -186,14 +186,14 @@ export default function EnhancedTable() {
   React.useEffect((e) => {
     axios.get(`${url}/job/apply/all/${id}`).then((value) => {
       setdata(value.data);
-      setref(data.map((i) => i.Reference));
+      // setref(data.map((i) => i.Reference));
       console.log(ref);
     });
   }, []);
-  const handleView = (e, id) => {
-    axios.get(`${url}/job/apply/all/${id}`)
+  const handleView = (e, candidateid) => {
+    axios.get(`${url}/job/apply/one/${candidateid}`)
       .then((res) => {
-        window.location = `/jobdetails/${id}`
+        window.location = `/candidatedetails/${candidateid}`
       })
   }
   const handleRequestSort = (event, property) => {

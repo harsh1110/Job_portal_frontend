@@ -60,6 +60,7 @@ export default function JobApplyForm() {
     .then((res) => {
       console.log(res)
       alert("applied successfully")
+      window.location = `/thankyou`
     })
     .catch((err) => {
       console.log(err);

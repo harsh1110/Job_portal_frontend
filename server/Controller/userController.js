@@ -30,7 +30,13 @@ exports.CreateUser = async (req, res) => {
         const { name, email, phone, pass } = req.body
         const pic = req.file
         var path = await uploadsingle(pic.path)
-        // fs.unlink(`${pic.path}`)
+        fs.unlink(pic.path,()=>{
+            res.send ({
+              status: "200",
+              responseType: "string",
+              response: "success"
+            })
+        })
         console.log(path);
         if (path.length !== 0) {
             var createUser = await User.create({

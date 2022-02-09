@@ -13,18 +13,12 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import Checkbox from '@mui/material/Checkbox';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
-import DeleteIcon from '@mui/icons-material/Delete';
-import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import axios from 'axios'
 import Button from '@mui/material/Button';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import { useParams } from 'react-router-dom';
+import url from '../../config';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -68,24 +62,6 @@ const headCells = [
     disablePadding: false,
     label: 'Candidate Name',
   },
-  // {
-  //   id: 'Email',
-  //   numeric: false,
-  //   disablePadding: false,
-  //   label: 'Email Address',
-  // },
-  // {
-  //   id: 'number',
-  //   numeric: false,
-  //   disablePadding: false,
-  //   label: 'Contact Number',
-  // },
-  // {
-  //   id: 'date',
-  //   numeric: false,
-  //   disablePadding: false,
-  //   label: 'Birth Date',
-  // },
   {
     id: 'status',
     numeric: false,
@@ -98,18 +74,6 @@ const headCells = [
     disablePadding: false,
     label: 'Application Status',
   },
-  // {
-  //   id: 'refname',
-  //   numeric: false,
-  //   disablePadding: false,
-  //   label: "Reference Name",
-  // },
-  // {
-  //   id: 'refphone',
-  //   numeric: false,
-  //   disablePadding: false,
-  //   label: 'Reference Contact Number',
-  // },
   {
     id: 'actions',
     numeric: false,
@@ -220,17 +184,15 @@ export default function EnhancedTable() {
   const [ref, setref] = React.useState([]);
 
   React.useEffect((e) => {
-    axios.get(`http://localhost:5000/job/apply/all/${id}`).then((value) => {
+    axios.get(`${url}/job/apply/all/${id}`).then((value) => {
       setdata(value.data);
       setref(data.map((i) => i.Reference));
       console.log(ref);
     });
   }, []);
   const handleView = (e, id) => {
-    axios.get(`http://localhost:5000/job/apply/all/${id}`)
+    axios.get(`${url}/job/apply/all/${id}`)
       .then((res) => {
-
-        console.log(res)
         window.location = `/jobdetails/${id}`
       })
   }
@@ -325,16 +287,6 @@ export default function EnhancedTable() {
                           key={i._id}
                           selected={isItemSelected}
                         >
-                          {/* <TableCell padding="checkbox">
-                        <Checkbox
-                          color="primary"
-                          checked={isItemSelected}
-                          inputProps={{
-                            'aria-labelledby': labelId,
-                          }}
-                        />
-                      </TableCell> */}
-
                           <TableCell
                             component="th"
                             id={labelId}
@@ -346,27 +298,12 @@ export default function EnhancedTable() {
                           <TableCell>
                             {i.name}
                           </TableCell>
-                          {/* <TableCell>
-                            {i.email}
-                          </TableCell>
-                          <TableCell>
-                            {i.phone}
-                          </TableCell>
-                          <TableCell>
-                            {i.date}
-                          </TableCell> */}
                           <TableCell>
                             {i.employStatus}
                           </TableCell>
                           <TableCell>
                             {i.ApplicationStatus}
                           </TableCell>
-                          {/* <TableCell>
-                            {i.Reference.refname}
-                          </TableCell>
-                          <TableCell>
-                            {i.Reference.refphone}
-                          </TableCell> */}
                           <TableCell><Button className="btn" onClick={(e) => handleView(e, i._id)}><RemoveRedEyeIcon className='text-white' /></Button></TableCell>
                         </TableRow>
                       );

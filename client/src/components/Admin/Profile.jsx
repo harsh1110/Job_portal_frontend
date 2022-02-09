@@ -5,13 +5,14 @@ import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EditIcon from '@mui/icons-material/Edit';
 import { toast } from 'react-toastify';
+import url from '../../config';
 
 const Profile = () => {
     const id = localStorage.getItem("user")
     const [user, setUser] = useState([]);
     const [recentdata, setRecenteData] = useState([]);
     useEffect(() => {
-        axios.get(`http://localhost:5000/user/${id}`)
+        axios.get(`${url}/user/${id}`)
             .then((res) => {
                 setUser(res.data)
                 if (window.document.referrer === "http://localhost:3000/login") {
@@ -19,7 +20,7 @@ const Profile = () => {
                 }
             })
             .catch((err) => console.log(err))
-        axios.get("http://localhost:5000/job/apply/all")
+        axios.get(`${url}/job/apply/all`)
             .then((res) => {
                 setRecenteData(res.data.slice(-4,).reverse())
             })

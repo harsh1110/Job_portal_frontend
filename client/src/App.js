@@ -14,6 +14,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import JobDetails from "./components/Admin/JobDetails";
 
+
 function App() {
   return (
     <>

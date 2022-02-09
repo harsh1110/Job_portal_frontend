@@ -3,6 +3,7 @@ import { TextField, Grid, Typography } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Box, Button } from "@mui/material";
 import axios from "axios";
+import url from "../../config";
 
 const theme = createTheme({
   palette: {
@@ -30,7 +31,7 @@ export default function CreateJob() {
       limit: limit,
       userId: localStorage.getItem("user"),
     }
-    axios.post("http://localhost:5000/job/create", data)
+    axios.post(`${url}/job/create`, data)
       .then((res) => {
         alert("Job Created Successfully")
         window.location = "/Create%20Job%20Post"

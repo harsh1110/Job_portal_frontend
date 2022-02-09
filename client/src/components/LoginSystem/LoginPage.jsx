@@ -15,6 +15,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
+import url from "../../config";
 const theme = createTheme({
   palette: {
     primary:{
@@ -47,7 +48,7 @@ export default function LoginPage() {
       pass: pass,
     };
     axios
-      .post("http://localhost:5000/login", data)
+      .post(`${url}/login`, data)
       .then((value) => {
         setAuthUser(value.data);
         if (authUser) {

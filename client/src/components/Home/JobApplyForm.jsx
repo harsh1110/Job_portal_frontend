@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom"
 import Card from '@mui/material/Card'
 import emailjs from '@emailjs/browser'
+import url from "../../config";
 
 export default function JobApplyForm() {
   const { id } = useParams()
@@ -23,7 +24,7 @@ export default function JobApplyForm() {
   const [refphone, setrefphone] = useState("");
   const [designation, setdesignation] = useState("");
   const callDesignation = () => {
-    axios.get(`http://localhost:5000/job/one/${id}`)
+    axios.get(`${url}/job/one/${id}`)
       .then((res) => (setdesignation(res.data.designation)))
       .catch((err) => { console.log(err); })
   }
@@ -55,7 +56,7 @@ export default function JobApplyForm() {
       to_email:email,
       designation:designation
     }
-    axios.post("http://localhost:5000/job/apply/user", data)
+    axios.post(`${url}/job/apply/user`, data)
     .then((res) => {
       console.log(res)
       alert("applied successfully")

@@ -5,6 +5,7 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined';
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
+import url from '../../config';
 
 const TopSection = () => {
     const id = localStorage.getItem("user")
@@ -14,29 +15,29 @@ const TopSection = () => {
     const [approveapplication,setapproveapplication] = useState("");
     const [rejectapplication,setrejectapplication] = useState("");
     useEffect(() => {
-        axios.get(`http://localhost:5000/user/${id}`)
+        axios.get(`${url}/user/${id}`)
             .then((res) => {
                 setUser(res.data)
                 console.log(res.data)
             })
             .catch((err) => console.log(err))
 
-            axios.get(`http://localhost:5000/job/apply/all`)
+            axios.get(`${url}/job/apply/all`)
             .then((res) => {
                 settotalapplication(res.data.length)
             })
             .catch((err) => console.log(err))
-            axios.get(`http://localhost:5000/job/apply/status/pending`)
+            axios.get(`${url}/job/apply/status/pending`)
             .then((res) => {
                 setpendingapplication(res.data.length)
             })
             .catch((err) => console.log(err))
-            axios.get(`http://localhost:5000/job/apply/status/approve`)
+            axios.get(`${url}/job/apply/status/approve`)
             .then((res) => {
                 setapproveapplication(res.data.length)
             })
             .catch((err) => console.log(err))
-            axios.get(`http://localhost:5000/job/apply/status/reject`)
+            axios.get(`${url}/job/apply/status/reject`)
             .then((res) => {
                 setrejectapplication(res.data.length)
             })

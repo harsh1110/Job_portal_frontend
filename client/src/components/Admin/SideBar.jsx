@@ -25,6 +25,7 @@ import { Link } from 'react-router-dom';
 import Container from '@mui/material/Container'
 import { Card, Grid } from '@mui/material';
 import axios from 'axios';
+import url from '../../config';
 
 const drawerWidth = 250;
 
@@ -38,7 +39,7 @@ function ResponsiveDrawer(props) {
         setMobileOpen(!mobileOpen);
     };
     React.useEffect(() => {
-        axios.get(`http://localhost:5000/user/${id}`)
+        axios.get(`${url}/user/${id}`)
         .then((value) => {
             setUser(value.data)
         })

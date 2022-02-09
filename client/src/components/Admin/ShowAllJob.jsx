@@ -24,6 +24,7 @@ import { visuallyHidden } from '@mui/utils';
 import axios from 'axios'
 import Button from '@mui/material/Button';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import url from '../../config';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -191,14 +192,14 @@ export default function EnhancedTable() {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [alljobs, setAlljobs] = React.useState([]);
 React.useEffect(() => {
-  axios.get("http://localhost:5000/job/all")
+  axios.get(`${url}/job/all`)
   .then((value) => {
     setAlljobs(value.data)
     // console.log(value.data)
   })
 }, []);
 const handleView = (e,id) => {
-  axios.get(`http://localhost:5000/job/apply/all/${id}`)
+  axios.get(`${url}/job/apply/all/${id}`)
   .then((res) => {
     
     console.log(res)

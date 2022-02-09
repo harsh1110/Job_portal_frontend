@@ -15,6 +15,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import Resizer from 'react-image-file-resizer'
 import { Card, CardMedia, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import url from '../../config';
 
 const theme = createTheme({
     palette: {
@@ -54,7 +55,7 @@ export default function Registration() {
         dat.append("pass", pass)
         dat.append("pic", pic)
         console.log(dat);
-        axios.post("http://localhost:5000/add-user", dat)
+        axios.post(`${url}/add-user`, dat)
             .then(res => {
                 alert('Data send successfully...!!')
                 window.location = "/login"

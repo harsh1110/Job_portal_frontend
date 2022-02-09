@@ -68,24 +68,24 @@ const headCells = [
     disablePadding: false,
     label: 'Candidate Name',
   },
-  {
-    id: 'Email',
-    numeric: false,
-    disablePadding: false,
-    label: 'Email Address',
-  },
-  {
-    id: 'number',
-    numeric: false,
-    disablePadding: false,
-    label: 'Contact Number',
-  },
-  {
-    id: 'date',
-    numeric: false,
-    disablePadding: false,
-    label: 'Birth Date',
-  },
+  // {
+  //   id: 'Email',
+  //   numeric: false,
+  //   disablePadding: false,
+  //   label: 'Email Address',
+  // },
+  // {
+  //   id: 'number',
+  //   numeric: false,
+  //   disablePadding: false,
+  //   label: 'Contact Number',
+  // },
+  // {
+  //   id: 'date',
+  //   numeric: false,
+  //   disablePadding: false,
+  //   label: 'Birth Date',
+  // },
   {
     id: 'status',
     numeric: false,
@@ -93,17 +93,23 @@ const headCells = [
     label: 'Employee Status',
   },
   {
-    id: 'refname',
+    id: 'status',
     numeric: false,
     disablePadding: false,
-    label: "Reference Name",
+    label: 'Application Status',
   },
-  {
-    id: 'refphone',
-    numeric: false,
-    disablePadding: false,
-    label: 'Reference Contact Number',
-  },
+  // {
+  //   id: 'refname',
+  //   numeric: false,
+  //   disablePadding: false,
+  //   label: "Reference Name",
+  // },
+  // {
+  //   id: 'refphone',
+  //   numeric: false,
+  //   disablePadding: false,
+  //   label: 'Reference Contact Number',
+  // },
   {
     id: 'actions',
     numeric: false,
@@ -337,27 +343,30 @@ export default function EnhancedTable() {
                           >
                             {index + 1}
                           </TableCell>
-                          <TableCell style={{ textAlign: "center" }}>
+                          <TableCell>
                             {i.name}
                           </TableCell>
-                          <TableCell style={{ textAlign: "center" }}>
+                          {/* <TableCell>
                             {i.email}
                           </TableCell>
-                          <TableCell style={{ textAlign: "center" }}>
+                          <TableCell>
                             {i.phone}
                           </TableCell>
-                          <TableCell style={{ textAlign: "center" }}>
+                          <TableCell>
                             {i.date}
-                          </TableCell>
-                          <TableCell style={{ textAlign: "center" }}>
+                          </TableCell> */}
+                          <TableCell>
                             {i.employStatus}
                           </TableCell>
-                          <TableCell style={{ textAlign: "center" }}>
+                          <TableCell>
+                            {i.ApplicationStatus}
+                          </TableCell>
+                          {/* <TableCell>
                             {i.Reference.refname}
                           </TableCell>
-                          <TableCell style={{ textAlign: "center" }}>
+                          <TableCell>
                             {i.Reference.refphone}
-                          </TableCell>
+                          </TableCell> */}
                           <TableCell><Button className="btn" onClick={(e) => handleView(e, i._id)}><RemoveRedEyeIcon className='text-white' /></Button></TableCell>
                         </TableRow>
                       );

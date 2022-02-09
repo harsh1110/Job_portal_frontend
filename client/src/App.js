@@ -26,11 +26,7 @@ function App() {
             <Routes>
               <Route exact path="/Profile" element={<Profile />} />
               <Route exact path="/Dashboard" element={<TopSection />} />
-              <Route
-                exact
-                path="/Create%20Job%20Post"
-                element={<CreateJob />}
-              />
+              <Route exact path="/Create%20Job%20Post" element={<CreateJob />} />
               <Route exact path="/Show%20All%20Data" element={<ShowAllJob />} />
               <Route exact path="/jobdetails/:id" element={<JobDetails />} />
               <Route exact path="/Log%20Out" element={<Logout />} />

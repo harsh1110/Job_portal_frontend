@@ -27,6 +27,9 @@ const JobApply = mongoose.Schema({
     Reference: {
         type: Object
     },
+    ApplicationStatus: {
+        type: String
+    },
     Resume: {
         type: String
     },

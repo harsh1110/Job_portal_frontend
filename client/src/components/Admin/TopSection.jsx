@@ -10,6 +10,9 @@ const TopSection = () => {
     const id = localStorage.getItem("user")
     const [user, setUser] = useState([]);
     const [totalapplication,settotalapplication] = useState("");
+    const [pendingapplication,setpendingapplication] = useState("");
+    const [approveapplication,setapproveapplication] = useState("");
+    const [rejectapplication,setrejectapplication] = useState("");
     useEffect(() => {
         axios.get(`http://localhost:5000/user/${id}`)
             .then((res) => {
@@ -21,6 +24,21 @@ const TopSection = () => {
             axios.get(`http://localhost:5000/job/apply/all`)
             .then((res) => {
                 settotalapplication(res.data.length)
+            })
+            .catch((err) => console.log(err))
+            axios.get(`http://localhost:5000/job/apply/status/pending`)
+            .then((res) => {
+                setpendingapplication(res.data.length)
+            })
+            .catch((err) => console.log(err))
+            axios.get(`http://localhost:5000/job/apply/status/approve`)
+            .then((res) => {
+                setapproveapplication(res.data.length)
+            })
+            .catch((err) => console.log(err))
+            axios.get(`http://localhost:5000/job/apply/status/reject`)
+            .then((res) => {
+                setrejectapplication(res.data.length)
             })
             .catch((err) => console.log(err))
     }, []);
@@ -37,21 +55,21 @@ const TopSection = () => {
             <Grid item xs={12} md={3}>
                 <div style={{ borderRadius: "15px" }} className="card yellow text-center py-2">
                     <h4 className='yellow-icon text-center my-4'><AccessTimeIcon /></h4>
-                    <h3 className='number mt-2'>150</h3>
+                    <h3 className='number mt-2'>{pendingapplication}</h3>
                     <p className='sub-title mb-4'>Pending Applications</p>
                 </div>
             </Grid>
             <Grid item xs={12} md={3}>
                 <div style={{ borderRadius: "15px" }} className="card green text-center py-2">
                     <h4 className='green-icon text-center my-4'><CheckCircleOutlineOutlinedIcon /></h4>
-                    <h3 className='number mt-2'>50</h3>
+                    <h3 className='number mt-2'>{approveapplication}</h3>
                     <p className='sub-title mb-4'>Approved Applications</p>
                 </div>
             </Grid>
             <Grid item xs={12} md={3}>
                 <div style={{ borderRadius: "15px" }} className="card red text-center py-2">
                     <h4 className='red-icon text-center my-4'><HighlightOffOutlinedIcon /></h4>
-                    <h3 className='number mt-2'>10</h3>
+                    <h3 className='number mt-2'>{rejectapplication}</h3>
                     <p className='sub-title mb-4'>Rejected Application</p>
                 </div>
             </Grid>

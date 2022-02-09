@@ -261,7 +261,7 @@ const handleView = (e,id) => {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Paper className='admin row text-center' sx={{ width: '100%', mb: 2 }}>
+      <Paper className='table admin row text-center' sx={{ width: '100%', mb: 2 }}>
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}

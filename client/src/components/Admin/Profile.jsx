@@ -59,7 +59,7 @@ const Profile = () => {
                                                 <Card className='app-card p-3'>
                                                     <p className='designation'>{application.designation}</p>
                                                     <p>Name :- {application.name}</p>
-                                                    <p>Status :- Pending</p>
+                                                    <p>Status :- {application.ApplicationStatus}</p>
                                                     <p>Employee Status :- {application.employStatus}</p>
                                                     <button className="btn text-white">View Application</button>
                                                 </Card>

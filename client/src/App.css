@@ -166,11 +166,12 @@ body::-webkit-scrollbar-thumb
   font-weight: 600 !important;
   color: var(--darkblue) !important;
 }
-.app-card{
+.app-card,.table{
   box-shadow: rgba(77, 77, 77, 0.24) 0px 0px 2px 0px, rgba(71, 71, 71, 0.24) 0px 6px 20px 12px !important;
 }
 .designation{
   color: var(--darkyellow);
+  /* font-weight: 300 !important; */
 }
 
 

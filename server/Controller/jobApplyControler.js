@@ -22,6 +22,11 @@ exports.JobApplyPerUser = async(req,res) => {
     var allAppliedJobPerUser = await JobApply.find({ AppliedBy: id }).lean()
     res.send(allAppliedJobPerUser)
 }
+exports.getStatus = async(req,res) => {
+    var status = req.params.status
+    var allAppliedJobwithStatus = await JobApply.find({ ApplicationStatus: status }).lean()
+    res.send(allAppliedJobwithStatus)
+}
 
 exports.NewJobApply = async (req, res) => {
     try {
@@ -44,6 +49,7 @@ exports.NewJobApply = async (req, res) => {
             date: date,
             designation:designation,
             employStatus: employment,
+            ApplicationStatus:"pending",
             Reference: refObj,
             Resume:path,
         })

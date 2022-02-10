@@ -18,11 +18,11 @@ import CardMedia from "@mui/material/CardMedia";
 import url from "../../config";
 const theme = createTheme({
   palette: {
-    primary:{
-      main:"#2d82f8"
+    primary: {
+      main: "#2d82f8"
     },
-    secondary:{
-      main:"rgb(196,209,64)"
+    secondary: {
+      main: "rgb(196,209,64)"
     },
   },
 });
@@ -54,15 +54,7 @@ export default function LoginPage() {
         if (authUser) {
           localStorage.setItem("user", authUser._id);
           localStorage.setItem("role", authUser.role);
-          if (authUser.role === "admin") {
-            window.location = "/profile";
-          } else {
-            window.location = "/profile";
-          }
-        } else {
-          if (authUser) {
-            window.location = "/profile";
-          }
+          window.location = "/profile";
         }
       })
       .catch((err) => {
@@ -80,7 +72,7 @@ export default function LoginPage() {
   }
   return (
     <ThemeProvider theme={theme}>
-      <Grid container component="main"  sx={{ height: "100vh",boxShadow:"none" }}>
+      <Grid container component="main" sx={{ height: "100vh", boxShadow: "none" }}>
         <CssBaseline />
         <Grid
           item
@@ -88,20 +80,20 @@ export default function LoginPage() {
           sm={4}
           md={5}
         >
-          <div style={{padding:"15px"}}>
-          <Card className="login-card">
-          <Typography style={{marginBlock:"50px"}} variant='h5' className='text-center'><img src="https://www.webbrainstechnologies.com/wp-content/uploads/2016/02/logo-3.png" height={"50px"} width={"100px"} alt="" srcset="" /></Typography>
+          <div style={{ padding: "15px" }}>
+            <Card className="login-card">
+              <Typography style={{ marginBlock: "50px" }} variant='h5' className='text-center'><img src="https://www.webbrainstechnologies.com/wp-content/uploads/2016/02/logo-3.png" height={"50px"} width={"100px"} alt="" srcset="" /></Typography>
 
-            <h3 className="m-4 text-center title">Hello Welcome Back</h3>
-            <CardMedia
-            className="login-card-img"
-            width="100%"
-              component="img"
-              height="100%"
-              image="https://minimal-kit-react.vercel.app/static/illustrations/illustration_login.png"
-              alt="green iguana"
-            />
-          </Card>
+              <h3 className="m-4 text-center title">Hello Welcome Back</h3>
+              <CardMedia
+                className="login-card-img"
+                width="100%"
+                component="img"
+                height="100%"
+                image="https://minimal-kit-react.vercel.app/static/illustrations/illustration_login.png"
+                alt="green iguana"
+              />
+            </Card>
           </div>
         </Grid>
         <Grid item xs={12} sm={8} md={7} elevation={6} square>
@@ -149,7 +141,7 @@ export default function LoginPage() {
                 autoComplete="current-password"
               />
               <Button
-              className="btn"
+                className="btn"
                 type="submit"
                 fullWidth
                 variant="contained"

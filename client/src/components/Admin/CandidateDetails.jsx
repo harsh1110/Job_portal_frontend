@@ -17,6 +17,7 @@ import { Radio, RadioGroup } from "@mui/material";
 import Viewer, { Worker } from '@phuocng/react-pdf-viewer';
 import '@phuocng/react-pdf-viewer/cjs/react-pdf-viewer.css';
 import url from "../../config";
+import emailjs from '@emailjs/browser'
 
 const theme = createTheme({
   palette: {
@@ -47,6 +48,27 @@ export default function CandidateDetails() {
   };
   const handleSave = (e) => {
     e.preventDefault();
+    const emaildata = {
+      to_name:candidate.name,
+      to_email:candidate.email,
+      designation:candidate.designation
+    }
+    if(status === "Approve") {
+      emailjs.send("service_8b9bgx1","template_approve",emaildata,"user_bNQsTrJpBB3n1BSg7wlfG")
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });
+    };
+    if(status === "Reject") {
+      emailjs.send("service_8b9bgx1","template_reject",emaildata,"user_bNQsTrJpBB3n1BSg7wlfG")
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });
+    };
     const data = {
       status: status,
     };

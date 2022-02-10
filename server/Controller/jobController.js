@@ -10,10 +10,11 @@ exports.CreateNewJob = async (req, res) => {
             jobDescription: jobDescription,
             positions: position,
             limit: limit,
+            appliedBy: 0,
             createdBy: userId
         })
         createJob.save()
-        if (createJob) res.json({ success: "Job added Successfully",data:createJob })
+        if (createJob) res.json({ success: "Job added Successfully", data: createJob })
     }
     catch {
         res.json({ error: "Job creation fail" })

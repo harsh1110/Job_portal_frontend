@@ -15,7 +15,7 @@ const Job = mongoose.Schema({
         type: Number
     },
     appliedBy: {
-        type: Array
+        type: Number
     },
     createdBy: {
         type: ObjectId,

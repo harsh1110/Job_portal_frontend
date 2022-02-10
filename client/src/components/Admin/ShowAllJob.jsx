@@ -55,7 +55,7 @@ const headCells = [
     numeric: false,
     disablePadding: false,
     label: 'JobId',
-  },{
+  }, {
     id: 'designation',
     numeric: false,
     disablePadding: false,
@@ -99,7 +99,7 @@ function EnhancedTableHead(props) {
       <TableRow>
         {headCells.map((headCell) => (
           <TableCell
-          className='fw-bold'
+            className='fw-bold'
             key={headCell.id}
             align={headCell.numeric ? 'right' : 'left'}
             padding={headCell.disablePadding ? 'none' : 'normal'}
@@ -138,7 +138,7 @@ const EnhancedTableToolbar = (props) => {
 
   return (
     <Toolbar
-    
+
       sx={{
         pl: { sm: 2 },
         pr: { xs: 1, sm: 1 },
@@ -184,21 +184,21 @@ export default function EnhancedTable() {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [alljobs, setAlljobs] = React.useState([]);
-React.useEffect(() => {
-  axios.get(`${url}/job/all`)
-  .then((value) => {
-    setAlljobs(value.data)
-    // console.log(value.data)
-  })
-}, []);
-const handleView = (e,id) => {
-  axios.get(`${url}/job/apply/all/${id}`)
-  .then((res) => {
-    
-    console.log(res)
-    window.location = `/jobdetails/${id}`
-  })
-}
+  React.useEffect(() => {
+    axios.get(`${url}/job/all`)
+      .then((value) => {
+        setAlljobs(value.data)
+        // console.log(value.data)
+      })
+  }, []);
+  const handleView = (e, id) => {
+    axios.get(`${url}/job/apply/all/${id}`)
+      .then((res) => {
+
+        console.log(res)
+        window.location = `/jobdetails/${id}`
+      })
+  }
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -298,20 +298,41 @@ const handleView = (e,id) => {
                           }}
                         />
                       </TableCell> */}
-                      
-                      <TableCell
-                        component="th"
-                        id={labelId}
-                        scope="row"
-                        padding="4px"
-                      >
-                        {index+1}
-                      </TableCell>
-                      <TableCell align="start">{job.designation}</TableCell>
-                      <TableCell align="start">{job.positions}</TableCell>
-                      <TableCell align="start">{job.limit}</TableCell>
-                      <TableCell align="start">{job.jobDescription}</TableCell>
-                      <TableCell><Button className="btn" onClick={(e)=>handleView(e,job._id)}><RemoveRedEyeIcon className='text-white'/></Button></TableCell>
+
+                      {
+                        job.limit === 0 ?
+                          <>
+                            <TableCell
+                            className='text-secondary'
+                              component="th"
+                              id={labelId}
+                              scope="row"
+                              padding="4px"
+                            >
+                              <del>{index + 1}</del>
+                            </TableCell>
+                            <TableCell className='text-secondary' align="start"><del>{job.designation}</del></TableCell>
+                            <TableCell className='text-secondary' align="start"><del>{job.positions}</del></TableCell>
+                            <TableCell className='text-secondary' align="start"><del>{job.limit}</del></TableCell>
+                            <TableCell className='text-secondary' align="start"><del>{job.jobDescription}</del></TableCell>
+                            <TableCell><Button className="btn" onClick={(e) => handleView(e, job._id)}><RemoveRedEyeIcon className='text-white' /></Button></TableCell>
+                          </> :
+                          <>
+                            <TableCell
+                              component="th"
+                              id={labelId}
+                              scope="row"
+                              padding="4px"
+                            >
+                              {index + 1}
+                            </TableCell>
+                            <TableCell align="start">{job.designation}</TableCell>
+                            <TableCell align="start">{job.positions}</TableCell>
+                            <TableCell align="start">{job.limit}</TableCell>
+                            <TableCell align="start">{job.jobDescription}</TableCell>
+                            <TableCell><Button className="btn" onClick={(e) => handleView(e, job._id)}><RemoveRedEyeIcon className='text-white' /></Button></TableCell>
+                          </>
+                      }
                     </TableRow>
                   );
                 })}

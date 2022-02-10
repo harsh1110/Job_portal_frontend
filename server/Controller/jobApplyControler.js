@@ -55,21 +55,28 @@ exports.changeStatus = async (req, res) => {
 }
 const changeLimit = async (id) => {
     var oldVal = await Job.findOne({ _id: id }).lean()
-    var limit = parseFloat(oldVal.limit) - 1
-    console.log(limit);
-    var newVal = {
-        designation: oldVal.designation,
-        jobDescription: oldVal.jobDescription,
-        positions: oldVal.positions,
-        limit: limit,
-        createdBy: oldVal.createdBy
-    }
-    var success = await Job.findOneAndReplace({ _id: id }, newVal)
-    if (success) {
-       console.log({ msg: "success" })
+    if (oldVal.limit === 0) {
+        
     }
     else {
-        console.log({ msg: "fail" })
+        var limit = parseFloat(oldVal.limit) - 1
+        var appliedBy = parseFloat(oldVal.appliedBy) + 1
+        console.log(limit);
+        var newVal = {
+            designation: oldVal.designation,
+            jobDescription: oldVal.jobDescription,
+            positions: oldVal.positions,
+            limit: limit,
+            appliedBy: appliedBy,
+            createdBy: oldVal.createdBy
+        }
+        var success = await Job.findOneAndReplace({ _id: id }, newVal)
+        if (success) {
+            console.log({ msg: "success" })
+        }
+        else {
+            console.log({ msg: "fail" })
+        }
     }
 }
 

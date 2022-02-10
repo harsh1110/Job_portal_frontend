@@ -6,6 +6,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined';
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
 import url from '../../config';
+import { LineChart } from './LineChart';
 
 const TopSection = () => {
     const id = localStorage.getItem("user")
@@ -18,7 +19,7 @@ const TopSection = () => {
         axios.get(`${url}/user/${id}`)
             .then((res) => {
                 setUser(res.data)
-                console.log(res.data)
+                // console.log(res.data)
             })
             .catch((err) => console.log(err))
 
@@ -75,6 +76,7 @@ const TopSection = () => {
                 </div>
             </Grid>
         </Grid>
+        <LineChart/>
     </div>;
 };
 

@@ -60,17 +60,17 @@ export default function JobApplyForm() {
     .then((res) => {
       console.log(res)
       alert("applied successfully")
+      emailjs.send('service_8b9bgx1', 'template_6rrbnry', emaildata, 'user_bNQsTrJpBB3n1BSg7wlfG')
+        .then((result) => {
+            console.log(result.text);
+        }, (error) => {
+            console.log(error.text);
+        });
       window.location = `/thankyou`
     })
     .catch((err) => {
       console.log(err);
     })
-    emailjs.send('service_8b9bgx1', 'template_6rrbnry', emaildata, 'user_bNQsTrJpBB3n1BSg7wlfG')
-      .then((result) => {
-          console.log(result.text);
-      }, (error) => {
-          console.log(error.text);
-      });
   }
   
   return (

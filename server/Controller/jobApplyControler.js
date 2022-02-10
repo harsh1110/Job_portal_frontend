@@ -1,5 +1,6 @@
 const { uploadsingle } = require('../Middlewares/cloudinary')
 const JobApply = require('../Models/jobApplyModel')
+const Job = require('../Models/jobModel')
 const fs = require("fs")
 
 exports.allApplyJob = async (req, res) => {
@@ -46,10 +47,29 @@ exports.changeStatus = async (req, res) => {
     }
     var success = await JobApply.findOneAndReplace({ _id: id }, newVal)
     if (success) {
-    res.json({ msg: "success" })
+        res.json({ msg: "success" })
     }
     else {
         res.json({ msg: "fail" })
+    }
+}
+const changeLimit = async (id) => {
+    var oldVal = await Job.findOne({ _id: id }).lean()
+    var limit = parseFloat(oldVal.limit) - 1
+    console.log(limit);
+    var newVal = {
+        designation: oldVal.designation,
+        jobDescription: oldVal.jobDescription,
+        positions: oldVal.positions,
+        limit: limit,
+        createdBy: oldVal.createdBy
+    }
+    var success = await Job.findOneAndReplace({ _id: id }, newVal)
+    if (success) {
+       console.log({ msg: "success" })
+    }
+    else {
+        console.log({ msg: "fail" })
     }
 }
 
@@ -61,11 +81,9 @@ exports.NewJobApply = async (req, res) => {
         console.log(resume)
         var path = await uploadsingle(resume.path)
         console.log(path);
-        fs.unlink(resume.path,()=>{
-            res.send ({
-              status: "200",
-              responseType: "string",
-              response: "success"
+        fs.unlink(resume.path, () => {
+            res.send({
+                response: "success"
             })
         })
         var refObj = {
@@ -85,9 +103,12 @@ exports.NewJobApply = async (req, res) => {
             Resume: path,
         })
         await createApply.save()
-        if (createApply) res.json({ success: "Job Applied Sucessfully" })
+        if (createApply) {
+            changeLimit(jobId)
+            res.json({ success: "Job Applied Sucessfully" })
+        }
     }
-    catch{
+    catch {
         res.json({ error: "Job Apply fail" })
     }
 

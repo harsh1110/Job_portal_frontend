@@ -27,17 +27,17 @@ const TopSection = () => {
                 settotalapplication(res.data.length)
             })
             .catch((err) => console.log(err))
-            axios.get(`${url}/job/apply/status/pending`)
+            axios.get(`${url}/job/apply/status/Pending`)
             .then((res) => {
                 setpendingapplication(res.data.length)
             })
             .catch((err) => console.log(err))
-            axios.get(`${url}/job/apply/status/approve`)
+            axios.get(`${url}/job/apply/status/Approve`)
             .then((res) => {
                 setapproveapplication(res.data.length)
             })
             .catch((err) => console.log(err))
-            axios.get(`${url}/job/apply/status/reject`)
+            axios.get(`${url}/job/apply/status/Reject`)
             .then((res) => {
                 setrejectapplication(res.data.length)
             })

@@ -80,7 +80,7 @@ exports.NewJobApply = async (req, res) => {
             date: date,
             designation: designation,
             employStatus: employment,
-            ApplicationStatus: "pending",
+            ApplicationStatus: "Pending",
             Reference: refObj,
             Resume: path,
         })

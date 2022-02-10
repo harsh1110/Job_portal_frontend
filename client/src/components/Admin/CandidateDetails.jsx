@@ -3,14 +3,20 @@ import axios from "axios";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { FormControl, FormControlLabel, Typography } from "@mui/material";
+import { FormControlLabel, Typography } from "@mui/material";
 import { Card, CardContent, CardActions } from "@mui/material";
 import { Button } from "@mui/material";
 import { Grid } from "@mui/material";
+import ContactMailIcon from '@mui/icons-material/ContactMail';
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EventIcon from "@mui/icons-material/Event";
+import PersonIcon from '@mui/icons-material/Person';
+import EqualizerIcon from '@mui/icons-material/Equalizer';
 import { Radio, RadioGroup } from "@mui/material";
+import Viewer, { Worker } from '@phuocng/react-pdf-viewer';
+import '@phuocng/react-pdf-viewer/cjs/react-pdf-viewer.css';
+import url from "../../config";
 
 const theme = createTheme({
   palette: {
@@ -45,100 +51,154 @@ export default function CandidateDetails() {
       status: status,
     };
     axios
-      .post(`http://localhost:5000/job/apply/change-status/${id}`, data)
-      .then((value) => {});
+      .post(`${url}/job/apply/change-status/${id}`, data)
+      .then((value) => {
+        window.location.reload()
+      });
   };
   return (
-    <div className="admin row container text-center ">
-      <Grid xs={12} container spacing={2}>
-        <Grid xs={6}>
-          <Card sx={{ minHeight: 500, justifyContent: "center" }}>
-            <CardContent>
-              <Typography variant="h3" component="div" color="primary">
-                {candidate.name}
-              </Typography>
-              <Typography
-                sx={{ fontSize: 20 }}
-                color="text.secondary"
-                gutterBottom
-              >
-                {candidate.employStatus}
-              </Typography>
+    <div style={{marginTop:"-50px"}} className="admin row container text-center">
+      {
+        candidate.length !== 0 ?
+          <Grid className="status-card" xs={12} container spacing={2}>
+            <Grid xs={6}>
+              <Card className="detail-card" sx={{ height: 650, justifyContent: "center" }}>
+                <CardContent>
+                  <Typography style={{ marginBlock: "30px" }} variant="h4" component="div" color="primary">
+                    {candidate.designation}
+                  </Typography>
+                  <Typography
+                    sx={{ fontSize: 20, marginBlock: "50px" }}
+                    color="text.secondary"
+                  >
 
-              <Typography
-                variant="h6"
-                className="mt-4"
-                sx={{ textAlign: "left" }}
-              >
-                <EmailIcon color="primary" /> {candidate.email}
-              </Typography>
-              <Typography
-                variant="h6"
-                className="mt-1"
-                sx={{ textAlign: "left" }}
-              >
-                <PhoneIcon color="primary" /> {candidate.phone}
-              </Typography>
-              <Typography
-                variant="h6"
-                className="mt-1"
-                sx={{ textAlign: "left" }}
-              >
-                <EventIcon color="primary" /> {candidate.date}
-              </Typography>
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    className="mt-4"
+                    sx={{ textAlign: "left" }}
+                  >
+                    <PersonIcon color="primary" />&nbsp;&nbsp;&nbsp; {candidate.name} ( {candidate.employStatus} )
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    className="mt-2"
+                    sx={{ textAlign: "left" }}
+                  >
+                    <EmailIcon color="primary" /> &nbsp;&nbsp;&nbsp;{candidate.email}
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    className="mt-2"
+                    sx={{ textAlign: "left" }}
+                  >
+                    <PhoneIcon color="primary" /> &nbsp;&nbsp;&nbsp;{candidate.phone}
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    className="mt-2"
+                    sx={{ textAlign: "left" }}
+                  >
+                    <EventIcon color="primary" />&nbsp;&nbsp;&nbsp; {candidate.date}
+                  </Typography>
 
-              <Typography
-                variant="h6"
-                className="mt-4"
-                sx={{ textAlign: "left" }}
-              >
-                Reference:
-              </Typography>
-              {/* <Typography variant="h6" className="mt-4" sx={{textAlign:"left"}}>{candidate.Reference.refname}</Typography> */}
-              {/* <Typography variant="h6" className="mt-4" sx={{textAlign:"left"}}>{candidate.Reference.refphone}</Typography> */}
-              <Grid style={{ textAlign: "start" }}>
-                <Typography variant="h6" className="mt-3">
-                  Application Status:{candidate.ApplicationStatus}
-                </Typography>
+                  {
+                    candidate.Reference.refname === "" ?
+                      <>
+                        <Typography
+                          variant="h6"
+                          className="mt-2"
+                          sx={{ textAlign: "left" }}
+                        >
+                          <ContactMailIcon color="primary" />  &nbsp;&nbsp;&nbsp; --- ---
+                        </Typography>
+                      </>
+                      :
+                      <>
+                        <Typography
+                          variant="h6"
+                          className="mt-2"
+                          sx={{ textAlign: "left" }}
+                        >
+                          <ContactMailIcon color="primary" /> &nbsp;&nbsp;&nbsp; {candidate.Reference.refname} ( {candidate.Reference.refphone} )
+                        </Typography>
+                      </>
+                  }
+                  <Grid style={{ textAlign: "start" }}>
+                    <Typography variant="h6" className="mt-2">
+                      <EqualizerIcon color="primary" />
+                      {
+                        candidate.ApplicationStatus === "Pending" ?
+                          <span className="status text-warning">&nbsp;&nbsp;&nbsp;{candidate.ApplicationStatus}</span>
+                          : null
+                      }
+                      {
+                        candidate.ApplicationStatus === "Approve" ?
+                          <span className="status text-success">&nbsp;&nbsp;&nbsp;{candidate.ApplicationStatus}</span>
+                          : null
+                      }
+                      {
+                        candidate.ApplicationStatus === "Reject" ?
+                          <span className="status text-danger">&nbsp;&nbsp;&nbsp;{candidate.ApplicationStatus}</span>
+                          : null
+                      }
+                    </Typography>
+                  </Grid>
+                  {
+                    candidate.ApplicationStatus === "Approve" || candidate.ApplicationStatus === "Reject" ?
+                      null :
+                      <>
+                        <hr />
+                        <Typography variant="h6" className="mt-2">
+                          Change Application Status
+                        </Typography>
+                        <RadioGroup onChange={(e) => setapplication(e.target.value)}>
+                          <FormControlLabel
+                            className="mt--2"
+                            value="Approve"
+                            control={<Radio />}
+                            label="Approve"
+                            onClick={handleStatus}
+                          />
+                          <FormControlLabel
+                            value="Reject"
+                            control={<Radio />}
+                            label="Reject"
+                            onClick={handleStatus}
+                          />
+                        </RadioGroup>
+                        {application !== "" ?
+                          <Button
+                            className="btn text-white"
+                            onClick={(e) => handleSave(e)}
+                          >
+                            Save
+                          </Button>
+                          :
+                          <Button
+                            className="btn text-white"
+                            onClick={(e) => handleSave(e)}
+                            disabled
+                          >
+                            Save
+                          </Button>
+                        }
+                      </>
+                  }
+                </CardContent>
 
-                <RadioGroup onChange={(e) => setapplication(e.target.value)}>
-                  <FormControlLabel
-                    className="mt--2"
-                    value="approve"
-                    control={<Radio />}
-                    label="Approve"
-                    onClick={handleStatus}
-                  />
-                  <FormControlLabel
-                    value="reject"
-                    control={<Radio />}
-                    label="Reject"
-                    onClick={handleStatus}
-                  />
-                </RadioGroup>
-              </Grid>
-            </CardContent>
-            {application === "approve" || "reject" ? (
-              <CardActions>
-                <Button
-                  className="btn text-white"
-                  onClick={(e) => handleSave(e)}
-                >
-                  Save
-                </Button>
-              </CardActions>
-            ) : null}
-          </Card>
-        </Grid>
-        <Grid xs={6}>
-          <Card sx={{ minHeight: 500, justifyContent: "center" }}>
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2gOp_o0HxgwsnD2iyj3XXC2eFq5Q8KyYD6A&usqp=CAU"
-              style={{ height: "500px", width: "100%" }}
-            ></img>
-          </Card>
-        </Grid>
-      </Grid>
+              </Card>
+            </Grid>
+            <Grid xs={6}>
+              <Card className="detail-card" sx={{ height: 650, justifyContent: "center" }}>
+                <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.12.313/build/pdf.worker.min.js">
+                  <Viewer fileUrl={candidate.Resume} />
+                </Worker>
+              </Card>
+            </Grid>
+          </Grid>
+          : null
+      }
     </div>
   );
 }

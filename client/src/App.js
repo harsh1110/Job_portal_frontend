@@ -15,6 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 import JobDetails from "./components/Admin/JobDetails";
 import CandidateDetails from "./components/Admin/CandidateDetails";
 import ThankYou from "./components/Home/ThankYou";
+import HomePage from "./components/HomePage";
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
         <>
           <BrowserRouter>
             <Routes>
+              <Route exact path="/" element={<HomePage />} />
               <Route exact path="/create-user" element={<Registration />} />
               <Route exact path="/login" element={<LoginPage />} />
               <Route exact path="/job/:id" element={<JobApplyForm />} />

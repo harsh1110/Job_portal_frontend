@@ -1,77 +1,116 @@
 :root {
   --darkblue: #2d82f8;
-  --lightblue: rgb(208,242,255);
-  --darkgray:rgb(99,115,129);
-  --lightgray:rgb(244,246,248);
-  --darkyellow:rgb(196,209,64);
+  --lightblue: rgb(208, 242, 255);
+  --darkgray: rgb(99, 115, 129);
+  --lightgray: rgb(244, 246, 248);
+  --darkyellow: rgb(196, 209, 64);
 }
+
 /* @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,300&display=swap'); */
- body::-webkit-scrollbar 
-{
- width: 8px;
+body::-webkit-scrollbar {
+  width: 8px;
 }
-body::-webkit-scrollbar-track 
-{
- border-radius:10px;
+
+body::-webkit-scrollbar-track {
+  border-radius: 10px;
 }
-body::-webkit-scrollbar-thumb
-{
- background-color: var(--lightgray);
- border-radius:10px;
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--lightgray);
+  border-radius: 10px;
 }
-.navbar{
+
+
+.viewer-layout-main::-webkit-scrollbar {
+  width: 8px;
+}
+
+.viewer-layout-main::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+.viewer-layout-main::-webkit-scrollbar-thumb {
+  background-color: rgba(128, 128, 128, 0.2);
+  border-radius: 10px;
+}
+
+.viewer-layout-main::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(128, 128, 128, 0.3);
+  border-radius: 10px;
+}
+
+.viewer-layout-main {
+  overflow-x: hidden !important;
+}
+
+
+
+
+.navbar {
   background-color: transparent !important;
   box-shadow: none !important;
 }
+
 .admin {
   margin-left: 280px !important;
   width: 80% !important;
   font-family: 'Montserrat', sans-serif;
   font-weight: 900 !important;
 }
-.MuiButtonBase-root.MuiListItem-root.MuiListItem-gutters.MuiListItem-padding.MuiListItem-button.css-bshv44-MuiButtonBase-root-MuiListItem-root.active{
+
+.MuiButtonBase-root.MuiListItem-root.MuiListItem-gutters.MuiListItem-padding.MuiListItem-button.css-bshv44-MuiButtonBase-root-MuiListItem-root.active {
   background-color: var(--lightblue) !important;
   color: var(--darkblue);
   border-right: 4px solid var(--darkblue);
 }
-.MuiButtonBase-root.MuiListItem-root.MuiListItem-gutters.MuiListItem-padding.MuiListItem-button.css-bshv44-MuiButtonBase-root-MuiListItem-root{
+
+.MuiButtonBase-root.MuiListItem-root.MuiListItem-gutters.MuiListItem-padding.MuiListItem-button.css-bshv44-MuiButtonBase-root-MuiListItem-root {
   color: var(--darkgray);
 }
-.MuiListItemIcon-root.active.css-cveggr-MuiListItemIcon-root{
-  color:var(--darkblue) ;
+
+.MuiListItemIcon-root.active.css-cveggr-MuiListItemIcon-root {
+  color: var(--darkblue);
 }
-.MuiListItemIcon-root.css-cveggr-MuiListItemIcon-root{
-  color:var(--darkgray) ;
+
+.MuiListItemIcon-root.css-cveggr-MuiListItemIcon-root {
+  color: var(--darkgray);
 }
-.user-card{
+
+.user-card {
   color: var(--darkgray) !important;
   background-color: var(--lightgray) !important;
   border-radius: 10px !important;
   box-shadow: none !important;
 }
-.user-card img{
+
+.user-card img {
   border-radius: 50% !important;
 }
-.title{
+
+.title {
   color: var(--darkblue);
   margin-top: -30px;
   margin-left: 10px;
   font-weight: 700 !important;
   margin-bottom: 50px;
 }
-.number{
+
+.number {
   font-weight: 900 !important;
 }
-.sub-title{
+
+.sub-title {
   font-weight: 400 !important;
 }
-.green{
-  background-color:rgb(200,250,205) !important;
-  color: rgb(0,123,85) !important;
+
+.green {
+  background-color: rgb(200, 250, 205) !important;
+  color: rgb(0, 123, 85) !important;
   border: none !important;
   font-weight: 900 !important;
 }
-.green-icon{
+
+.green-icon {
   padding-top: 9px !important;
   margin-left: 41%;
   background-image: linear-gradient(135deg, rgba(0, 123, 85, 0) 0%, rgba(0, 123, 85, 0.24) 100%);
@@ -79,13 +118,15 @@ body::-webkit-scrollbar-thumb
   height: 50px !important;
   border-radius: 50%;
 }
-.blue{
-  background-color: rgb(208,242,255) !important;
+
+.blue {
+  background-color: rgb(208, 242, 255) !important;
   color: #0c53b7 !important;
   border: none !important;
   font-weight: 900 !important;
 }
-.blue-icon{
+
+.blue-icon {
   padding-top: 9px;
   margin-left: 41%;
   background-image: linear-gradient(135deg, rgba(12, 83, 183, 0) 0%, rgba(12, 83, 183, 0.24) 100%);
@@ -93,13 +134,15 @@ body::-webkit-scrollbar-thumb
   height: 50px !important;
   border-radius: 50%;
 }
-.yellow{
+
+.yellow {
   background-color: #fff7cd !important;
   color: #b78103 !important;
   border: none !important;
   font-weight: 900 !important;
 }
-.yellow-icon{
+
+.yellow-icon {
   padding-top: 9px;
   margin-left: 41%;
   background-image: linear-gradient(135deg, rgba(183, 129, 3, 0) 0%, rgba(183, 129, 3, 0.24) 100%);
@@ -107,13 +150,15 @@ body::-webkit-scrollbar-thumb
   height: 50px !important;
   border-radius: 50%;
 }
-.red{
+
+.red {
   background-color: #ffe7d9 !important;
   color: #b72136 !important;
   border: none !important;
   font-weight: 900 !important;
 }
-.red-icon{
+
+.red-icon {
   padding-top: 9px;
   margin-left: 41%;
   background-image: linear-gradient(135deg, rgba(183, 33, 54, 0) 0%, rgba(183, 33, 54, 0.24) 100%);
@@ -121,57 +166,84 @@ body::-webkit-scrollbar-thumb
   height: 50px !important;
   border-radius: 50%;
 }
-.login-card{
+
+.login-card {
   border-radius: 20px !important;
   box-shadow: rgb(145 158 171 / 24%) 0px 0px 2px 0px, rgb(145 158 171 / 24%) 0px 16px 32px -4px !important;
 }
-.login-card-img{
+
+.login-card-img {
   margin-block: 40px !important;
 }
-.btn{
+
+.btn {
   background-color: var(--darkblue) !important;
 }
-.background{
+
+.background {
   margin-top: -110px !important;
   padding-block: 102px;
   background-size: cover !important;
   background: url("./assets/images/background.jpg") !important;
   height: 100% !important;
 }
-.job-apply.row{
+
+.job-apply.row {
   background: url("./assets/images/job-apply.jpg");
   margin-right: 0px !important;
- --bs-gutter-x: 0rem !important;
+  --bs-gutter-x: 0rem !important;
 }
-.job-apply-card{
+
+.job-apply-card {
   border-radius: 10px !important;
   box-shadow: rgb(145 158 171 / 24%) 0px 0px 2px 0px, rgb(145 158 171 / 24%) 0px 16px 32px -4px !important;
 }
-.cover{
-  background:url("./assets/images/profile-cover2.jpg");
-  height:350px!important;
+
+.cover {
+  background: url("./assets/images/profile-cover2.jpg");
+  height: 350px !important;
   margin-top: -112px !important;
   background-size: cover;
 }
-.profile{
+
+.profile {
   margin-top: -200px !important;
   box-shadow: rgba(106, 180, 253, 0.24) 0px 0px 2px 0px, rgba(77, 147, 218, 0.24) 0px 6px 20px 12px !important;
 }
-.image-name img{
+
+.image-name img {
   box-shadow: rgba(106, 180, 253, 0.24) 0px 0px 2px 0px, rgba(77, 147, 218, 0.24) 0px 6px 20px 12px !important;
   border-radius: 50% !important;
 }
-.name h4{
+
+.name h4 {
   margin-top: 50px !important;
   font-weight: 600 !important;
   color: var(--darkblue) !important;
 }
-.app-card,.table{
+
+.app-card, .table {
   box-shadow: rgba(77, 77, 77, 0.24) 0px 0px 2px 0px, rgba(71, 71, 71, 0.24) 0px 6px 20px 12px !important;
 }
-.designation{
+.status-card{
+  box-shadow: rgba(106, 180, 253, 0.24) 0px 0px 2px 0px, rgba(77, 147, 218, 0.24) 0px 6px 20px 12px !important;
+}
+
+.designation {
   color: var(--darkyellow);
   /* font-weight: 300 !important; */
+}
+
+.MuiTablePagination-root.css-jtlhu6-MuiTablePagination-root {
+  border-top: none !important;
+}
+
+.status {
+  font-weight: 700 !important;
+}
+
+.detail-card {
+  box-shadow: none !important;
 }
 
 
@@ -179,26 +251,32 @@ body::-webkit-scrollbar-thumb
 
 /*mobile size code*/
 @media screen and (max-width :600px) {
-  .admin{
+  .admin {
     margin-left: 20px !important;
     width: 90% !important;
   }
-  .navbar svg{
+
+  .navbar svg {
     fill: var(--darkblue);
     margin-left: -280px !important;
   }
-  .background{
+
+  .background {
     margin-top: -105px !important;
     padding-block: 59px !important;
   }
-  .job-card{
+
+  .job-card {
     margin-top: 30px !important;
   }
-  .job-card .title{
+
+  .job-card .title {
     font-size: 20px !important;
   }
-  .job-apply-card .title{
+
+  .job-apply-card .title {
     font-size: 20px !important;
   }
 }
+
 /*tablate size code*/

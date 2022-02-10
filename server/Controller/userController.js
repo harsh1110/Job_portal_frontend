@@ -52,7 +52,7 @@ exports.CreateUser = async (req, res) => {
     }
     catch{
         res.json({msg:"user creation fail"})
-    }
+    } 
 }
 
 //login user

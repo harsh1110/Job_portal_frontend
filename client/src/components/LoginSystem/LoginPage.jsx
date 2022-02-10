@@ -151,7 +151,7 @@ export default function LoginPage() {
                 Login
               </Button>
               <Grid container>
-                <Grid item>
+                <Grid item xs={12} sx={{ textAlign: "center" }}>
                   <Link
                     className="text-decoration-none"
                     href="/create-user"

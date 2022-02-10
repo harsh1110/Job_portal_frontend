@@ -41,6 +41,7 @@ function App() {
       ) : (
         // job seeker routes
         <>
+          <ToastContainer />
           <BrowserRouter>
             <Routes>
               <Route exact path="/" element={<HomePage />} />

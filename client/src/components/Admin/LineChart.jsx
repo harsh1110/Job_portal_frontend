@@ -6,24 +6,32 @@ import url from "../../config"
 
 
 export const options = {
-    chart: {
-        title: "",
-        animation: {
-            startup: true,
-            easing: "linear",
-            duration: 500,
-          },
-    },
+    width: "100%",
+    height: 500,
+    bar: { groupWidth: "50%" },
+    legend: { position: "none" },
 };
 
 export function LineChart() {
     const [post, setPost] = useState([]);
-    var data = [["Post", ""]]
+    var data = [[
+        "Job Post",
+        "Total Application",
+        { role: "style" },
+        {
+            sourceColumn: 0,
+            role: "annotation",
+            type: "string",
+            calc: "stringify",
+        },
+    ]]
     useEffect(() => {
         fetchData()
     }, []);
     post.map((value) => {
-        data.push([value.designation, value.appliedBy])
+        if (value.limit !== 0) {
+            data.push([value.designation, value.appliedBy, "#2d82f8", `${value.appliedBy}`])
+        }
     })
 
     const fetchData = () => {
@@ -42,8 +50,7 @@ export function LineChart() {
             {
                 data.length > 1 ?
                     <Chart
-                        style={{ marginTop: "50px" }}
-                        chartType="Bar"
+                        chartType="BarChart"
                         width="100%"
                         height="400px"
                         data={data}

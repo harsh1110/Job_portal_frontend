@@ -43,7 +43,13 @@ body::-webkit-scrollbar-thumb {
   overflow-x: hidden !important;
 }
 
-
+.job-title{
+  margin-left: 250px !important;
+  color: var(--darkblue);
+  margin-bottom: 20px !important;
+  margin-top: -50px !important;
+  text-align: center;
+}
 
 
 .navbar {
@@ -258,6 +264,13 @@ body::-webkit-scrollbar-thumb {
 
 /*mobile size code*/
 @media screen and (max-width :600px) {
+  .admin.row.container.text-center.candetails{
+    margin-left: 35px !important;
+    margin-top: 0px !important;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+    --bs-gutter-x:0rem !important
+  }
   .admin {
     margin-left: 20px !important;
     width: 90% !important;
@@ -291,6 +304,9 @@ body::-webkit-scrollbar-thumb {
   .name{
     margin-top: -40px !important;
     text-align: center !important;
+  }
+  .registration-box{
+    padding-inline: 0px !important;
   }
 }
 

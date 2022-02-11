@@ -22,11 +22,14 @@ export default function CreateJob() {
   const [position, setposition] = useState("");
   const [jobDescription, setjobDescription] = useState("");
   const [limit, setlimit] = useState("");
+  if(window.document.referrer === "http://localhost:3000/Create%20Job%20Post"){
+    toast.success("Create Job Successfully")
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
     if (designation === "" || position === "" || jobDescription === "" || limit === "") {
-      alert("fields can not be Empty...!!");
+      toast.error("fields can not be Empty...!!");
     } else {
       const data = {
         designation: designation,
@@ -37,7 +40,6 @@ export default function CreateJob() {
       };
 
       axios.post(`${url}/job/create`, data).then((res) => {
-        alert("Job Created Successfully");
         window.location = "/Create%20Job%20Post";
       });
     }

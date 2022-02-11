@@ -4,7 +4,6 @@ import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
-import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LoginIcon from "@mui/icons-material/Login";
@@ -16,6 +15,7 @@ import { toast } from "react-toastify";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import url from "../../config";
+import fronturl from "../../config"
 const theme = createTheme({
   palette: {
     primary: {
@@ -28,10 +28,12 @@ const theme = createTheme({
 });
 
 export default function LoginPage() {
-  // const window.location =  = usewindow.location = ()
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const [authUser, setAuthUser] = useState();
+  const [toaster, settoaster] = useState(true);
+  var msg = []
+
 
   // console.log(window.location = );
   // var token = "harsh"
@@ -43,41 +45,48 @@ export default function LoginPage() {
   // console.log(isExpired);
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = {
-      email: email,
-      pass: pass,
-    };
-    axios
-      .post(`${url}/login`, data)
-      .then((value) => {
-        setAuthUser(value.data);
-        if (authUser) {
-          localStorage.setItem("user", authUser._id);
-          localStorage.setItem("role", authUser.role);
-          window.location = "/profile";
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (email === "" || pass === "") {
+      toast.error("Fields Can not be Empty")
+    }
+    else if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9.-]+.[a-zA-Z]$/.test(email)) {
+      toast.error("email is not valid...!!");
+    }
+    else {
+      const data = {
+        email: email,
+        pass: pass,
+      };
+      axios
+        .post(`${url}/login`, data)
+        .then((value) => {
+          setAuthUser(value.data);
+          if (authUser) {
+            localStorage.setItem("user", authUser._id);
+            localStorage.setItem("role", authUser.role);
+            window.location = "/profile";
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }
+  if (toaster) {
+    if (window.document.referrer === `http://localhost:3000/create-user`) {
+      console.log("hiii");
+      toast.success("Registration Successfully");
+    }
+    if (window.document.referrer === `http://localhost:3000/Log%20Out`) {
+      toast.success("Successfully Logout");
+    }
   };
-  if (window.document.referrer === "http://localhost:3000/profile") {
-    toast.success("Successfully logout");
-  }
-  if (window.document.referrer === "http://localhost:3000/create-user`") {
-    toast.success("Registration Successfully");
-  }
-  if (window.document.referrer === "http://localhost:3000/Log%20Out`") {
-    toast.success("Successfully Logout");
-  }
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh", boxShadow: "none" }}>
         <CssBaseline />
         <Grid
           item
-          xs={false}
-          sm={4}
+          xs={0}
           md={5}
         >
           <div style={{ padding: "15px" }}>
@@ -96,7 +105,7 @@ export default function LoginPage() {
             </Card>
           </div>
         </Grid>
-        <Grid item xs={12} sm={8} md={7} elevation={6} square>
+        <Grid item xs={12} md={7} elevation={6} square>
           <Box
             sx={{
               my: 8,
@@ -125,7 +134,7 @@ export default function LoginPage() {
                 id="email"
                 label="Email Address"
                 name="email"
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => { setEmail(e.target.value); settoaster(false) }}
                 autoComplete="email"
                 autoFocus
               />

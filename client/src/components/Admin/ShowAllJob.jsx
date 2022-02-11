@@ -18,6 +18,8 @@ import axios from 'axios'
 import Button from '@mui/material/Button';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import url from '../../config';
+import { Grid } from '@mui/material';
+import ReportRoundedIcon from '@mui/icons-material/ReportRounded';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -254,6 +256,7 @@ export default function EnhancedTable() {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - alljobs.length) : 0;
 
   return (
+<<<<<<< Updated upstream
     <Box sx={{ width: '100%' }}>
       <Typography variant='h3' className='job-title' >All Job Details</Typography>
       <Paper className='table admin row text-center' sx={{ width: '100%', mb: 2 }}>
@@ -263,35 +266,71 @@ export default function EnhancedTable() {
             sx={{ minWidth: 750 }}
             aria-labelledby="tableTitle"
             size={dense ? 'small' : 'medium'}
+=======
+    <>
+      {alljobs.length === 0 ?
+        <Grid
+          item
+          xs={12}
+          sx={{
+            marginLeft: "180px",
+            height: 490,
+            textAlign: "center",
+          }}
+        >
+          <ReportRoundedIcon
+            className="my-2"
+            sx={{ height: "20%", width: "20%", color: "#c0cd30" }}
+          />
+          <Typography
+            variant="h6"
+            className='my-2'
+            sx={{ fontSize: 60, fontWeight: "bold", color: "red" }}
+>>>>>>> Stashed changes
           >
-            <EnhancedTableHead
-              numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
-              onRequestSort={handleRequestSort}
-              rowCount={alljobs.length}
-            />
-            <TableBody>
-              {/* if you don't need to support IE11, you can replace the `stableSort` call with:
+            Opps...!
+          </Typography>
+          <Typography variant="h6">
+            There is no Record for Jobs
+          </Typography>
+        </Grid>
+        :
+        <Box sx={{ width: '100%' }}>
+          <Paper className='table admin row text-center' sx={{ width: '100%', mb: 2 }}>
+            <TableContainer>
+              <Table
+                sx={{ minWidth: 750 }}
+                aria-labelledby="tableTitle"
+                size={dense ? 'small' : 'medium'}
+              >
+                <EnhancedTableHead
+                  numSelected={selected.length}
+                  order={order}
+                  orderBy={orderBy}
+                  onSelectAllClick={handleSelectAllClick}
+                  onRequestSort={handleRequestSort}
+                  rowCount={alljobs.length}
+                />
+                <TableBody>
+                  {/* if you don't need to support IE11, you can replace the `stableSort` call with:
                  rows.slice().sort(getComparator(order, orderBy)) */}
-              {stableSort(alljobs, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((job, index) => {
-                  const isItemSelected = isSelected(index);
-                  const labelId = `enhanced-table-checkbox-${index}`;
+                  {stableSort(alljobs, getComparator(order, orderBy))
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((job, index) => {
+                      const isItemSelected = isSelected(index);
+                      const labelId = `enhanced-table-checkbox-${index}`;
 
-                  return (
-                    <TableRow
-                      hover
-                      onClick={(event) => handleClick(event, job._id)}
-                      role="checkbox"
-                      aria-checked={isItemSelected}
-                      tabIndex={-1}
-                      key={job._id}
-                      selected={isItemSelected}
-                    >
-                      {/* <TableCell padding="checkbox">
+                      return (
+                        <TableRow
+                          hover
+                          onClick={(event) => handleClick(event, job._id)}
+                          role="checkbox"
+                          aria-checked={isItemSelected}
+                          tabIndex={-1}
+                          key={job._id}
+                          selected={isItemSelected}
+                        >
+                          {/* <TableCell padding="checkbox">
                         <Checkbox
                           color="primary"
                           checked={isItemSelected}
@@ -301,65 +340,67 @@ export default function EnhancedTable() {
                         />
                       </TableCell> */}
 
-                      {
-                        job.limit === 0 ?
-                          <>
-                            <TableCell
-                            className='text-secondary'
-                              component="th"
-                              id={labelId}
-                              scope="row"
-                              padding="4px"
-                            >
-                              <del>{index + 1}</del>
-                            </TableCell>
-                            <TableCell className='text-secondary' align="start"><del>{job.designation}</del></TableCell>
-                            <TableCell className='text-secondary' align="start"><del>{job.positions}</del></TableCell>
-                            <TableCell className='text-secondary' align="start"><del>{job.limit}</del></TableCell>
-                            <TableCell className='text-secondary' align="start"><del>{job.jobDescription}</del></TableCell>
-                            <TableCell><Button className="btn" onClick={(e) => handleView(e, job._id)}><RemoveRedEyeIcon className='text-white' /></Button></TableCell>
-                          </> :
-                          <>
-                            <TableCell
-                              component="th"
-                              id={labelId}
-                              scope="row"
-                              padding="4px"
-                            >
-                              {index + 1}
-                            </TableCell>
-                            <TableCell align="start">{job.designation}</TableCell>
-                            <TableCell align="start">{job.positions}</TableCell>
-                            <TableCell align="start">{job.limit}</TableCell>
-                            <TableCell align="start">{job.jobDescription}</TableCell>
-                            <TableCell><Button className="btn" onClick={(e) => handleView(e, job._id)}><RemoveRedEyeIcon className='text-white' /></Button></TableCell>
-                          </>
-                      }
+                          {
+                            job.limit === 0 ?
+                              <>
+                                <TableCell
+                                  className='text-secondary'
+                                  component="th"
+                                  id={labelId}
+                                  scope="row"
+                                  padding="4px"
+                                >
+                                  <del>{index + 1}</del>
+                                </TableCell>
+                                <TableCell className='text-secondary' align="start"><del>{job.designation}</del></TableCell>
+                                <TableCell className='text-secondary' align="start"><del>{job.positions}</del></TableCell>
+                                <TableCell className='text-secondary' align="start"><del>{job.limit}</del></TableCell>
+                                <TableCell className='text-secondary' align="start"><del>{job.jobDescription}</del></TableCell>
+                                <TableCell><Button className="btn" onClick={(e) => handleView(e, job._id)}><RemoveRedEyeIcon className='text-white' /></Button></TableCell>
+                              </> :
+                              <>
+                                <TableCell
+                                  component="th"
+                                  id={labelId}
+                                  scope="row"
+                                  padding="4px"
+                                >
+                                  {index + 1}
+                                </TableCell>
+                                <TableCell align="start">{job.designation}</TableCell>
+                                <TableCell align="start">{job.positions}</TableCell>
+                                <TableCell align="start">{job.limit}</TableCell>
+                                <TableCell align="start">{job.jobDescription}</TableCell>
+                                <TableCell><Button className="btn" onClick={(e) => handleView(e, job._id)}><RemoveRedEyeIcon className='text-white' /></Button></TableCell>
+                              </>
+                          }
+                        </TableRow>
+                      );
+                    })}
+                  {emptyRows > 0 && (
+                    <TableRow
+                      style={{
+                        height: (dense ? 33 : 53) * emptyRows,
+                      }}
+                    >
+                      <TableCell colSpan={6} />
                     </TableRow>
-                  );
-                })}
-              {emptyRows > 0 && (
-                <TableRow
-                  style={{
-                    height: (dense ? 33 : 53) * emptyRows,
-                  }}
-                >
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={alljobs.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Paper>
-    </Box>
+                  )}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 25]}
+              component="div"
+              count={alljobs.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+          </Paper>
+        </Box>
+      }
+    </>
   );
 }

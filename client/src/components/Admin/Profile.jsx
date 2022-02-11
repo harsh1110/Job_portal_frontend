@@ -1,4 +1,4 @@
-import { Card, CircularProgress, Grid, Typography } from '@mui/material';
+import { Button, Card, CircularProgress, Grid, Typography } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import EmailIcon from '@mui/icons-material/Email';
@@ -12,12 +12,12 @@ const Profile = () => {
     const [user, setUser] = useState([]);
     const [recentdata, setRecenteData] = useState([]);
     useEffect(() => {
+        if (window.document.referrer === "http://localhost:3000/login") {
+            toast.success("Successfully login");
+        }
         axios.get(`${url}/user/${id}`)
             .then((res) => {
                 setUser(res.data)
-                if (window.document.referrer === "http://localhost:3000/login") {
-                    toast.success("Successfully login");
-                }
             })
             .catch((err) => console.log(err))
         axios.get(`${url}/job/apply/all`)
@@ -45,9 +45,9 @@ const Profile = () => {
                                     <h4>{user.name}</h4>
                                     <p className='text-secondary'>HR Manager</p>
                                 </Grid>
-                                </Grid>
-                                <hr />
-                                <Grid container spacing={2}>
+                            </Grid>
+                            <hr />
+                            <Grid container spacing={2}>
                                 <Grid item xs={12} sm={4}>
                                     <h5 className="title my-4 mx-0">Profile Deatils</h5>
 
@@ -65,6 +65,7 @@ const Profile = () => {
                                     >
                                         <PhoneIcon color="primary" /> &nbsp;&nbsp;&nbsp;{user.phone}
                                     </Typography>
+                                    <Button className="btn m-4 text-white"><EditIcon/>&nbsp;&nbsp;Edit Profile</Button>
                                 </Grid>
                                 <Grid item xs={12} sm={8}>
                                     <h5 className="title my-4 mx-0"> Recently Added Application</h5>

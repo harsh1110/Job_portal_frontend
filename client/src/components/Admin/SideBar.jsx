@@ -30,62 +30,84 @@ import url from '../../config';
 const drawerWidth = 250;
 
 function ResponsiveDrawer(props) {
-    const [active, setActive] = React.useState('Profile');
-    const { window } = props;
+    const [active, setActive] = React.useState("");
     const id = localStorage.getItem("user")
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const [user, setUser] = React.useState([]);
+    const [all, setall] = React.useState([])
+    var jobIds = []
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
     React.useEffect(() => {
+        setActive(window.location.pathname)
+        console.log(active);
         axios.get(`${url}/user/${id}`)
-        .then((value) => {
-            setUser(value.data)
-        })
-        .catch((err) => {
-            console.log(err);
-        })
+            .then((value) => {
+                setUser(value.data)
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+        axios.get(`${url}/job/all`)
+            .then((value) => {
+                setall(value.data)
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+       
     }, []);
     const icon = [<PersonIcon />, <DashboardIcon />, <AddIcon />, <TocIcon />, <LogoutIcon />]
-
+    const locations = ['/Profile', '/Dashboard', '/Create%20Job%20Post', "/Show%20All%20Data", "/Log%20Out"]
+    all.map((job) => {
+        jobIds.push(`/jobdetails/${job._id}`);
+        console.log(jobIds);
+    })
+        jobIds.map((jobpath) => {
+            if (active === jobpath) {
+                document.getElementById("Sh").classList.add("active")
+                document.getElementById("Sho").classList.add("active")
+            }
+        })
+    
     const drawer = (
         <div>
             <Typography variant='h5' className='my-4 text-center'><img src="https://www.webbrainstechnologies.com/wp-content/uploads/2016/02/logo-3.png" height={"50px"} width={"100px"} alt="" srcset="" /></Typography>
             {/* <Container maxWidth="lg"> */}
-                <Card className='user-card mx-2'>
-                    <Grid className='d-flex' xs={12}>
-                        <img className='m-3' src={user.pic} height={"45px"} width={"45px"} alt="" />
-                        <Typography marginTop={"25px"} marginLeft={"10px"} fontWeight={600}>{user.name}</Typography>
-                    </Grid>
-                </Card>
+            <Card className='user-card mx-2'>
+                <Grid className='d-flex' xs={12}>
+                    <img className='m-3' src={user.pic} height={"45px"} width={"45px"} alt="" />
+                    <Typography marginTop={"25px"} marginLeft={"10px"} fontWeight={600}>{user.name}</Typography>
+                </Grid>
+            </Card>
             {/* </Container> */}
             <List>
                 {['Profile', 'Dashboard', 'Create Job Post', "Show All Data", "Log Out"].map((text, index) => (
-                    <Link className='text-decoration-none text-dark' onClick={(e) => (setActive(text))} to={`/${text}`}>
+                    <a className='text-decoration-none text-dark' onClick={(e) => (window.location.reload())} href={`/${text}`}>
                         {
-                            active === text ?
-                                <ListItem className='active' name={text} button key={text}>
-                                    <ListItemIcon className='active'>
+                            active === locations[index] ?
+                                <ListItem className='active' id={text.slice(0, 2)} name={text} button key={text}>
+                                    <ListItemIcon id={text.slice(0, 3)} className='active'>
                                         {icon[index]}
                                     </ListItemIcon>
                                     <ListItemText primary={text} />
                                 </ListItem>
                                 :
-                                <ListItem name={text} button key={text}>
-                                    <ListItemIcon>
+                                <ListItem name={text} id={text.slice(0, 2)} button key={text}>
+                                    <ListItemIcon id={text.slice(0, 3)}>
                                         {icon[index]}
                                     </ListItemIcon>
                                     <ListItemText primary={text} />
                                 </ListItem>
                         }
-                    </Link>
+                    </a>
                 ))}
             </List>
         </div>
     );
 
-    const container = window !== undefined ? () => window().document.body : undefined;
+    const container = window !== undefined ? () => window.document.body : undefined;
 
     return (
         <Box sx={{ display: 'flex' }}>

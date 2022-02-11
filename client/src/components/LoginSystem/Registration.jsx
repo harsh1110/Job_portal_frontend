@@ -147,10 +147,11 @@ export default function Registration() {
         </Grid>
         <Grid item xs={12} sm={8} md={7} elevation={6} square>
           <Box
+          className="registration-box"
             sx={{
               my: 4,
               mx: 4,
-              px: 20,
+              px:20,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",

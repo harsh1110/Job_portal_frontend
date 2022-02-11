@@ -18,6 +18,7 @@ import Viewer, { Worker } from '@phuocng/react-pdf-viewer';
 import '@phuocng/react-pdf-viewer/cjs/react-pdf-viewer.css';
 import url from "../../config";
 import emailjs from '@emailjs/browser'
+import { toast } from "react-toastify";
 
 const theme = createTheme({
   palette: {
@@ -35,7 +36,9 @@ export default function CandidateDetails() {
   const [candidate, setcandidate] = useState([]);
   const [application, setapplication] = useState("");
   const [status, setstatus] = useState("");
-
+  if(window.document.referrer === window.location.href){
+    toast.success("Change Status Successfully")
+  }
   React.useEffect((e) => {
     axios.get(`http://localhost:5000/job/apply/one/${id}`).then((value) => {
       console.log(value);
@@ -79,11 +82,11 @@ export default function CandidateDetails() {
       });
   };
   return (
-    <div style={{marginTop:"-50px"}} className="admin row container text-center">
+    <div style={{marginTop:"-50px"}} className="admin row container text-center candetails">
       {
         candidate.length !== 0 ?
           <Grid className="status-card" xs={12} container spacing={2}>
-            <Grid xs={6}>
+            <Grid xs={12} sm={6}>
               <Card className="detail-card" sx={{ height: 650, justifyContent: "center" }}>
                 <CardContent>
                   <Typography style={{ marginBlock: "30px" }} variant="h4" component="div" color="primary">
@@ -211,7 +214,7 @@ export default function CandidateDetails() {
 
               </Card>
             </Grid>
-            <Grid xs={6}>
+            <Grid xs={12} sm={6}>
               <Card className="detail-card" sx={{ height: 650, justifyContent: "center" }}>
                 <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.12.313/build/pdf.worker.min.js">
                   <Viewer fileUrl={candidate.Resume} />

@@ -284,6 +284,14 @@ body::-webkit-scrollbar-thumb {
   .job-apply-card .title {
     font-size: 20px !important;
   }
+  .image-name{
+    margin-left: 30% !important;
+    margin-top: 20px !important;
+  }
+  .name{
+    margin-top: -40px !important;
+    text-align: center !important;
+  }
 }
 
 /*tablate size code*/

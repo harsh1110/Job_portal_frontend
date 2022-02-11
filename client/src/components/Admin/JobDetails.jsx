@@ -1,26 +1,3 @@
-<<<<<<< Updated upstream
-import * as React from "react";
-import PropTypes from "prop-types";
-import { alpha } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
-import TableSortLabel from "@mui/material/TableSortLabel";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
-import { visuallyHidden } from "@mui/utils";
-import axios from "axios";
-import Button from "@mui/material/Button";
-import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
-import { useParams } from "react-router-dom";
-import url from "../../config";
-=======
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { alpha } from '@mui/material/styles';
@@ -44,7 +21,6 @@ import { useParams } from 'react-router-dom';
 import url from '../../config';
 import { Grid } from '@mui/material';
 import ReportRoundedIcon from '@mui/icons-material/ReportRounded';
->>>>>>> Stashed changes
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -284,94 +260,6 @@ export default function EnhancedTable() {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data.length) : 0;
 
   return (
-<<<<<<< Updated upstream
-    <Box sx={{ width: "100%" }}>
-      <Typography variant="h3" className="job-title">
-        All Candidate Details
-      </Typography>
-      <Paper
-        className="table admin row text-center"
-        sx={{ width: "100%", mb: 2 }}
-      >
-        <TableContainer>
-          <Table
-            sx={{ minWidth: 750 }}
-            aria-labelledby="tableTitle"
-            size={dense ? "small" : "medium"}
-          >
-            <EnhancedTableHead
-              numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
-              onSelectAllClick={handleSelectAllClick}
-              onRequestSort={handleRequestSort}
-              rowCount={data.length}
-            />
-            <TableBody>
-              {data.length === 0
-                ? null
-                : stableSort(data, getComparator(order, orderBy))
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((i, index) => {
-                      const isItemSelected = isSelected(index);
-                      const labelId = `enhanced-table-checkbox-${index}`;
-
-                      return (
-                        <TableRow
-                          hover
-                          onClick={(event) => handleClick(event, i._id)}
-                          role="checkbox"
-                          aria-checked={isItemSelected}
-                          tabIndex={-1}
-                          key={i._id}
-                          selected={isItemSelected}
-                        >
-                          <TableCell
-                            component="th"
-                            id={labelId}
-                            scope="row"
-                            padding="4px"
-                          >
-                            {index + 1}
-                          </TableCell>
-                          <TableCell>{i.name}</TableCell>
-                          <TableCell>{i.employStatus}</TableCell>
-                          <TableCell>{i.ApplicationStatus}</TableCell>
-                          <TableCell>
-                            <Button
-                              className="btn"
-                              onClick={(e) => handleView(e, i._id)}
-                            >
-                              <RemoveRedEyeIcon className="text-white" />
-                            </Button>
-                          </TableCell>
-                        </TableRow>
-                      );
-                    })}
-              {emptyRows > 0 && (
-                <TableRow
-                  style={{
-                    height: (dense ? 33 : 53) * emptyRows,
-                  }}
-                >
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={data.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Paper>
-    </Box>
-=======
     <>
       {data.length === 0 ?
         <Grid
@@ -400,6 +288,9 @@ export default function EnhancedTable() {
         </Grid>
         :
         <Box sx={{ width: '100%' }}>
+          <Typography variant="h3" className="job-title">
+            All Candidate Details
+          </Typography>
           <Paper className='table admin row text-center' sx={{ width: '100%', mb: 2 }}>
             <TableContainer>
               <Table
@@ -481,6 +372,5 @@ export default function EnhancedTable() {
         </Box>
       }
     </>
->>>>>>> Stashed changes
   );
 }

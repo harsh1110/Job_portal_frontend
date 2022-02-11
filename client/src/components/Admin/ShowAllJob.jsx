@@ -256,17 +256,6 @@ export default function EnhancedTable() {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - alljobs.length) : 0;
 
   return (
-<<<<<<< Updated upstream
-    <Box sx={{ width: '100%' }}>
-      <Typography variant='h3' className='job-title' >All Job Details</Typography>
-      <Paper className='table admin row text-center' sx={{ width: '100%', mb: 2 }}>
-        
-        <TableContainer>
-          <Table
-            sx={{ minWidth: 750 }}
-            aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
-=======
     <>
       {alljobs.length === 0 ?
         <Grid
@@ -286,7 +275,6 @@ export default function EnhancedTable() {
             variant="h6"
             className='my-2'
             sx={{ fontSize: 60, fontWeight: "bold", color: "red" }}
->>>>>>> Stashed changes
           >
             Opps...!
           </Typography>
@@ -296,6 +284,7 @@ export default function EnhancedTable() {
         </Grid>
         :
         <Box sx={{ width: '100%' }}>
+          <Typography variant='h3' className='job-title' >All Job Details</Typography>
           <Paper className='table admin row text-center' sx={{ width: '100%', mb: 2 }}>
             <TableContainer>
               <Table

@@ -26,6 +26,7 @@ import Container from '@mui/material/Container'
 import { Card, Grid } from '@mui/material';
 import axios from 'axios';
 import url from '../../config';
+import PeopleIcon from '@mui/icons-material/People';
 
 const drawerWidth = 250;
 
@@ -58,8 +59,8 @@ function ResponsiveDrawer(props) {
             })
        
     }, []);
-    const icon = [<PersonIcon />, <DashboardIcon />, <AddIcon />, <TocIcon />, <LogoutIcon />]
-    const locations = ['/Profile', '/Dashboard', '/Create%20Job%20Post', "/Show%20All%20Data", "/Log%20Out"]
+    const icon = [<PersonIcon />, <DashboardIcon />, <AddIcon />, <TocIcon />,<PeopleIcon/>, <LogoutIcon />]
+    const locations = ['/Profile', '/Dashboard', '/Create%20Job%20Post', "/Job%20Listing","/All%20Applicants", "/Log%20Out"]
     all.map((job) => {
         jobIds.push(`/jobdetails/${job._id}`);
         console.log(jobIds);
@@ -83,7 +84,7 @@ function ResponsiveDrawer(props) {
             </Card>
             {/* </Container> */}
             <List>
-                {['Profile', 'Dashboard', 'Create Job Post', "Show All Data", "Log Out"].map((text, index) => (
+                {['Profile', 'Dashboard', 'Create Job Post', "Job Listing","All Applicants", "Log Out"].map((text, index) => (
                     <a className='text-decoration-none text-dark' onClick={(e) => (window.location.reload())} href={`/${text}`}>
                         {
                             active === locations[index] ?

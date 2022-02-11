@@ -11,10 +11,10 @@ import { LineChart } from './LineChart';
 const TopSection = () => {
     const id = localStorage.getItem("user")
     const [user, setUser] = useState([]);
-    const [totalapplication,settotalapplication] = useState("");
-    const [pendingapplication,setpendingapplication] = useState("");
-    const [approveapplication,setapproveapplication] = useState("");
-    const [rejectapplication,setrejectapplication] = useState("");
+    const [totalapplication, settotalapplication] = useState("");
+    const [pendingapplication, setpendingapplication] = useState("");
+    const [approveapplication, setapproveapplication] = useState("");
+    const [rejectapplication, setrejectapplication] = useState("");
     useEffect(() => {
         axios.get(`${url}/user/${id}`)
             .then((res) => {
@@ -23,22 +23,22 @@ const TopSection = () => {
             })
             .catch((err) => console.log(err))
 
-            axios.get(`${url}/job/apply/all`)
+        axios.get(`${url}/job/apply/all`)
             .then((res) => {
                 settotalapplication(res.data.length)
             })
             .catch((err) => console.log(err))
-            axios.get(`${url}/job/apply/status/Pending`)
+        axios.get(`${url}/job/apply/status/Pending`)
             .then((res) => {
                 setpendingapplication(res.data.length)
             })
             .catch((err) => console.log(err))
-            axios.get(`${url}/job/apply/status/Approve`)
+        axios.get(`${url}/job/apply/status/Approve`)
             .then((res) => {
                 setapproveapplication(res.data.length)
             })
             .catch((err) => console.log(err))
-            axios.get(`${url}/job/apply/status/Reject`)
+        axios.get(`${url}/job/apply/status/Reject`)
             .then((res) => {
                 setrejectapplication(res.data.length)
             })
@@ -76,7 +76,11 @@ const TopSection = () => {
                 </div>
             </Grid>
         </Grid>
-        <LineChart/>
+        <div className='mt-4'>
+            <br />
+            <h2 className="text-start title mt-4">Daily Application Tracking</h2>
+            <LineChart />
+        </div>
     </div>;
 };
 

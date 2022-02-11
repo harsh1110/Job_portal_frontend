@@ -5,22 +5,16 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
 export default function ThankYou() {
   return (
-    <div>
+    <div className="background-thankyou">
       <Grid
         container
-        sx={{
-          background:
-            "url(https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/rm222batch5-kul-03.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=08fbfb223887d33030e97becaf4e20dc)",
-          width: "100%",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-        }}
       >
         <Grid
           item
           xs={12}
           sx={{
-            height: 600,
+            marginTop:"180px",
+            height: 490,
             textAlign: "center",
           }}
         >

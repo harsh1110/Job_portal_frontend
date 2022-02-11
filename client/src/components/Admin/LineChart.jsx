@@ -7,7 +7,7 @@ import url from "../../config"
 
 export const options = {
     chart: {
-        title: "Daily Application Tracking",
+        title: "",
         animation: {
             startup: true,
             easing: "linear",

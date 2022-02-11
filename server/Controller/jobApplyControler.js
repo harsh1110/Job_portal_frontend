@@ -126,3 +126,4 @@ exports.NewJobApply = async (req, res) => {
     }
 
 }
+

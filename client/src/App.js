@@ -16,6 +16,7 @@ import JobDetails from "./components/Admin/JobDetails";
 import CandidateDetails from "./components/Admin/CandidateDetails";
 import ThankYou from "./components/Home/ThankYou";
 import HomePage from "./components/HomePage";
+import AllApplicants from "./components/Admin/AllApplicants";
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
               <Route exact path="/Create%20Job%20Post" element={<CreateJob />} />
               <Route exact path="/Job%20Listing" element={<ShowAllJob />} />
               <Route exact path="/jobdetails/:id" element={<JobDetails />} />
+              <Route exact path="/All%20Applicants" element={<AllApplicants />} />
               <Route exact path="/candidatedetails/:id" element={<CandidateDetails />} />
               <Route exact path="/Log%20Out" element={<Logout />} />
             </Routes>

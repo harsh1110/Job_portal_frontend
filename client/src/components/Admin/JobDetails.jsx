@@ -1,24 +1,24 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import { alpha } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
-import TableSortLabel from '@mui/material/TableSortLabel';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
-import { visuallyHidden } from '@mui/utils';
-import axios from 'axios'
-import Button from '@mui/material/Button';
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import { useParams } from 'react-router-dom';
-import url from '../../config';
+import * as React from "react";
+import PropTypes from "prop-types";
+import { alpha } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TablePagination from "@mui/material/TablePagination";
+import TableRow from "@mui/material/TableRow";
+import TableSortLabel from "@mui/material/TableSortLabel";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Paper from "@mui/material/Paper";
+import { visuallyHidden } from "@mui/utils";
+import axios from "axios";
+import Button from "@mui/material/Button";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import { useParams } from "react-router-dom";
+import url from "../../config";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -31,7 +31,7 @@ function descendingComparator(a, b, orderBy) {
 }
 
 function getComparator(order, orderBy) {
-  return order === 'desc'
+  return order === "desc"
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
@@ -51,40 +51,46 @@ function stableSort(array, comparator) {
 }
 const headCells = [
   {
-    id: 'id',
+    id: "id",
     numeric: false,
     disablePadding: false,
-    label: 'Candidate Id',
+    label: "Candidate Id",
   },
   {
-    id: 'Candidate Name',
+    id: "Candidate Name",
     numeric: false,
     disablePadding: false,
-    label: 'Candidate Name',
+    label: "Candidate Name",
   },
   {
-    id: 'status',
+    id: "status",
     numeric: false,
     disablePadding: false,
-    label: 'Employee Status',
+    label: "Employee Status",
   },
   {
-    id: 'status',
+    id: "status",
     numeric: false,
     disablePadding: false,
-    label: 'Application Status',
+    label: "Application Status",
   },
   {
-    id: 'actions',
+    id: "actions",
     numeric: false,
     disablePadding: false,
-    label: 'Actions',
-  }
+    label: "Actions",
+  },
 ];
 
 function EnhancedTableHead(props) {
-  const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } =
-    props;
+  const {
+    onSelectAllClick,
+    order,
+    orderBy,
+    numSelected,
+    rowCount,
+    onRequestSort,
+  } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
@@ -94,21 +100,21 @@ function EnhancedTableHead(props) {
       <TableRow>
         {headCells.map((headCell) => (
           <TableCell
-            className='fw-bold'
+            className="fw-bold"
             key={headCell.id}
-            align={headCell.numeric ? 'right' : 'left'}
-            padding={headCell.disablePadding ? 'none' : 'normal'}
+            align={headCell.numeric ? "right" : "left"}
+            padding={headCell.disablePadding ? "none" : "normal"}
             sortDirection={orderBy === headCell.id ? order : false}
           >
             <TableSortLabel
               active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : 'asc'}
+              direction={orderBy === headCell.id ? order : "asc"}
               onClick={createSortHandler(headCell.id)}
             >
               {headCell.label}
               {orderBy === headCell.id ? (
                 <Box component="span" sx={visuallyHidden}>
-                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                  {order === "desc" ? "sorted descending" : "sorted ascending"}
                 </Box>
               ) : null}
             </TableSortLabel>
@@ -123,7 +129,7 @@ EnhancedTableHead.propTypes = {
   numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
   onSelectAllClick: PropTypes.func.isRequired,
-  order: PropTypes.oneOf(['asc', 'desc']).isRequired,
+  order: PropTypes.oneOf(["asc", "desc"]).isRequired,
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
 };
@@ -133,19 +139,21 @@ const EnhancedTableToolbar = (props) => {
 
   return (
     <Toolbar
-
       sx={{
         pl: { sm: 2 },
         pr: { xs: 1, sm: 1 },
         ...(numSelected > 0 && {
           bgcolor: (theme) =>
-            alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
+            alpha(
+              theme.palette.primary.main,
+              theme.palette.action.activatedOpacity
+            ),
         }),
       }}
     >
       {numSelected > 0 ? (
         <Typography
-          sx={{ flex: '1 1 100%' }}
+          sx={{ flex: "1 1 100%" }}
           color="inherit"
           variant="subtitle1"
           component="div"
@@ -154,11 +162,11 @@ const EnhancedTableToolbar = (props) => {
         </Typography>
       ) : (
         <Typography
-          sx={{ flex: '1 1 100%' }}
+          sx={{ flex: "1 1 100%" }}
           variant="h4"
           id="tableTitle"
           component="div"
-          className='table-title purple'
+          className="table-title purple"
         >
           All Job Post List
         </Typography>
@@ -172,8 +180,8 @@ EnhancedTableToolbar.propTypes = {
 };
 
 export default function EnhancedTable() {
-  const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('calories');
+  const [order, setOrder] = React.useState("asc");
+  const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
@@ -191,14 +199,13 @@ export default function EnhancedTable() {
     });
   }, []);
   const handleView = (e, candidateid) => {
-    axios.get(`${url}/job/apply/one/${candidateid}`)
-      .then((res) => {
-        window.location = `/candidatedetails/${candidateid}`
-      })
-  }
+    axios.get(`${url}/job/apply/one/${candidateid}`).then((res) => {
+      window.location = `/candidatedetails/${candidateid}`;
+    });
+  };
   const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
+    const isAsc = orderBy === property && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
 
@@ -224,7 +231,7 @@ export default function EnhancedTable() {
     } else if (selectedIndex > 0) {
       newSelected = newSelected.concat(
         selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
+        selected.slice(selectedIndex + 1)
       );
     }
 
@@ -251,13 +258,19 @@ export default function EnhancedTable() {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data.length) : 0;
 
   return (
-    <Box sx={{ width: '100%' }}>
-      <Paper className='table admin row text-center' sx={{ width: '100%', mb: 2 }}>
+    <Box sx={{ width: "100%" }}>
+      <Typography variant="h3" className="job-title">
+        All Candidate Details
+      </Typography>
+      <Paper
+        className="table admin row text-center"
+        sx={{ width: "100%", mb: 2 }}
+      >
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}
             aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
+            size={dense ? "small" : "medium"}
           >
             <EnhancedTableHead
               numSelected={selected.length}
@@ -268,10 +281,9 @@ export default function EnhancedTable() {
               rowCount={data.length}
             />
             <TableBody>
-              {
-                data.length === 0 ?
-                  null :
-                  stableSort(data, getComparator(order, orderBy))
+              {data.length === 0
+                ? null
+                : stableSort(data, getComparator(order, orderBy))
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((i, index) => {
                       const isItemSelected = isSelected(index);
@@ -295,16 +307,17 @@ export default function EnhancedTable() {
                           >
                             {index + 1}
                           </TableCell>
+                          <TableCell>{i.name}</TableCell>
+                          <TableCell>{i.employStatus}</TableCell>
+                          <TableCell>{i.ApplicationStatus}</TableCell>
                           <TableCell>
-                            {i.name}
+                            <Button
+                              className="btn"
+                              onClick={(e) => handleView(e, i._id)}
+                            >
+                              <RemoveRedEyeIcon className="text-white" />
+                            </Button>
                           </TableCell>
-                          <TableCell>
-                            {i.employStatus}
-                          </TableCell>
-                          <TableCell>
-                            {i.ApplicationStatus}
-                          </TableCell>
-                          <TableCell><Button className="btn" onClick={(e) => handleView(e, i._id)}><RemoveRedEyeIcon className='text-white' /></Button></TableCell>
                         </TableRow>
                       );
                     })}
@@ -333,4 +346,3 @@ export default function EnhancedTable() {
     </Box>
   );
 }
-

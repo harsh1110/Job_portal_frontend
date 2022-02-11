@@ -255,7 +255,9 @@ export default function EnhancedTable() {
 
   return (
     <Box sx={{ width: '100%' }}>
+      <Typography variant='h3' className='job-title' >All Job Details</Typography>
       <Paper className='table admin row text-center' sx={{ width: '100%', mb: 2 }}>
+        
         <TableContainer>
           <Table
             sx={{ minWidth: 750 }}

@@ -339,7 +339,18 @@ export default function EnhancedTable() {
                               </TableCell>
                               <TableCell>{i.name}</TableCell>
                               <TableCell>{i.employStatus}</TableCell>
-                              <TableCell>{i.ApplicationStatus}</TableCell>
+                              {
+                                i.ApplicationStatus === "Pending"?
+                              <TableCell className="text-warning" sx={{fontWeight:800}}>{i.ApplicationStatus}</TableCell>:null
+                              }
+                               {
+                                i.ApplicationStatus === "Approve"?
+                              <TableCell className="text-success" sx={{fontWeight:800}}>{i.ApplicationStatus}</TableCell>:null
+                              }
+                               {
+                                i.ApplicationStatus === "Reject"?
+                              <TableCell className="text-danger" sx={{fontWeight:800}}>{i.ApplicationStatus}</TableCell>:null
+                              }
                               <TableCell>
                                 <Button
                                   className="btn"

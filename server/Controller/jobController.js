@@ -34,3 +34,18 @@ exports.OneJob = async (req, res) => {
     var onejob = await Job.findOne({ _id: id }).lean()
     res.send(onejob)
 }
+
+exports.EditJob = async (req,res) => {
+    var id = req.params.id
+    const {designation,position,jobDescription,limit} = req.body;
+
+    var editjob = {
+        designation:designation,
+        positions:position,
+        jobDescription:jobDescription,
+        limit:limit
+    }
+
+    var JobEdit = await Job.findOneAndReplace({_id:id},editjob)
+    res.send(JobEdit)
+}

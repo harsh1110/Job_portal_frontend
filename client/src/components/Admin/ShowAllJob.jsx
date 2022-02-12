@@ -20,6 +20,10 @@ import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import url from "../../config";
 import { Grid } from "@mui/material";
 import ReportRoundedIcon from "@mui/icons-material/ReportRounded";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { Modal } from "@mui/material";
+import { useState } from "react";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -87,6 +91,7 @@ const headCells = [
     numeric: false,
     disablePadding: false,
     label: "Actions",
+    textAlign: "end",
   },
 ];
 
@@ -107,26 +112,56 @@ function EnhancedTableHead(props) {
     <TableHead>
       <TableRow>
         {headCells.map((headCell) => (
-          <TableCell
-            className="fw-bold"
-            key={headCell.id}
-            align={headCell.numeric ? "right" : "left"}
-            padding={headCell.disablePadding ? "none" : "normal"}
-            sortDirection={orderBy === headCell.id ? order : false}
-          >
-            <TableSortLabel
-              active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : "asc"}
-              onClick={createSortHandler(headCell.id)}
-            >
-              {headCell.label}
-              {orderBy === headCell.id ? (
-                <Box component="span" sx={visuallyHidden}>
-                  {order === "desc" ? "sorted descending" : "sorted ascending"}
-                </Box>
-              ) : null}
-            </TableSortLabel>
-          </TableCell>
+          <>
+            {headCell.label === "Actions" ? (
+              <TableCell
+              colSpan={2}
+                className="fw-bold"
+                key={headCell.id}
+                align={headCell.numeric ? "right" : "left"}
+                padding={headCell.disablePadding ? "none" : "normal"}
+                sortDirection={orderBy === headCell.id ? order : false}
+              >
+                <TableSortLabel
+                  active={orderBy === headCell.id}
+                  direction={orderBy === headCell.id ? order : "asc"}
+                  onClick={createSortHandler(headCell.id)}
+                >
+                  {headCell.label}
+                  {orderBy === headCell.id ? (
+                    <Box component="span" sx={visuallyHidden}>
+                      {order === "desc"
+                        ? "sorted descending"
+                        : "sorted ascending"}
+                    </Box>
+                  ) : null}
+                </TableSortLabel>
+              </TableCell>
+            ) : (
+              <TableCell
+                className="fw-bold"
+                key={headCell.id}
+                align={headCell.numeric ? "right" : "left"}
+                padding={headCell.disablePadding ? "none" : "normal"}
+                sortDirection={orderBy === headCell.id ? order : false}
+              >
+                <TableSortLabel
+                  active={orderBy === headCell.id}
+                  direction={orderBy === headCell.id ? order : "asc"}
+                  onClick={createSortHandler(headCell.id)}
+                >
+                  {headCell.label}
+                  {orderBy === headCell.id ? (
+                    <Box component="span" sx={visuallyHidden}>
+                      {order === "desc"
+                        ? "sorted descending"
+                        : "sorted ascending"}
+                    </Box>
+                  ) : null}
+                </TableSortLabel>
+              </TableCell>
+            )}
+          </>
         ))}
       </TableRow>
     </TableHead>
@@ -188,6 +223,18 @@ EnhancedTableToolbar.propTypes = {
 };
 
 export default function EnhancedTable() {
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    bgcolor: "white",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+  };
+
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
@@ -195,21 +242,56 @@ export default function EnhancedTable() {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [alljobs, setAlljobs] = React.useState([]);
+  const [open, setOpen] = useState(false);
+  const [defaultjob, setdefaultjob] = useState("");
+  const [newdesignation, setnewdesignation] = useState("");
+  const [newposition, setnewposition] = useState("");
+  const [newjobdescription, setnewjobdescription] = useState("");
+  const [newlimit, setnewlimit] = useState("");
+  const handleClose = () => setOpen(false);
+  const [flag, setFlag] = useState(false);
+
   React.useEffect(() => {
     axios.get(`${url}/job/all`).then((value) => {
       setAlljobs(value.data);
       // console.log(value.data)
     });
-  }, []);
+  }, [flag]);
   const handleView = (e, id) => {
     axios.get(`${url}/job/apply/all/${id}`).then((res) => {
       console.log(res);
       window.location = `/jobdetails/${id}`;
+      setFlag(!flag);
+    });
+  };
+  const handleEdit = (e, id) => {
+    axios.get(`${url}/job/one/${id}`).then(
+      (res) => {
+        console.log(res);
+        setdefaultjob(res.data);
+        setOpen(true);
+        // setFlag(!flag)
+      },
+      [flag]
+    );
+  };
+  const handleEditOk = (e, id) => {
+    const data = {
+      designation: newdesignation ? newdesignation : defaultjob.designation,
+      position: newposition ? newposition : defaultjob.position,
+      jobDescription: newjobdescription
+        ? newjobdescription
+        : defaultjob.jobDescription,
+      limit: newlimit ? newlimit : defaultjob.limit,
+    };
+    axios.post(`${url}/job/one/${id}`, data).then((res) => {
+      console.log(res);
+      setFlag(!flag);
     });
   };
   const handleCreateJob = (e) => {
-    window.location=`/Create%20Job%20Post`;
-  }
+    window.location = `/Create%20Job%20Post`;
+  };
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
@@ -292,7 +374,11 @@ export default function EnhancedTable() {
       ) : (
         <Box sx={{ width: "100%" }}>
           <Grid item xs={12} sx={{ textAlign: "end" }}>
-            <Button variant="contained" className="button-job" onClick={(e) => handleCreateJob(e)}>
+            <Button
+              variant="contained"
+              className="button-job"
+              onClick={(e) => handleCreateJob(e)}
+            >
               Create Job
             </Button>
           </Grid>
@@ -393,6 +479,15 @@ export default function EnhancedTable() {
                                   <RemoveRedEyeIcon className="text-white" />
                                 </Button>
                               </TableCell>
+                              <TableCell>
+                                <Button
+                                  disabled
+                                  className="btn"
+                                  onClick={(e) => handleEdit(e, job._id)}
+                                >
+                                  <EditIcon className="text-white" />
+                                </Button>
+                              </TableCell>
                             </>
                           ) : (
                             <>
@@ -422,11 +517,71 @@ export default function EnhancedTable() {
                                   <RemoveRedEyeIcon className="text-white" />
                                 </Button>
                               </TableCell>
+                              <TableCell>
+                                <Button
+                                  className="btn"
+                                  onClick={(e) => handleEdit(e, job._id)}
+                                >
+                                  <EditIcon className="text-white" />
+                                </Button>
+                              </TableCell>
                             </>
                           )}
                         </TableRow>
                       );
                     })}
+                  <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                  >
+                    <Box sx={style}>
+                      <div style={{ textAlign: "center" }}>
+                        {/* {console.log("nn",defaultBook)} */}
+
+                        <input
+                          defaultValue={defaultjob.designation}
+                          onChange={(event) =>
+                            setnewdesignation(event.target.value)
+                          }
+                        ></input>
+                        <br />
+                        <br />
+                        <input
+                          defaultValue={defaultjob.positions}
+                          onChange={(event) =>
+                            setnewposition(event.target.value)
+                          }
+                        ></input>
+                        <br />
+                        <br />
+                        <input
+                          defaultValue={defaultjob.jobDescription}
+                          onChange={(event) =>
+                            setnewjobdescription(event.target.value)
+                          }
+                        ></input>
+                        <br />
+                        <br />
+                        <input
+                          defaultValue={defaultjob.limit}
+                          onChange={(event) => setnewlimit(event.target.value)}
+                        ></input>
+                        <br />
+                        <br />
+
+                        <Button
+                          onClick={(e) => {
+                            handleEditOk(e, defaultjob._id);
+                            handleClose();
+                          }}
+                        >
+                          Ok
+                        </Button>
+                      </div>
+                    </Box>
+                  </Modal>
                   {emptyRows > 0 && (
                     <TableRow
                       style={{

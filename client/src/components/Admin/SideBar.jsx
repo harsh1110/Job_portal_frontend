@@ -67,8 +67,8 @@ function ResponsiveDrawer(props) {
     })
         jobIds.map((jobpath) => {
             if (active === jobpath) {
-                document.getElementById("Sh").classList.add("active")
-                document.getElementById("Sho").classList.add("active")
+                document.getElementById("Jo").classList.add("active")
+                document.getElementById("Job").classList.add("active")
             }
         })
     

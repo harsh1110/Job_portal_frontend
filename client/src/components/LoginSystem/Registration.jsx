@@ -37,6 +37,7 @@ const theme = createTheme({
 });
 export default function Registration() {
   const [name, setname] = useState("");
+  const [role, setrole] = useState("");
   const [email, setemail] = useState("");
   const [phone, setphone] = useState("");
   const [pic, setpic] = useState();
@@ -59,6 +60,7 @@ export default function Registration() {
     dat.append("phone", phone);
     dat.append("pass", pass);
     dat.append("pic", pic);
+    dat.append("pic", role);
     console.log(dat);
     axios
       .post(`${url}/add-user`, dat)
@@ -84,7 +86,8 @@ export default function Registration() {
       phone === "" ||
       pic === "" ||
       pass === "" ||
-      conpass === ""
+      conpass === "" ||
+      role === ""
     ) {
       alert("fields can not Empty...!!");
     }
@@ -187,6 +190,19 @@ export default function Registration() {
                     id="fullname"
                     onChange={(e) => setname(e.target.value)}
                     label="Full Name"
+                    autoFocus
+                    color={"primary"}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    autoComplete="given-name"
+                    name="role"
+                    required
+                    fullWidth
+                    id="role"
+                    onChange={(e) => setrole(e.target.value)}
+                    label="Role"
                     autoFocus
                     color={"primary"}
                   />

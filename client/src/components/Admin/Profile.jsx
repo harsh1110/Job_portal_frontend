@@ -16,23 +16,26 @@ import { Box } from "@mui/system";
 import { Modal } from "@mui/material";
 
 const Profile = () => {
-
-    const style = {
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        width: 400,
-        bgcolor: "white",
-        border: "2px solid #000",
-        boxShadow: 24,
-        p: 4,
-      };
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    bgcolor: "white",
+    border: "1px solid #000",
+    boxShadow: 24,
+    p: 4,
+  };
 
   const id = localStorage.getItem("user");
   const [user, setUser] = useState([]);
   const [recentdata, setRecenteData] = useState([]);
   const [open, setOpen] = useState(false);
+  const [newname, setnewname] = useState("");
+  const [newemail, setnewemail] = useState("");
+  const [newphone, setnewphone] = useState("");
+  const [newpic, setnewpic] = useState("");
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
@@ -42,6 +45,7 @@ const Profile = () => {
     axios
       .get(`${url}/user/${id}`)
       .then((res) => {
+        // console.log(res.data);
         setUser(res.data);
       })
       .catch((err) => console.log(err));
@@ -53,9 +57,29 @@ const Profile = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  const handleEditProfile = () => {
-    console.log("hii")
+  const handleModal = (e, id) => {
+    setOpen(true);
   };
+
+  const handleEditProfile = (e, id) => {
+    const id1 = user._id;
+    var data = new FormData();
+    data.append("newname", newname ? newname : user.name);
+    data.append("newemail", newemail ? newemail : user.email);
+    data.append("newphone", newphone ? newphone : user.phone);
+    data.append("newpic", newpic ? newpic : user.pic);
+    data.append("newpass", user.pass);
+    data.append("newconpass", user.conpass);
+
+    for (let i = 0; i < user.pic.length; i++) {
+      data.append("pic", user.pic[i]);
+    }
+
+    axios.post(`${url}/update-user/${id1}`, data).then((res) => {
+      console.log(res);
+    });
+  };
+
   return (
     <div className="">
       {user.length === 0 ? (
@@ -104,7 +128,7 @@ const Profile = () => {
                   </Typography>
                   <Button
                     className="btn m-4 text-white"
-                    onClick={(e) => handleEditProfile(e)}
+                    onClick={(e) => handleModal(e, user._id)}
                   >
                     <EditIcon />
                     &nbsp;&nbsp;Edit Profile
@@ -118,21 +142,50 @@ const Profile = () => {
                 >
                   <Box sx={style}>
                     <div style={{ textAlign: "center" }}>
-                      {/* {console.log("nn",defaultBook)} */}
+                      <Typography variant="h6" color="blue" className="mb-2">
+                        Edit Profile
+                      </Typography>
                       <input
-                        // defaultValue={
-                        //   defaultTodo && defaultTodo?.map((i) => i?.todo)
-                        // }
-                        // onChange={(event) =>
-                        //   setNewTodo(event.target.value, i.id)
-                        // }
+                        fullWidth
+                        defaultValue={user.name}
+                        onChange={(event) => setnewname(event.target.value)}
                       ></input>
+                      <br />
+                      <br />
+                      <input
+                        defaultValue={user.email}
+                        onChange={(event) => setnewemail(event.target.value)}
+                      ></input>
+                      <br />
+                      <br />
+                      <input
+                        defaultValue={user.phone}
+                        onChange={(event) => setnewphone(event.target.value)}
+                      ></input>
+                      <br />
+                      <br />
+                      {user.pic ? (
+                        <img
+                          src={user.pic}
+                          height={"70px"}
+                          width={"70px"}
+                          alt=""
+                          srcset=""
+                        />
+                      ) : (
+                        <input
+                          // textAlign="center"
+                          type="file"
+                          onChange={(event) => setnewpic(event.target.files[0])}
+                        ></input>
+                      )}
                       <br />
                       <br />
 
                       <Button
+                        variant="contained"
                         onClick={(e) => {
-                        //   defaultValue(e, i.id);
+                          handleEditProfile(e);
                           handleClose();
                         }}
                       >

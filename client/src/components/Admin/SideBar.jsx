@@ -63,7 +63,7 @@ function ResponsiveDrawer(props) {
     const locations = ['/Profile', '/Dashboard', '/Create%20Job%20Post', "/Job%20Listing","/All%20Applicants", "/Log%20Out"]
     all.map((job) => {
         jobIds.push(`/jobdetails/${job._id}`);
-        console.log(jobIds);
+        // console.log(jobIds);
     })
         jobIds.map((jobpath) => {
             if (active === jobpath) {

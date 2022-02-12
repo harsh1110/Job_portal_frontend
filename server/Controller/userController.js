@@ -68,3 +68,54 @@ exports.Login = async (req, res) => {
     }
 }
 
+exports.UpdateUser = async (req,res) => {
+    const{newname,newemail,newphone,newpass,newconpass,id} = req.body
+    var pic = req.files.pic
+        console.log(req.body);
+        console.log(req.files);
+        var path = []
+        if (!pic) {
+            path = await Users.findOne({ _id: id }).lean().pic
+        }
+        else {
+            if (pic.name) {
+                var img = pic.tempFilePath
+                var data = await uploadToCloudinary(img, path)
+                console.log(data);
+                var createUser = {
+                    name: newname,
+                    email: newemail,
+                    phone: newphone,
+                    pic: data,
+                    pass: newpass,
+                    conpass: newconpass,
+                }
+            }
+            else{
+                for (let i = 0; i < pic.length; i++) {
+                    var img = pic[i].tempFilePath
+                    var data = await uploadToCloudinary(img, path)
+                    console.log(data);
+                    if (path.length === pic.length) {
+                        var createUser = {
+                            name: newname,
+                            email: newemail,
+                            phone: newphone,
+                            pic: data,
+                            pass: newpass,
+                            conpass: newconpass,
+                        }
+                    }
+                }
+            }
+        }
+    const updateuser = await User.findOneAndReplace({ _id: id }, createUser);
+    console.log("1 document updated",updateuser);
+    if(updateuser){
+    res.send(updateuser)
+    }
+    else{
+        res.status(400).send({msg:'Error'})
+    }
+}
+

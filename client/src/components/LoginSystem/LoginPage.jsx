@@ -115,7 +115,7 @@ export default function LoginPage() {
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 1 }}>
+            <Avatar sx={{ m: 1 , bgcolor: "primary.main" }}>
               <LoginIcon />
             </Avatar>
             <Typography component="h1" variant="h5">

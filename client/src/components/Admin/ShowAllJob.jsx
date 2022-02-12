@@ -278,7 +278,7 @@ export default function EnhancedTable() {
   const handleEditOk = (e, id) => {
     const data = {
       designation: newdesignation ? newdesignation : defaultjob.designation,
-      position: newposition ? newposition : defaultjob.position,
+      position: newposition ? newposition : defaultjob.positions,
       jobDescription: newjobdescription
         ? newjobdescription
         : defaultjob.jobDescription,

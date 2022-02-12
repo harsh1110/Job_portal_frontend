@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import url from "../../config";
 import { Box } from "@mui/system";
 import { Modal } from "@mui/material";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const Profile = () => {
   const style = {
@@ -35,6 +36,8 @@ const Profile = () => {
   const [newname, setnewname] = useState("");
   const [newemail, setnewemail] = useState("");
   const [newphone, setnewphone] = useState("");
+  const [newpass, setnewpass] = useState("");
+  const [newconpass, setnewconpass] = useState("");
   const [newpic, setnewpic] = useState("");
   const handleClose = () => setOpen(false);
 
@@ -61,24 +64,31 @@ const Profile = () => {
     setOpen(true);
   };
 
-  const handleEditProfile = (e, id) => {
-    const id1 = user._id;
+  const handleEditProfile = (e) => {
+    const id = user._id;
     var data = new FormData();
-    data.append("newname", newname ? newname : user.name);
-    data.append("newemail", newemail ? newemail : user.email);
-    data.append("newphone", newphone ? newphone : user.phone);
-    data.append("newpic", newpic ? newpic : user.pic);
-    data.append("newpass", user.pass);
-    data.append("newconpass", user.conpass);
+    data.append("name", newname !== "" ? newname : user.name);
+    data.append("email", newemail !== "" ? newemail : user.email);
+    data.append("phone", newphone !== "" ? newphone : user.phone);
+    data.append("pic", newpic);
+    data.append("profile", user.pic);
+    data.append("pass", newpass !== "" ? newpass : user.pass);
+    data.append("conpass", newconpass !== "" ? newconpass : user.conpass);
 
-    for (let i = 0; i < user.pic.length; i++) {
-      data.append("pic", user.pic[i]);
-    }
-
-    axios.post(`${url}/update-user/${id1}`, data).then((res) => {
+    axios.post(`${url}/update-user/${id}`, data).then((res) => {
       console.log(res);
     });
   };
+  const handlePicDelete = (e) => {
+    // e.preventDefault()
+    axios.delete(`${url}/pic/${id}`)
+    .then((res)=>{
+      toast.success("Picture Deleted Successfully")
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
 
   return (
     <div className="">
@@ -104,7 +114,7 @@ const Profile = () => {
                 </Grid>
                 <Grid item className="name mx-4" xs={12} sm={8}>
                   <h4>{user.name}</h4>
-                  <p className="text-secondary">HR Manager</p>
+                  <p className="text-secondary">{user.role}</p>
                 </Grid>
               </Grid>
               <hr />
@@ -128,7 +138,7 @@ const Profile = () => {
                   </Typography>
                   <Button
                     className="btn m-4 text-white"
-                    onClick={(e) => handleModal(e, user._id)}
+                    onClick={(e) => (window.location = `/update/${user._id}`)}
                   >
                     <EditIcon />
                     &nbsp;&nbsp;Edit Profile
@@ -164,21 +174,7 @@ const Profile = () => {
                       ></input>
                       <br />
                       <br />
-                      {user.pic ? (
-                        <img
-                          src={user.pic}
-                          height={"70px"}
-                          width={"70px"}
-                          alt=""
-                          srcset=""
-                        />
-                      ) : (
-                        <input
-                          // textAlign="center"
-                          type="file"
-                          onChange={(event) => setnewpic(event.target.files[0])}
-                        ></input>
-                      )}
+                      
                       <br />
                       <br />
 

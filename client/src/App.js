@@ -17,6 +17,7 @@ import CandidateDetails from "./components/Admin/CandidateDetails";
 import ThankYou from "./components/Home/ThankYou";
 import HomePage from "./components/HomePage";
 import AllApplicants from "./components/Admin/AllApplicants";
+import UpdateUser from "./components/Admin/UpdateUser";
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
             <ResponsiveDrawer />
             <Routes>
               <Route exact path="/Profile" element={<Profile />} />
+              <Route exact path="/update/:id" element={<UpdateUser />} />
               <Route exact path="/Dashboard" element={<TopSection />} />
               <Route exact path="/Create%20Job%20Post" element={<CreateJob />} />
               <Route exact path="/Job%20Listing" element={<ShowAllJob />} />

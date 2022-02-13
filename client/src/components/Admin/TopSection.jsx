@@ -45,11 +45,11 @@ const TopSection = () => {
             .catch((err) => console.log(err))
     }, []);
     return <div className="admin container px-4">
-        {totalapplication == "" || pendingapplication == "" || approveapplication == "" || rejectapplication == "" ?
+        {/* {totalapplication == "" || pendingapplication == "" || approveapplication == "" || rejectapplication == "" ?
             <div className="text-center">
                 <CircularProgress />
             </div>
-            :
+            : */}
             <>
                 <h2 className="text-start title">Hii, {user.name}</h2>
                 <Grid container spacing={{ xs: 4, md: 4 }} columns={{ xs: 4, sm: 8, md: 12 }}>
@@ -88,7 +88,7 @@ const TopSection = () => {
                     <LineChart />
                 </div>
             </>
-        }
+        {/* } */}
     </div>;
 };
 

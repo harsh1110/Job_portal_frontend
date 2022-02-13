@@ -30,15 +30,15 @@ function App() {
           <BrowserRouter>
             <ResponsiveDrawer />
             <Routes>
-              <Route exact path="/Profile" element={<Profile />} />
+              <Route exact path="/profile" element={<Profile />} />
               <Route exact path="/update/:id" element={<UpdateUser />} />
-              <Route exact path="/Dashboard" element={<TopSection />} />
-              <Route exact path="/Create%20Job%20Post" element={<CreateJob />} />
-              <Route exact path="/Job%20Listing" element={<ShowAllJob />} />
+              <Route exact path="/dashboard" element={<TopSection />} />
+              <Route exact path="/create-job-post" element={<CreateJob />} />
+              <Route exact path="/job-listing" element={<ShowAllJob />} />
               <Route exact path="/jobdetails/:id" element={<JobDetails />} />
-              <Route exact path="/All%20Applicants" element={<AllApplicants />} />
+              <Route exact path="/all-applicants" element={<AllApplicants />} />
               <Route exact path="/candidatedetails/:id" element={<CandidateDetails />} />
-              <Route exact path="/Log%20Out" element={<Logout />} />
+              <Route exact path="/logout" element={<Logout />} />
             </Routes>
           </BrowserRouter>
         </>

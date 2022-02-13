@@ -289,7 +289,7 @@ export default function EnhancedTable() {
             Opps...!
           </Typography>
           <Typography variant="h6">
-            There is no Record for This Post
+            There is no Record for Application
           </Typography>
         </Grid>
         :

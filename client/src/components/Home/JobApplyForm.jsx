@@ -25,7 +25,6 @@ export default function JobApplyForm() {
   const [refname, setrefname] = useState("");
   const [refphone, setrefphone] = useState("");
   const [designation, setdesignation] = useState("");
-  const [jobId, setJobId] = useState("");
   const [limit, setlimit] = useState("");
 
   const callDesignation = () => {
@@ -84,32 +83,11 @@ export default function JobApplyForm() {
       data.append("refname", refname);
       data.append("refphone", refphone);
 
-      const emaildata = {
-        to_name: name,
-        to_email: email,
-        designation: designation,
-      };
-      axios
-        .post(`${url}/job/apply/user`, data)
+      axios.post(`${url}/job/apply/user`, data)
         .then((res) => {
           console.log(res);
           alert("applied successfully");
-          emailjs
-            .send(
-              "service_8b9bgx1",
-              "template_6rrbnry",
-              emaildata,
-              "user_bNQsTrJpBB3n1BSg7wlfG"
-            )
-            .then(
-              (result) => {
-                console.log(result.text);
-              },
-              (error) => {
-                console.log(error.text);
-              }
-            );
-          window.location = `/thankyou`;
+         window.location = `/thankyou`;
         })
         .catch((err) => {
           console.log(err);

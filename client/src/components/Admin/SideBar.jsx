@@ -60,7 +60,7 @@ function ResponsiveDrawer(props) {
        
     }, []);
     const icon = [<PersonIcon />, <DashboardIcon />, <AddIcon />, <TocIcon />,<PeopleIcon/>, <LogoutIcon />]
-    const locations = ['/Profile', '/Dashboard', '/Create%20Job%20Post', "/Job%20Listing","/All%20Applicants", "/Log%20Out"]
+    const locations = ['/profile', '/dashboard', '/create-job-post', "/job-listing","/all-applicants", "/logout"]
     all.map((job) => {
         jobIds.push(`/jobdetails/${job._id}`);
         // console.log(jobIds);
@@ -85,7 +85,7 @@ function ResponsiveDrawer(props) {
             {/* </Container> */}
             <List>
                 {['Profile', 'Dashboard', 'Create Job Post', "Job Listing","All Applicants", "Log Out"].map((text, index) => (
-                    <a className='text-decoration-none text-dark' onClick={(e) => (window.location.reload())} href={`/${text}`}>
+                    <a className='text-decoration-none text-dark' onClick={(e) => (window.location.reload())} href={`${locations[index]}`}>
                         {
                             active === locations[index] ?
                                 <ListItem className='active' id={text.slice(0, 2)} name={text} button key={text}>

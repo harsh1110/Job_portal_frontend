@@ -18,6 +18,7 @@ import Viewer, { Worker } from '@phuocng/react-pdf-viewer';
 import '@phuocng/react-pdf-viewer/cjs/react-pdf-viewer.css';
 import url from "../../config";
 import emailjs from '@emailjs/browser'
+import{ init } from '@emailjs/browser';
 import { toast } from "react-toastify";
 
 const theme = createTheme({
@@ -40,46 +41,54 @@ export default function CandidateDetails() {
     toast.success("Change Status Successfully")
   }
   React.useEffect((e) => {
-    axios.get(`http://localhost:5000/job/apply/one/${id}`).then((value) => {
-      console.log(value);
+    axios.get(`http://localhost:5000/job/apply/one/${id}`)
+    .then((value) => {
       setcandidate(value.data);
     });
   }, []);
-
+  
   const handleStatus = (e) => {
     setstatus(e.target.value);
   };
   const handleSave = (e) => {
-    e.preventDefault();
-    const emaildata = {
-      to_name:candidate.name,
-      to_email:candidate.email,
-      designation:candidate.designation
-    }
-    if(status === "Approve") {
-      emailjs.send("service_8b9bgx1","template_approve",emaildata,"user_bNQsTrJpBB3n1BSg7wlfG")
-      .then((result) => {
-          console.log(result.text);
-      }, (error) => {
-          console.log(error.text);
-      });
-    };
-    if(status === "Reject") {
-      emailjs.send("service_8b9bgx1","template_reject",emaildata,"user_bNQsTrJpBB3n1BSg7wlfG")
-      .then((result) => {
-          console.log(result.text);
-      }, (error) => {
-          console.log(error.text);
-      });
-    };
+    init("user_bNQsTrJpBB3n1BSg7wlfG");
+    e.preventDefault()
     const data = {
       status: status,
     };
-    axios
-      .post(`${url}/job/apply/change-status/${id}`, data)
+    axios.post(`${url}/job/apply/change-status/${id}`, data)
       .then((value) => {
-        window.location.reload()
-      });
+        const emaildata = {
+          to_name:candidate.name,
+          to_email:candidate.email,
+          designation:candidate.designation
+        }
+        if(status === "Approve") {
+          console.log(status);
+          emailjs.send("service_approve","template_approve",emaildata)
+          .then((result) => {
+            console.log(result.text);
+            window.location.reload()
+          })
+          .catch((error) => {
+            console.log(error.text);
+          });
+        }
+        if(status === "Reject") {
+          console.log(status);
+          emailjs.send("service_reject","template_reject",emaildata)
+          .then((result) => {
+            console.log(result.text);
+            window.location.reload()
+          })
+          .catch((error) => {
+            console.log(error.text);
+          });
+        }
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
   };
   return (
     <div style={{marginTop:"-50px"}} className="admin row container text-center candetails">
@@ -202,7 +211,6 @@ export default function CandidateDetails() {
                           :
                           <Button
                             className="btn text-white"
-                            onClick={(e) => handleSave(e)}
                             disabled
                           >
                             Save

@@ -56,7 +56,7 @@ exports.changeStatus = async (req, res) => {
 const changeLimit = async (id) => {
     var oldVal = await Job.findOne({ _id: id }).lean()
     if (oldVal.limit === 0) {
-        
+
     }
     else {
         var limit = parseFloat(oldVal.limit) - 1
@@ -82,8 +82,6 @@ const changeLimit = async (id) => {
 
 exports.NewJobApply = async (req, res) => {
     try {
-        var job = Job.findOne({_id:jobId}).lean()
-        if(job.limit === 0){
         console.log(req.body);
         const { jobId, designation, name, email, phone, date, employment, refname, refphone } = req.body
         const resume = req.file
@@ -112,14 +110,10 @@ exports.NewJobApply = async (req, res) => {
             Resume: path,
         })
         await createApply.save()
+        changeLimit(jobId)
         if (createApply) {
-            changeLimit(jobId)
             res.json({ success: "Job Applied Sucessfully" })
         }
-    }
-    else{
-        console.log("Limit is Over");
-    }
     }
     catch {
         res.json({ error: "Job Apply fail" })

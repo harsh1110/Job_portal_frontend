@@ -22,7 +22,7 @@ export default function CreateJob() {
   const [position, setposition] = useState("");
   const [jobDescription, setjobDescription] = useState("");
   const [limit, setlimit] = useState("");
-  if(window.document.referrer === "http://localhost:3000/Create%20Job%20Post"){
+  if(window.document.referrer === "http://localhost:3000/create-job-post"){
     toast.success("Create Job Successfully")
   }
 
@@ -40,7 +40,7 @@ export default function CreateJob() {
       };
 
       axios.post(`${url}/job/create`, data).then((res) => {
-        window.location = "/Create%20Job%20Post";
+        window.location = "/create-job-post";
       });
     }
   };

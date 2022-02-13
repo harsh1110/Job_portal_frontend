@@ -205,7 +205,7 @@ const Profile = () => {
                           <p>Name :- {application.name}</p>
                           <p>Status :- {application.ApplicationStatus}</p>
                           <p>Employee Status :- {application.employStatus}</p>
-                          <button className="btn text-white">
+                          <button onClick={(e)=>(window.location = `/candidatedetails/${application._id}`)} className="btn text-white">
                             View Application
                           </button>
                         </Card>

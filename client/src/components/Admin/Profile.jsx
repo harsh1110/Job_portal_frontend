@@ -203,8 +203,18 @@ const Profile = () => {
                             {application.designation}
                           </p>
                           <p>Name :- {application.name}</p>
-                          <p>Status :- {application.ApplicationStatus}</p>
-                          <p>Employee Status :- {application.employStatus}</p>
+                          {application.ApplicationStatus === 'Approve' ?
+                          <p >Status :- <span className="text-success" > {application.ApplicationStatus} </span></p>
+                          :null}
+                          {application.ApplicationStatus === 'Reject' ?
+                          <p >Status :- <span className="text-danger" > {application.ApplicationStatus} </span></p>
+                          :null}
+                          {application.ApplicationStatus === 'pending' ?
+                          <p >Status :- <span className="text-warning" > {application.ApplicationStatus} </span></p>
+                          :null}
+                           <p >Employee Status :- {application.employStatus}</p>
+                         
+                         
                           <button onClick={(e)=>(window.location = `/candidatedetails/${application._id}`)} className="btn text-white">
                             View Application
                           </button>

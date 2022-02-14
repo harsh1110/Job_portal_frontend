@@ -18,6 +18,7 @@ import ThankYou from "./components/Home/ThankYou";
 import HomePage from "./components/HomePage";
 import AllApplicants from "./components/Admin/AllApplicants";
 import UpdateUser from "./components/Admin/UpdateUser";
+import Interview from "./components/Admin/Interview";
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
               <Route exact path="/all-applicants" element={<AllApplicants />} />
               <Route exact path="/candidatedetails/:id" element={<CandidateDetails />} />
               <Route exact path="/logout" element={<Logout />} />
+              <Route exact path="/interview/:id" element={<Interview />} />
             </Routes>
           </BrowserRouter>
         </>

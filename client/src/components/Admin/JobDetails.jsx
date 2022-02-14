@@ -21,6 +21,7 @@ import { useParams } from "react-router-dom";
 import url from "../../config";
 import { Grid } from "@mui/material";
 import ReportRoundedIcon from "@mui/icons-material/ReportRounded";
+import EventNoteIcon from '@mui/icons-material/EventNote';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -102,6 +103,7 @@ function EnhancedTableHead(props) {
       <TableRow>
         {headCells.map((headCell) => (
           <TableCell
+            colSpan={headCell.id === "actions" ? 2 : null}
             className="fw-bold"
             key={headCell.id}
             align={headCell.numeric ? "right" : "left"}
@@ -204,6 +206,9 @@ export default function EnhancedTable() {
     axios.get(`${url}/job/apply/one/${candidateid}`).then((res) => {
       window.location = `/candidatedetails/${candidateid}`;
     });
+  };
+  const handleSchedual = (e, candidateid) => {
+    window.location = `/interview/${candidateid}`;
   };
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -311,57 +316,77 @@ export default function EnhancedTable() {
                   {data.length === 0
                     ? null
                     : stableSort(data, getComparator(order, orderBy))
-                        .slice(
-                          page * rowsPerPage,
-                          page * rowsPerPage + rowsPerPage
-                        )
-                        .map((i, index) => {
-                          const isItemSelected = isSelected(index);
-                          const labelId = `enhanced-table-checkbox-${index}`;
+                      .slice(
+                        page * rowsPerPage,
+                        page * rowsPerPage + rowsPerPage
+                      )
+                      .map((i, index) => {
+                        const isItemSelected = isSelected(index);
+                        const labelId = `enhanced-table-checkbox-${index}`;
 
-                          return (
-                            <TableRow
-                              hover
-                              onClick={(event) => handleClick(event, i._id)}
-                              role="checkbox"
-                              aria-checked={isItemSelected}
-                              tabIndex={-1}
-                              key={i._id}
-                              selected={isItemSelected}
+                        return (
+                          <TableRow
+                            hover
+                            onClick={(event) => handleClick(event, i._id)}
+                            role="checkbox"
+                            aria-checked={isItemSelected}
+                            tabIndex={-1}
+                            key={i._id}
+                            selected={isItemSelected}
+                          >
+                            <TableCell
+                              component="th"
+                              id={labelId}
+                              scope="row"
+                              padding="4px"
                             >
-                              <TableCell
-                                component="th"
-                                id={labelId}
-                                scope="row"
-                                padding="4px"
+                              {index + 1}
+                            </TableCell>
+                            <TableCell>{i.name}</TableCell>
+                            <TableCell>{i.employStatus}</TableCell>
+                            {
+                              i.ApplicationStatus === "Pending" ?
+                                <TableCell className="text-warning" sx={{ fontWeight: 800 }}>{i.ApplicationStatus}</TableCell> : null
+                            }
+                            {
+                              i.ApplicationStatus === "Approve" ?
+                                <TableCell className="text-success" sx={{ fontWeight: 800 }}>{i.ApplicationStatus}</TableCell> : null
+                            }
+                            {
+                              i.ApplicationStatus === "Reject" ?
+                                <TableCell className="text-danger" sx={{ fontWeight: 800 }}>{i.ApplicationStatus}</TableCell> : null
+                            }
+                            <TableCell>
+                              <Button
+                                className="btn"
+                                onClick={(e) => handleView(e, i._id)}
                               >
-                                {index + 1}
-                              </TableCell>
-                              <TableCell>{i.name}</TableCell>
-                              <TableCell>{i.employStatus}</TableCell>
-                              {
-                                i.ApplicationStatus === "Pending"?
-                              <TableCell className="text-warning" sx={{fontWeight:800}}>{i.ApplicationStatus}</TableCell>:null
-                              }
-                               {
-                                i.ApplicationStatus === "Approve"?
-                              <TableCell className="text-success" sx={{fontWeight:800}}>{i.ApplicationStatus}</TableCell>:null
-                              }
-                               {
-                                i.ApplicationStatus === "Reject"?
-                              <TableCell className="text-danger" sx={{fontWeight:800}}>{i.ApplicationStatus}</TableCell>:null
-                              }
+                                <RemoveRedEyeIcon className="text-white" />
+                              </Button>
+                            </TableCell>
+                            {i.ApplicationStatus === "Pending" ?
                               <TableCell>
                                 <Button
                                   className="btn"
-                                  onClick={(e) => handleView(e, i._id)}
+                                  disabled
+                                  onClick={(e) => handleSchedual(e, i._id)}
                                 >
-                                  <RemoveRedEyeIcon className="text-white" />
+                                  <EventNoteIcon className="text-white" />
                                 </Button>
                               </TableCell>
-                            </TableRow>
-                          );
-                        })}
+                              :
+                              <TableCell>
+                                <Button
+                                  className="btn"
+                                  onClick={(e) => handleSchedual(e, i._id)}
+                                >
+                                  <EventNoteIcon className="text-white" />
+                                </Button>
+                              </TableCell>
+                            }
+                          </TableRow>
+                        );
+                      })}
                   {emptyRows > 0 && (
                     <TableRow
                       style={{

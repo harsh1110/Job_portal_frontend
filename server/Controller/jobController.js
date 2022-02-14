@@ -37,11 +37,13 @@ exports.OneJob = async (req, res) => {
 
 exports.EditJob = async (req,res) => {
     var id = req.params.id
+    var oldData = await Job.findById(id).lean()
     const {designation,position,jobDescription,limit} = req.body;
 
     var editjob = {
         designation:designation,
         positions:position,
+        appliedBy: oldData.appliedBy,
         jobDescription:jobDescription,
         limit:limit
     }

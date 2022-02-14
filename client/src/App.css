@@ -258,6 +258,10 @@ body::-webkit-scrollbar-thumb {
 .detail-card {
   box-shadow: none !important;
 }
+.input{
+  width: 250px ;
+  margin-bottom: -15px;
+}
 /* #reactgooglegraph-1 div div div svg g text{
   font-size: 30px !important;
   fill: var(--darkblue) !important;

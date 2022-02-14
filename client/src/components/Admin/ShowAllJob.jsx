@@ -115,7 +115,7 @@ function EnhancedTableHead(props) {
           <>
             {headCell.label === "Actions" ? (
               <TableCell
-              colSpan={2}
+                colSpan={2}
                 className="fw-bold"
                 key={headCell.id}
                 align={headCell.numeric ? "right" : "left"}
@@ -230,9 +230,9 @@ export default function EnhancedTable() {
     transform: "translate(-50%, -50%)",
     width: 400,
     bgcolor: "white",
-    border: "2px solid #000",
+    // border: "2px solid #000",
     boxShadow: 24,
-    p: 4,
+    p: 3,
   };
 
   const [order, setOrder] = React.useState("asc");
@@ -537,41 +537,85 @@ export default function EnhancedTable() {
                     aria-describedby="modal-modal-description"
                   >
                     <Box sx={style}>
-                      <div style={{ textAlign: "center" }}>
-                        {/* {console.log("nn",defaultBook)} */}
+                      <div style={{ textAlign: "center", width: "100%" }}>
+                        <h1 style={{ color: "#2962ff" }}>Edit Job</h1>
+
+                        <p
+                          style={{ margin: "0px 0px 0px -150px" }}
+                          className="fw-bold"
+                        >
+                          Designation:
+                        </p>
 
                         <input
+                          className="input"
+                          // style={{ width: "200px" }}
                           defaultValue={defaultjob.designation}
                           onChange={(event) =>
                             setnewdesignation(event.target.value)
                           }
                         ></input>
+
                         <br />
                         <br />
+
+                        <p
+                          style={{ margin: "-5px 0px 0px -180px" }}
+                          className="fw-bold"
+                        >
+                          Position:
+                        </p>
+
                         <input
+                          className="input"
+                          type="number"
                           defaultValue={defaultjob.positions}
                           onChange={(event) =>
                             setnewposition(event.target.value)
                           }
                         ></input>
+
                         <br />
                         <br />
+
+                        <p
+                          style={{ margin: "-5px 0px 0px -120px" }}
+                          className="fw-bold"
+                        >
+                          Job Description:
+                        </p>
+
                         <input
+                          className="input"
                           defaultValue={defaultjob.jobDescription}
                           onChange={(event) =>
                             setnewjobdescription(event.target.value)
                           }
                         ></input>
+
                         <br />
                         <br />
+
+                        <p
+                          style={{ margin: "-5px 0px 0px -115px" }}
+                          className="fw-bold"
+                        >
+                          Limit of Position:
+                        </p>
+
                         <input
+                          className="input"
+                          type="number"
                           defaultValue={defaultjob.limit}
                           onChange={(event) => setnewlimit(event.target.value)}
                         ></input>
+                       
                         <br />
                         <br />
 
                         <Button
+                          variant="contained"
+                          style={{width:'250px'}}
                           onClick={(e) => {
                             handleEditOk(e, defaultjob._id);
                             handleClose();

@@ -52,7 +52,7 @@ export function LineChart() {
                     <Chart
                         chartType="BarChart"
                         width="100%"
-                        height="400px"
+                        height="300px"
                         data={data}
                         options={options}
                     />

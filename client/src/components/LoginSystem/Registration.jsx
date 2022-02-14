@@ -60,7 +60,7 @@ export default function Registration() {
     dat.append("phone", phone);
     dat.append("pass", pass);
     dat.append("pic", pic);
-    dat.append("pic", role);
+    dat.append("role", role);
     console.log(dat);
     axios
       .post(`${url}/add-user`, dat)

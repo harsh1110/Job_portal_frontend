@@ -40,20 +40,19 @@ const Profile = () => {
   const [newconpass, setnewconpass] = useState("");
   const [newpic, setnewpic] = useState("");
   const handleClose = () => setOpen(false);
+  
 
   useEffect(() => {
     if (window.document.referrer === "http://localhost:3000/login") {
       toast.success("Successfully login");
     }
-    axios
-      .get(`${url}/user/${id}`)
+    axios.get(`${url}/user/${id}`, {headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
       .then((res) => {
         // console.log(res.data);
         setUser(res.data);
       })
       .catch((err) => console.log(err));
-    axios
-      .get(`${url}/job/apply/all`)
+    axios.get(`${url}/job/apply/all`,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
       .then((res) => {
         setRecenteData(res.data.slice(-4).reverse());
       })
@@ -75,19 +74,19 @@ const Profile = () => {
     data.append("pass", newpass !== "" ? newpass : user.pass);
     data.append("conpass", newconpass !== "" ? newconpass : user.conpass);
 
-    axios.post(`${url}/update-user/${id}`, data).then((res) => {
+    axios.post(`${url}/update-user/${id}`, data,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}}).then((res) => {
       console.log(res);
     });
   };
   const handlePicDelete = (e) => {
     // e.preventDefault()
-    axios.delete(`${url}/pic/${id}`)
-    .then((res)=>{
-      toast.success("Picture Deleted Successfully")
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+    axios.delete(`${url}/pic/${id}`,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
+      .then((res) => {
+        toast.success("Picture Deleted Successfully")
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   return (
@@ -174,7 +173,7 @@ const Profile = () => {
                       ></input>
                       <br />
                       <br />
-                      
+
                       <br />
                       <br />
 
@@ -204,18 +203,18 @@ const Profile = () => {
                           </p>
                           <p>Name :- {application.name}</p>
                           {application.ApplicationStatus === 'Approve' ?
-                          <p >Status :- <span className="text-success" > {application.ApplicationStatus} </span></p>
-                          :null}
+                            <p >Status :- <span className="text-success" > {application.ApplicationStatus} </span></p>
+                            : null}
                           {application.ApplicationStatus === 'Reject' ?
-                          <p >Status :- <span className="text-danger" > {application.ApplicationStatus} </span></p>
-                          :null}
+                            <p >Status :- <span className="text-danger" > {application.ApplicationStatus} </span></p>
+                            : null}
                           {application.ApplicationStatus === 'Pending' ?
-                          <p >Status :- <span className="text-warning" > {application.ApplicationStatus} </span></p>
-                          :null}
-                           <p >Employee Status :- {application.employStatus}</p>
-                         
-                         
-                          <button onClick={(e)=>(window.location = `/candidatedetails/${application._id}`)} className="btn text-white">
+                            <p >Status :- <span className="text-warning" > {application.ApplicationStatus} </span></p>
+                            : null}
+                          <p >Employee Status :- {application.employStatus}</p>
+
+
+                          <button onClick={(e) => (window.location = `/candidatedetails/${application._id}`)} className="btn text-white">
                             View Application
                           </button>
                         </Card>

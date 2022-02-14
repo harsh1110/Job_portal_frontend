@@ -200,14 +200,14 @@ export default function EnhancedTable() {
   const [ref, setref] = React.useState([]);
 
   React.useEffect((e) => {
-    axios.get(`${url}/job/apply/all`).then((value) => {
+    axios.get(`${url}/job/apply/all`,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}}).then((value) => {
       setdata(value.data);
       // setref(data.map((i) => i.Reference));
       console.log(ref);
     });
   }, []);
   const handleView = (e, candidateid) => {
-    axios.get(`${url}/job/apply/one/${candidateid}`).then((res) => {
+    axios.get(`${url}/job/apply/one/${candidateid}`,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}}).then((res) => {
       window.location = `/candidatedetails/${candidateid}`;
     });
   };

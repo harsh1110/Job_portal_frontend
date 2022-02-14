@@ -17,29 +17,29 @@ const TopSection = () => {
     const [approveapplication, setapproveapplication] = useState("");
     const [rejectapplication, setrejectapplication] = useState("");
     useEffect(() => {
-        axios.get(`${url}/user/${id}`)
+        axios.get(`${url}/user/${id}`,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
             .then((res) => {
                 setUser(res.data)
                 // console.log(res.data)
             })
             .catch((err) => console.log(err))
 
-        axios.get(`${url}/job/apply/all`)
+        axios.get(`${url}/job/apply/all`,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
             .then((res) => {
                 settotalapplication(res.data.length)
             })
             .catch((err) => console.log(err))
-        axios.get(`${url}/job/apply/status/Pending`)
+        axios.get(`${url}/job/apply/status/Pending`,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
             .then((res) => {
                 setpendingapplication(res.data.length)
             })
             .catch((err) => console.log(err))
-        axios.get(`${url}/job/apply/status/Approve`)
+        axios.get(`${url}/job/apply/status/Approve`,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
             .then((res) => {
                 setapproveapplication(res.data.length)
             })
             .catch((err) => console.log(err))
-        axios.get(`${url}/job/apply/status/Reject`)
+        axios.get(`${url}/job/apply/status/Reject`,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
             .then((res) => {
                 setrejectapplication(res.data.length)
             })

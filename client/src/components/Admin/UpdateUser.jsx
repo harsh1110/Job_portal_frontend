@@ -31,7 +31,7 @@ export default function UpdateUser() {
     }
     const handlePicDelete = (e) => {
         e.preventDefault()
-        axios.delete(`${url}/pic/${id}`)
+        axios.delete(`${url}/pic/${id}`,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
             .then((res) => {
                 toast.success("Picture Deleted Successfully")
                 window.location.reload()
@@ -45,7 +45,7 @@ export default function UpdateUser() {
     }, []);
     const { id } = useParams()
     const fatchData = () => {
-        axios.get(`${url}/user/${id}`)
+        axios.get(`${url}/user/${id}`,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
             .then((res) => {
                 setUser(res.data);
             })
@@ -62,7 +62,7 @@ export default function UpdateUser() {
         data.append("role", user.role);
         data.append("pass", pass !== "" ? pass : user.pass);
 
-        axios.post(`${url}/update-user/${id}`, data)
+        axios.post(`${url}/update-user/${id}`, data,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
             .then((res) => {
                 console.log(res);
                 window.location = "/profile"

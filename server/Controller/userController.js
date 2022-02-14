@@ -1,11 +1,13 @@
 const express = require('express');
 const User = require('../Models/userModel');
 const { uploadsingle } = require("../Middlewares/cloudinary")
-const jwt = require('jsonwebtoken');
+const {signAccessToken} = require("../Middlewares/jwt")
 const fs = require('fs')
+
 
 //homepage function
 exports.homePage = async (req, res) => {
+    console.log(req.headers.authorization);
     res.send("<h1>Hello Welcome to E-Commerce Server</h1>")
 }
 
@@ -18,6 +20,7 @@ exports.allUser = async (req, res) => {
 
 //one user api
 exports.OneUser = async (req, res) => {
+    console.log(req.headers.authorization);
     var id = req.params.id
     var oneuser = await User.findById(id).lean()
     res.send(oneuser)
@@ -81,8 +84,13 @@ exports.CreateUser = async (req, res) => {
 exports.Login = async (req, res) => {
     const { email, pass } = req.body
     const authUser = await User.findOne({ email: email, pass: pass })
+
+    const accessToken = await signAccessToken(authUser)
     if (authUser) {
-        res.send(authUser)
+        res.json({
+            "token":accessToken,
+            "id":authUser._id
+        })
     }
     else {
         res.status(400).send({ msg: 'Error' })

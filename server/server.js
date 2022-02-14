@@ -8,6 +8,7 @@ const port = process.env.PORT
 const userRoute = require("./Routes/userRoute")
 const jobRoute = require("./Routes/jobRoute")
 const jobApplyRoute = require("./Routes/applyJobRoute")
+const interviewRoute = require("./Routes/interviewRoute")
 app.use(cors())
 app.use(express.json())
 app.use("/public",express.static(__dirname + "/public"))
@@ -18,6 +19,7 @@ dbConnect()
 app.use("/",userRoute)
 app.use("/job",jobRoute)
 app.use("/job/apply",jobApplyRoute)
+app.use("/interview",interviewRoute)
 
 
 

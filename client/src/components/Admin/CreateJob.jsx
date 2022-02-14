@@ -39,7 +39,7 @@ export default function CreateJob() {
         userId: localStorage.getItem("user"),
       };
 
-      axios.post(`${url}/job/create`, data).then((res) => {
+      axios.post(`${url}/job/create`, data,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}}).then((res) => {
         window.location = "/create-job-post";
       });
     }

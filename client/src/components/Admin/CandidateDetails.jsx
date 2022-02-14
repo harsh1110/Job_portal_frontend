@@ -41,7 +41,7 @@ export default function CandidateDetails() {
     toast.success("Change Status Successfully")
   }
   React.useEffect((e) => {
-    axios.get(`http://localhost:5000/job/apply/one/${id}`)
+    axios.get(`http://localhost:5000/job/apply/one/${id}`,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
     .then((value) => {
       setcandidate(value.data);
     });
@@ -56,7 +56,7 @@ export default function CandidateDetails() {
     const data = {
       status: status,
     };
-    axios.post(`${url}/job/apply/change-status/${id}`, data)
+    axios.post(`${url}/job/apply/change-status/${id}`, data,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
       .then((value) => {
         const emaildata = {
           to_name:candidate.name,

@@ -258,14 +258,14 @@ export default function EnhancedTable() {
     });
   }, [flag]);
   const handleView = (e, id) => {
-    axios.get(`${url}/job/apply/all/${id}`).then((res) => {
+    axios.get(`${url}/job/apply/all/${id}`,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}}).then((res) => {
       console.log(res);
       window.location = `/jobdetails/${id}`;
       setFlag(!flag);
     });
   };
   const handleEdit = (e, id) => {
-    axios.get(`${url}/job/one/${id}`).then(
+    axios.get(`${url}/job/one/${id}`,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}}).then(
       (res) => {
         console.log(res);
         setdefaultjob(res.data);
@@ -284,7 +284,7 @@ export default function EnhancedTable() {
         : defaultjob.jobDescription,
       limit: newlimit ? newlimit : defaultjob.limit,
     };
-    axios.post(`${url}/job/one/${id}`, data).then((res) => {
+    axios.post(`${url}/job/one/${id}`, data,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}}).then((res) => {
       console.log(res);
       setFlag(!flag);
     });

@@ -43,14 +43,14 @@ function ResponsiveDrawer(props) {
     React.useEffect(() => {
         setActive(window.location.pathname)
         console.log(active);
-        axios.get(`${url}/user/${id}`)
+        axios.get(`${url}/user/${id}`, {headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
             .then((value) => {
                 setUser(value.data)
             })
             .catch((err) => {
                 console.log(err);
             })
-        axios.get(`${url}/job/all`)
+        axios.get(`${url}/job/all`, {headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
             .then((value) => {
                 setall(value.data)
             })

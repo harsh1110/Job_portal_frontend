@@ -24,7 +24,7 @@ import Interview from "./components/Admin/Interview";
 function App() {
   return (
     <>
-      {localStorage.getItem("user") ? (
+      {localStorage.getItem("token") ? (
         //Admin Routes
         <>
           <ToastContainer />

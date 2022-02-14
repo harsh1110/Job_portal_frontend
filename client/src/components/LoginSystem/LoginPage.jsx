@@ -35,6 +35,9 @@ export default function LoginPage() {
   var msg = []
 
 
+
+
+
   // console.log(window.location = );
   // var token = "harsh"
   // const { decodedToken, isExpired } = useJwt(token);
@@ -60,9 +63,10 @@ export default function LoginPage() {
         .post(`${url}/login`, data)
         .then((value) => {
           setAuthUser(value.data);
+
           if (authUser) {
-            localStorage.setItem("user", authUser._id);
-            localStorage.setItem("role", authUser.role);
+            localStorage.setItem("token",authUser.token)
+            localStorage.setItem("user",authUser.id)
             window.location = "/profile";
           }
         })

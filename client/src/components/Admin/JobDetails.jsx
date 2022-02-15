@@ -104,7 +104,7 @@ function EnhancedTableHead(props) {
         {headCells.map((headCell) => (
           <TableCell
             colSpan={headCell.id === "actions" ? 2 : null}
-            className="fw-bold"
+            className={headCell.id === "actions"? "fw-bold action":"fw-bold"}
             key={headCell.id}
             align={headCell.numeric ? "right" : "left"}
             padding={headCell.disablePadding ? "none" : "normal"}
@@ -365,7 +365,7 @@ export default function EnhancedTable() {
                                 <RemoveRedEyeIcon className="text-white" />
                               </Button>
                             </TableCell>
-                            {i.ApplicationStatus === "Pending" ?
+                            {i.ApplicationStatus === "Pending" || i.ApplicationStatus === "Reject" ?
                               <TableCell>
                                 <Button
                                   className="btn"

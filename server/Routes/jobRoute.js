@@ -8,7 +8,7 @@ const router = express.Router()
 
 router.post("/create", verifyAccessToken, CreateNewJob)
 router.get("/all", verifyAccessToken, allJob)
-router.get("/one/:id", verifyAccessToken, OneJob)
+router.get("/one/:id", OneJob)
 router.post("/one/:id", verifyAccessToken, EditJob)
 
 

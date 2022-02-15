@@ -88,6 +88,7 @@ exports.NewJobApply = async (req, res) => {
         console.log(resume)
         var path = await uploadsingle(resume.path)
         console.log(path);
+        changeLimit(jobId)
         fs.unlink(resume.path, () => {
             res.send({
                 response: "success"
@@ -109,10 +110,9 @@ exports.NewJobApply = async (req, res) => {
             Reference: refObj,
             Resume: path,
         })
-        await createApply.save()
-        changeLimit(jobId)
+        createApply.save()
         if (createApply) {
-            res.json({ success: "Job Applied Sucessfully" })
+            console.log({ success: "Job Applied Sucessfully" })
         }
     }
     catch {

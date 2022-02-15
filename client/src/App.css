@@ -262,6 +262,10 @@ body::-webkit-scrollbar-thumb {
   width: 250px ;
   margin-bottom: -15px;
 }
+
+th.action span{
+  margin-left: 65px !important;
+}
 /* #reactgooglegraph-1 div div div svg g text{
   font-size: 30px !important;
   fill: var(--darkblue) !important;

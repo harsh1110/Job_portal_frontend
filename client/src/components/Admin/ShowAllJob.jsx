@@ -91,7 +91,7 @@ const headCells = [
     numeric: false,
     disablePadding: false,
     label: "Actions",
-    textAlign: "end",
+
   },
 ];
 
@@ -116,7 +116,7 @@ function EnhancedTableHead(props) {
             {headCell.label === "Actions" ? (
               <TableCell
                 colSpan={2}
-                className="fw-bold"
+                className="fw-bold action"
                 key={headCell.id}
                 align={headCell.numeric ? "right" : "left"}
                 padding={headCell.disablePadding ? "none" : "normal"}

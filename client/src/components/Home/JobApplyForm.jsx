@@ -179,6 +179,7 @@ export default function JobApplyForm() {
                         className="mt-4"
                         required
                         fullWidth
+                        type="number"
                         onChange={(e) => setphone(e.target.value)}
                         label="Mobile Number"
                         color={"primary"}

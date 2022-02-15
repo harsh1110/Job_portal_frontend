@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import url from "../../config";
+import Form from "react-bootstrap/Form";
 import DatePicker from "@mui/lab/DatePicker";
 import {
   TextField,
@@ -28,28 +29,41 @@ const theme = createTheme({
 const Interview = () => {
   const [date, setdate] = useState("");
   const [time, settime] = useState("");
-  const [data, setdata] = useState("");
+  const [data, setdata] = useState([]);
   const [link, setlink] = useState("");
 
   const { id } = useParams();
 
   React.useEffect((e) => {
-    axios.get(`${url}/job/apply/one/${id}`).then((value) => {
-      console.log(value.data);
-      setdata(value.data);
-    });
+    axios
+      .get(`${url}/job/apply/one/${id}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      })
+      .then((value) => {
+        console.log(value.data);
+        setdata(value.data);
+      });
   }, []);
 
   const handleSubmit = () => {
-      const data={  
-        userId:id,
-        Date:date,
-        Time:time,
-        link:link
-      }
+    const data = {
+      userId: id,
+      Date: date,
+      email:data.email,
+      designation:data.designation,
+      Time: time,
+      link: link,
+    };
 
-    axios.post(`${url}/interview/create`,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}},data).then((res)=>
-    console.log(res))
+    axios
+      .post(
+        `${url}/interview/create`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        },
+        data
+      )
+      .then((res) => console.log(res));
   };
 
   return (
@@ -80,28 +94,20 @@ const Interview = () => {
                   Schedule Interview
                 </Typography>
 
-                <TextField
-                  className="mt-4"
-                  required
+                <Form.Control
+                  className="mb-3"
                   fullWidth
+                  size="lg"
+                  id="designation"
                   value={data.designation}
-                  id="name"
-                  // onChange={(e) => setname(e.target.value)}
-                  label="Full Name"
-                  name="name"
-                  color={theme.secondary}
-                  sx={{ mb: 3 }}
                 />
 
-                <TextField
-                  required
+                <Form.Control
+                  className="mb-3"
                   fullWidth
+                  size="lg"
                   id="email"
-                  name="email"
                   value={data.email}
-                  label="Email address"
-                  color={theme.secondary}
-                  sx={{ mb: 3 }}
                 />
 
                 <TextField
@@ -111,6 +117,19 @@ const Interview = () => {
                   label="Date"
                   type="date"
                   onChange={(e) => setdate(e.target.value)}
+                  sx={{ mb: 3 }}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+
+                <TextField
+                  required
+                  fullWidth
+                  id="time"
+                  label="Time"
+                  type="time"
+                  onChange={(e) => settime(e.target.value)}
                   sx={{ mb: 3 }}
                   InputLabelProps={{
                     shrink: true,

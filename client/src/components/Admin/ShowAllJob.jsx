@@ -252,7 +252,7 @@ export default function EnhancedTable() {
   const [flag, setFlag] = useState(false);
 
   React.useEffect(() => {
-    axios.get(`${url}/job/all`).then((value) => {
+    axios.get(`${url}/job/all`,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}}).then((value) => {
       setAlljobs(value.data);
       // console.log(value.data)
     });

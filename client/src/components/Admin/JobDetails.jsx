@@ -193,6 +193,7 @@ export default function EnhancedTable() {
   const [alljobs, setAlljobs] = React.useState([]);
   const { id } = useParams();
   const [data, setdata] = React.useState("");
+  
   const [ref, setref] = React.useState([]);
 
   React.useEffect((e) => {

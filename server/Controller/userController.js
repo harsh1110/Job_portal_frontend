@@ -1,4 +1,3 @@
-const express = require('express');
 const User = require('../Models/userModel');
 const { uploadsingle } = require("../Middlewares/cloudinary")
 const {signAccessToken} = require("../Middlewares/jwt")

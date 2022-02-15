@@ -31,6 +31,6 @@ exports.allIntreviews = async (req, res) => {
 
 exports.OneIntreview = async (req, res) => {
     var id = req.params.id
-    var oneinterview = await Interview.findOne({ _id: id }).lean()
+    var oneinterview = await Interview.findOne({ UserId: id }).lean()
     res.send(oneinterview)
 }

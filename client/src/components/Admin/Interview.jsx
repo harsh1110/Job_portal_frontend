@@ -4,7 +4,8 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import url from "../../config";
 import Form from "react-bootstrap/Form";
-import DatePicker from "@mui/lab/DatePicker";
+import emailjs from "@emailjs/browser"
+import { init } from '@emailjs/browser';
 import {
   TextField,
   Typography,
@@ -31,39 +32,46 @@ const Interview = () => {
   const [time, settime] = useState("");
   const [data, setdata] = useState([]);
   const [link, setlink] = useState("");
-
+  
   const { id } = useParams();
-
+  
+  init("user_g9I6tQwx976Da3rQ705Fn");
   React.useEffect((e) => {
-    axios
-      .get(`${url}/job/apply/one/${id}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      })
-      .then((value) => {
-        console.log(value.data);
-        setdata(value.data);
-      });
+    axios.get(`${url}/job/apply/one/${id}`, { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } })
+    .then((value) => {
+      console.log(value.data);
+      setdata(value.data);
+    });
   }, []);
-
+  
   const handleSubmit = () => {
-    const data = {
+    const details = {
       userId: id,
-      Date: date,
-      email:data.email,
-      designation:data.designation,
-      Time: time,
+      date: date,
+      email: data.email,
+      designation: data.designation,
+      time: time,
       link: link,
     };
+    const emaildata = {
+      to_name: data.name,
+      date: date,
+      time: time,
+      link:link,
+      to_email: data.email,
+    }
 
-    axios
-      .post(
-        `${url}/interview/create`,
-        {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        },
-        data
-      )
-      .then((res) => console.log(res));
+    axios.post(`${url}/interview/create`, details, { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } })
+      .then((res) => {
+        emailjs.send("service_interview", "template_xf2i9ok", emaildata)
+        .then((result) => {
+          console.log(result.text);
+          window.location = `/jobdetails/${data.jobId}`
+        })
+        .catch((error) => {
+          console.log(error.text);
+        });
+      });
   };
 
   return (

@@ -35,7 +35,7 @@ export function LineChart() {
     })
 
     const fetchData = () => {
-        axios.get(`${url}/job/all`)
+        axios.get(`${url}/job/all`,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
             .then((value) => {
                 setPost(value.data)
             })

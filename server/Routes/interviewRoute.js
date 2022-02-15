@@ -4,7 +4,7 @@ const { verifyAccessToken } = require('../Middlewares/jwt');
 const router = express.Router()
 
 
-//JobRoutes
+//InterviewRoutes
 
 router.post("/create", verifyAccessToken, CreateNewInterview)
 router.get("/all", verifyAccessToken, allIntreviews)

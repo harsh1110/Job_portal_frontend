@@ -9,6 +9,12 @@ const Interview = mongoose.Schema({
     Date: {
         type: String
     },
+    email: {
+        type: String
+    },
+    designation: {
+        type: String
+    },
     Time: {
         type: String
     },

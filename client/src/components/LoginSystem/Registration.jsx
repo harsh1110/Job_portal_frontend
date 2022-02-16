@@ -24,6 +24,7 @@ import {
 } from "@mui/material";
 import url from "../../config";
 import Link from "@mui/material/Link";
+import GoogleLogin from 'react-google-login'
 
 const theme = createTheme({
   palette: {
@@ -45,7 +46,17 @@ export default function Registration() {
   const [conpass, setconpass] = useState("");
   const [data, setdata] = useState();
   const [key, setKey] = useState("");
+  
   // var value = {}
+
+  const responseSuccessGoogle = (responce) => {
+    console.log(responce)
+  }
+  
+  const responseErrorGoogle = (responce) => {
+    
+  }
+
   useEffect(() => {
     axios.get("http://localhost:5000/all").then((value) => {
       setdata(value.data);
@@ -283,6 +294,13 @@ export default function Registration() {
               >
                 Sign Up
               </Button>
+              <GoogleLogin
+                clientId="453891827793-gg8c8uvsofu19gbuhv95e60evked8fc1.apps.googleusercontent.com"
+                buttonText="Login with Google"
+                onSuccess={responseSuccessGoogle}
+                onFailure={responseErrorGoogle}
+                cookiePolicy={"single_host_origin"}
+              />
               <Grid container>
                 <Grid item xs={12} sx={{ textAlign: "center" }}>
                   <Link

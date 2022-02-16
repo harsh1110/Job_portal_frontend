@@ -15,14 +15,16 @@ import { toast } from "react-toastify";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import url from "../../config";
-import fronturl from "../../config"
+import fronturl from "../../config";
+import GoogleLogin from 'react-google-login'
+
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#2d82f8"
+      main: "#2d82f8",
     },
     secondary: {
-      main: "rgb(196,209,64)"
+      main: "rgb(196,209,64)",
     },
   },
 });
@@ -32,11 +34,7 @@ export default function LoginPage() {
   const [pass, setPass] = useState("");
   const [authUser, setAuthUser] = useState();
   const [toaster, settoaster] = useState(true);
-  var msg = []
-
-
-
-
+  var msg = [];
 
   // console.log(window.location = );
   // var token = "harsh"
@@ -46,15 +44,22 @@ export default function LoginPage() {
   // }
   // console.log(decodedToken);
   // console.log(isExpired);
+
+const responseSuccessGoogle = (responce) => {
+  console.log(responce)
+}
+
+const responseErrorGoogle = (responce) => {
+  
+}
+
   const handleSubmit = (event) => {
     event.preventDefault();
     if (email === "" || pass === "") {
-      toast.error("Fields Can not be Empty")
-    }
-    else if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9.-]+.[a-zA-Z]$/.test(email)) {
+      toast.error("Fields Can not be Empty");
+    } else if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9.-]+.[a-zA-Z]$/.test(email)) {
       toast.error("email is not valid...!!");
-    }
-    else {
+    } else {
       const data = {
         email: email,
         pass: pass,
@@ -65,8 +70,8 @@ export default function LoginPage() {
           setAuthUser(value.data);
 
           if (authUser) {
-            localStorage.setItem("token",authUser.token)
-            localStorage.setItem("user",authUser.id)
+            localStorage.setItem("token", authUser.token);
+            localStorage.setItem("user", authUser.id);
             window.location = "/profile";
           }
         })
@@ -74,7 +79,7 @@ export default function LoginPage() {
           console.log(err);
         });
     }
-  }
+  };
   if (toaster) {
     if (window.document.referrer === `http://localhost:3000/create-user`) {
       console.log("hiii");
@@ -83,19 +88,31 @@ export default function LoginPage() {
     if (window.document.referrer === `http://localhost:3000/Log%20Out`) {
       toast.success("Successfully Logout");
     }
-  };
+  }
   return (
     <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{ height: "100vh", boxShadow: "none" }}>
+      <Grid
+        container
+        component="main"
+        sx={{ height: "100vh", boxShadow: "none" }}
+      >
         <CssBaseline />
-        <Grid
-          item
-          xs={0}
-          md={5}
-        >
+        <Grid item xs={0} md={5}>
           <div style={{ padding: "15px" }}>
             <Card className="login-card">
-              <Typography style={{ marginBlock: "50px" }} variant='h5' className='text-center'><img src="https://www.webbrainstechnologies.com/wp-content/uploads/2016/02/logo-3.png" height={"50px"} width={"100px"} alt="" srcset="" /></Typography>
+              <Typography
+                style={{ marginBlock: "50px" }}
+                variant="h5"
+                className="text-center"
+              >
+                <img
+                  src="https://www.webbrainstechnologies.com/wp-content/uploads/2016/02/logo-3.png"
+                  height={"50px"}
+                  width={"100px"}
+                  alt=""
+                  srcset=""
+                />
+              </Typography>
 
               <h3 className="m-4 text-center title">Hello Welcome Back</h3>
               <CardMedia
@@ -119,7 +136,7 @@ export default function LoginPage() {
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 1 , bgcolor: "primary.main" }}>
+            <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
               <LoginIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
@@ -138,7 +155,10 @@ export default function LoginPage() {
                 id="email"
                 label="Email Address"
                 name="email"
-                onChange={(e) => { setEmail(e.target.value); settoaster(false) }}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  settoaster(false);
+                }}
                 autoComplete="email"
                 autoFocus
               />
@@ -163,6 +183,8 @@ export default function LoginPage() {
               >
                 Login
               </Button>
+             
+              
               <Grid container>
                 <Grid item xs={12} sx={{ textAlign: "center" }}>
                   <Link

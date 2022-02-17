@@ -1,26 +1,27 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import { alpha } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
-import TableSortLabel from '@mui/material/TableSortLabel';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
-import { visuallyHidden } from '@mui/utils';
-import axios from 'axios'
-import Button from '@mui/material/Button';
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import { useParams } from 'react-router-dom';
-import url from '../../config';
-import { Grid } from '@mui/material';
-import ReportRoundedIcon from '@mui/icons-material/ReportRounded';
+import * as React from "react";
+import PropTypes from "prop-types";
+import { alpha } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TablePagination from "@mui/material/TablePagination";
+import TableRow from "@mui/material/TableRow";
+import TableSortLabel from "@mui/material/TableSortLabel";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Paper from "@mui/material/Paper";
+import { visuallyHidden } from "@mui/utils";
+import axios from "axios";
+import Button from "@mui/material/Button";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import { useParams } from "react-router-dom";
+import url from "../../config";
+import { Grid } from "@mui/material";
+import ReportRoundedIcon from "@mui/icons-material/ReportRounded";
+import EventNoteIcon from '@mui/icons-material/EventNote';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -200,17 +201,30 @@ export default function EnhancedTable() {
   const [ref, setref] = React.useState([]);
 
   React.useEffect((e) => {
-    axios.get(`${url}/job/apply/all`,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}}).then((value) => {
-      setdata(value.data);
-      // setref(data.map((i) => i.Reference));
-      console.log(ref);
-    });
+    axios
+      .get(`${url}/job/apply/all`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      })
+      .then((value) => {
+        setdata(value.data);
+        // setref(data.map((i) => i.Reference));
+        console.log(ref);
+      });
   }, []);
   const handleView = (e, candidateid) => {
-    axios.get(`${url}/job/apply/one/${candidateid}`,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}}).then((res) => {
-      window.location = `/candidatedetails/${candidateid}`;
-    });
+    axios
+      .get(`${url}/job/apply/one/${candidateid}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      })
+      .then((res) => {
+        window.location = `/candidatedetails/${candidateid}`;
+      });
   };
+
+  const handleSchedual = (e, candidateid) => {
+    window.location = `/interview/${candidateid}`;
+  };
+
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
@@ -267,7 +281,7 @@ export default function EnhancedTable() {
 
   return (
     <>
-      {data.length === 0 ?
+      {data.length === 0 ? (
         <Grid
           item
           xs={12}
@@ -283,7 +297,7 @@ export default function EnhancedTable() {
           />
           <Typography
             variant="h6"
-            className='my-2'
+            className="my-2"
             sx={{ fontSize: 60, fontWeight: "bold", color: "red" }}
           >
             Opps...!
@@ -292,19 +306,21 @@ export default function EnhancedTable() {
             There is no Record for Application
           </Typography>
         </Grid>
-        :
-        <Box sx={{ width: '100%' }}>
-          
+      ) : (
+        <Box sx={{ width: "100%" }}>
           <Typography variant="h3" className="job-title">
-          All Applicants Details
+            All Applicants Details
           </Typography>
-         
-          <Paper className='table admin row text-center' sx={{ width: '100%', mb: 2 }}>
+
+          <Paper
+            className="table admin row text-center"
+            sx={{ width: "100%", mb: 2 }}
+          >
             <TableContainer>
               <Table
                 sx={{ minWidth: 750 }}
                 aria-labelledby="tableTitle"
-                size={dense ? 'small' : 'medium'}
+                size={dense ? "small" : "medium"}
               >
                 <EnhancedTableHead
                   numSelected={selected.length}
@@ -315,11 +331,13 @@ export default function EnhancedTable() {
                   rowCount={data.length}
                 />
                 <TableBody>
-                  {
-                    data.length === 0 ?
-                      null :
-                      stableSort(data, getComparator(order, orderBy))
-                        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  {data.length === 0
+                    ? null
+                    : stableSort(data, getComparator(order, orderBy))
+                        .slice(
+                          page * rowsPerPage,
+                          page * rowsPerPage + rowsPerPage
+                        )
                         .map((i, index) => {
                           const isItemSelected = isSelected(index);
                           const labelId = `enhanced-table-checkbox-${index}`;
@@ -342,30 +360,63 @@ export default function EnhancedTable() {
                               >
                                 {index + 1}
                               </TableCell>
+                              <TableCell>{i.designation}</TableCell>
+                              <TableCell>{i.name}</TableCell>
+                              <TableCell>{i.employStatus}</TableCell>
+                              {i.ApplicationStatus === "Pending" ? (
+                                <TableCell
+                                  className="text-warning"
+                                  sx={{ fontWeight: 800 }}
+                                >
+                                  {i.ApplicationStatus}
+                                </TableCell>
+                              ) : null}
+                              {i.ApplicationStatus === "Approve" ? (
+                                <TableCell
+                                  className="text-success"
+                                  sx={{ fontWeight: 800 }}
+                                >
+                                  {i.ApplicationStatus}
+                                </TableCell>
+                              ) : null}
+                              {i.ApplicationStatus === "Reject" ? (
+                                <TableCell
+                                  className="text-danger"
+                                  sx={{ fontWeight: 800 }}
+                                >
+                                  {i.ApplicationStatus}
+                                </TableCell>
+                              ) : null}
                               <TableCell>
-                                {i.designation}
+                                <Button
+                                  className="btn"
+                                  onClick={(e) => handleView(e, i._id)}
+                                >
+                                  <RemoveRedEyeIcon className="text-white" />
+                                </Button>
                               </TableCell>
-                              <TableCell>
-                                {i.name}
-                              </TableCell>
-                              <TableCell>
-                                {i.employStatus}
-                              </TableCell>
-                              {
-                                i.ApplicationStatus === "Pending"?
-                              <TableCell className="text-warning" sx={{fontWeight:800}}>{i.ApplicationStatus}</TableCell>:null
-                              }
-                               {
-                                i.ApplicationStatus === "Approve"?
-                              <TableCell className="text-success" sx={{fontWeight:800}}>{i.ApplicationStatus}</TableCell>:null
-                              }
-                               {
-                                i.ApplicationStatus === "Reject"?
-                              <TableCell className="text-danger" sx={{fontWeight:800}}>{i.ApplicationStatus}</TableCell>:null
-                              }
-                              <TableCell><Button className="btn" 
-                              onClick={(e) => handleView(e, i._id)}
-                              ><RemoveRedEyeIcon className='text-white' /></Button></TableCell>
+
+                              {i.ApplicationStatus === "Pending" ||
+                              i.ApplicationStatus === "Reject" ? (
+                                <TableCell>
+                                  <Button
+                                    className="btn"
+                                    disabled
+                                    onClick={(e) => handleSchedual(e, i._id)}
+                                  >
+                                    <EventNoteIcon className="text-white" />
+                                  </Button>
+                                </TableCell>
+                              ) : (
+                                <TableCell>
+                                  <Button
+                                    className="btn"
+                                    onClick={(e) => handleSchedual(e, i._id)}
+                                  >
+                                    <EventNoteIcon className="text-white" />
+                                  </Button>
+                                </TableCell>
+                              )}
                             </TableRow>
                           );
                         })}
@@ -392,7 +443,7 @@ export default function EnhancedTable() {
             />
           </Paper>
         </Box>
-      }
+      )}
     </>
   );
 }

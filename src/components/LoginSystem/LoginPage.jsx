@@ -17,6 +17,7 @@ import CardMedia from "@mui/material/CardMedia";
 import url from "../../config";
 import fronturl from "../../config";
 import GoogleLogin from 'react-google-login'
+import { useNavigate } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -34,6 +35,7 @@ export default function LoginPage() {
   const [pass, setPass] = useState("");
   const [authUser, setAuthUser] = useState();
   const [toaster, settoaster] = useState(true);
+  const navigate = useNavigate()
   var msg = [];
 
   // console.log(window.location = );
@@ -69,7 +71,7 @@ export default function LoginPage() {
         .then((value) => {
           localStorage.setItem("token", value.data.token);
           localStorage.setItem("user", value.data.id);
-          window.location = "/profile";
+          navigate("/profile");
         })
         .catch((err) => {
           console.log(err);

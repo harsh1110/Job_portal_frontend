@@ -5,6 +5,7 @@ import { Box, Button } from "@mui/material";
 import axios from "axios";
 import url from "../../config";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -22,6 +23,8 @@ export default function CreateJob() {
   const [position, setposition] = useState("");
   const [jobDescription, setjobDescription] = useState("");
   const [limit, setlimit] = useState("");
+  const navigate = useNavigate()
+
   if(window.document.referrer === "http://localhost:3000/create-job-post"){
     toast.success("Create Job Successfully")
   }
@@ -40,7 +43,7 @@ export default function CreateJob() {
       };
 
       axios.post(`${url}/job/create`, data,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}}).then((res) => {
-        window.location = "/create-job-post";
+        navigate("/create-job-post");
       });
     }
   };

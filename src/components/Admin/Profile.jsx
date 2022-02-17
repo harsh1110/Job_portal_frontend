@@ -147,7 +147,7 @@ const Profile = ({name}) => {
                   </Typography>
                   <Button
                     className="btn m-4 text-white"
-                    onClick={(e) => (window.location = `/update/${user._id}`)}
+                    onClick={(e) => (navigate(`/update/${user._id}`))}
                   >
                     <EditIcon />
                     &nbsp;&nbsp;Edit Profile
@@ -224,7 +224,7 @@ const Profile = ({name}) => {
                           <p >Employee Status :- {application.employStatus}</p>
 
 
-                          <button onClick={(e) => (window.location = `/candidatedetails/${application._id}`)} className="btn text-white">
+                          <button onClick={(e) => (navigate(`/candidatedetails/${application._id}`))} className="btn text-white">
                             View Application
                           </button>
                         </Card>

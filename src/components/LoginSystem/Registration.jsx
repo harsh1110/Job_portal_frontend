@@ -25,6 +25,7 @@ import {
 import url from "../../config";
 import Link from "@mui/material/Link";
 import GoogleLogin from 'react-google-login'
+import { useNavigate } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -46,6 +47,7 @@ export default function Registration() {
   const [conpass, setconpass] = useState("");
   const [data, setdata] = useState();
   const [key, setKey] = useState("");
+  const navigate = useNavigate()
   
   // var value = {}
 
@@ -80,7 +82,7 @@ export default function Registration() {
       .post(`${url}/add-user`, dat)
       .then((res) => {
         alert("Data send successfully...!!");
-        window.location = "/login";
+        navigate("/login");
       })
       .catch((err) => console.log(err));
   };

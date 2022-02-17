@@ -24,6 +24,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Modal } from "@mui/material";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -250,6 +251,7 @@ export default function EnhancedTable() {
   const [newlimit, setnewlimit] = useState("");
   const handleClose = () => setOpen(false);
   const [flag, setFlag] = useState(false);
+  const navigate = useNavigate()
 
   React.useEffect(() => {
     axios.get(`${url}/job/all`,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}}).then((value) => {
@@ -260,7 +262,7 @@ export default function EnhancedTable() {
   const handleView = (e, id) => {
     axios.get(`${url}/job/apply/all/${id}`,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}}).then((res) => {
       console.log(res);
-      window.location = `/jobdetails/${id}`;
+      navigate(`/jobdetails/${id}`);
       setFlag(!flag);
     });
   };
@@ -290,7 +292,7 @@ export default function EnhancedTable() {
     });
   };
   const handleCreateJob = (e) => {
-    window.location = `/Create%20Job%20Post`;
+    navigate(`/Create%20Job%20Post`);
   };
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";

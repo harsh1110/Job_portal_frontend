@@ -5,7 +5,7 @@ import { Box, Button } from "@mui/material";
 import axios from "axios";
 import url from "../../config";
 import { toast } from "react-toastify";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 const theme = createTheme({
@@ -26,6 +26,7 @@ export default function UpdateUser() {
     const [pic, setpic] = useState("");
     const [pass, setpass] = useState("");
     const [user, setUser] = useState([]);
+    const navigate = useNavigate()
     if (window.document.referrer === "http://localhost:3000/Create%20Job%20Post") {
         toast.success("Create Job Successfully")
     }
@@ -65,7 +66,7 @@ export default function UpdateUser() {
         axios.post(`${url}/update-user/${id}`, data,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
             .then((res) => {
                 console.log(res);
-                window.location = "/profile"
+                navigate("/profile")
             })
             .catch((value) => {
                 console.log(value);

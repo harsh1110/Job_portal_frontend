@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import url from "../../config";
 import Form from "react-bootstrap/Form";
@@ -39,7 +39,7 @@ const Interview = () => {
   const [data, setdata] = useState([]);
   const [interview, setinterview] = useState([]);
   const [link, setlink] = useState("");
-
+  const navigate = useNavigate()
   const { id } = useParams();
 
   init("user_g9I6tQwx976Da3rQ705Fn");
@@ -76,7 +76,7 @@ const Interview = () => {
         emailjs.send("service_interview", "template_xf2i9ok", emaildata)
           .then((result) => {
             console.log(result.text);
-            window.location = `/jobdetails/${data.jobId}`
+            navigate(`/jobdetails/${data.jobId}`)
           })
           .catch((error) => {
             console.log(error.text);

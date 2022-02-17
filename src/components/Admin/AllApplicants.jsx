@@ -17,7 +17,7 @@ import { visuallyHidden } from "@mui/utils";
 import axios from "axios";
 import Button from "@mui/material/Button";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import url from "../../config";
 import { Grid } from "@mui/material";
 import ReportRoundedIcon from "@mui/icons-material/ReportRounded";
@@ -199,6 +199,7 @@ export default function EnhancedTable() {
   const { id } = useParams();
   const [data, setdata] = React.useState("");
   const [ref, setref] = React.useState([]);
+  const navigate = useNavigate()
 
   React.useEffect((e) => {
     axios
@@ -217,12 +218,12 @@ export default function EnhancedTable() {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
       .then((res) => {
-        window.location = `/candidatedetails/${candidateid}`;
+        navigate(`/candidatedetails/${candidateid}`);
       });
   };
 
   const handleSchedual = (e, candidateid) => {
-    window.location = `/interview/${candidateid}`;
+    navigate(`/interview/${candidateid}`);
   };
 
   const handleRequestSort = (event, property) => {

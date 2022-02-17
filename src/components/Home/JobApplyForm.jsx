@@ -6,7 +6,7 @@ import { FormControlLabel, FormLabel, FormControl } from "@mui/material";
 import { Button, Grid, TextField } from "@mui/material";
 import { Radio, RadioGroup } from "@mui/material";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Card from "@mui/material/Card";
 import emailjs from "@emailjs/browser";
 import url from "../../config";
@@ -26,6 +26,7 @@ export default function JobApplyForm() {
   const [refphone, setrefphone] = useState("");
   const [designation, setdesignation] = useState("");
   const [limit, setlimit] = useState("");
+  const navigate = useNavigate()
 
   const callDesignation = () => {
     axios.get(`${url}/job/one/${id}`)
@@ -87,7 +88,7 @@ export default function JobApplyForm() {
         .then((res) => {
           console.log(res);
           alert("applied successfully");
-         window.location = `/thankyou`;
+         navigate(`/thankyou`);
         })
         .catch((err) => {
           console.log(err);

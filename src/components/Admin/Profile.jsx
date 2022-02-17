@@ -15,8 +15,13 @@ import url from "../../config";
 import { Box } from "@mui/system";
 import { Modal } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useNavigate } from "react-router-dom";
+import ResponsiveDrawer from "./SideBar";
+
+
 
 const Profile = ({name}) => {
+  const navigate = useNavigate()
   console.log(name);
   const style = {
     position: "absolute",
@@ -49,7 +54,10 @@ const Profile = ({name}) => {
     }
     axios.get(`${url}/user/${id}`, {headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
       .then((res) => {
-        // console.log(res.data);
+       if(res.data.message === "Access Denied"){
+         navigate("/login")
+       }
+        
         setUser(res.data);
       })
       .catch((err) => console.log(err));
@@ -91,7 +99,8 @@ const Profile = ({name}) => {
   }
 
   return (
-    <div className="">
+    <div>
+      <ResponsiveDrawer />
       {user.length === 0 ? (
         <div className="text-center">
           <CircularProgress color="secondary" />

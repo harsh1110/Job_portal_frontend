@@ -1,10 +1,11 @@
 import React from 'react';
+import {Link} from "react-router-dom"
 
 
 export default function HomePage() {
   return (
     <div className="Example">
-      <Link className="btn" onClick={(e)=>(window.location = "/login")}>Login</Link>
+      <Link className="btn" to={`/login`}>Login</Link>
     </div>
   );
 }

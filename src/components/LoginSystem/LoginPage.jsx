@@ -45,13 +45,13 @@ export default function LoginPage() {
   // console.log(decodedToken);
   // console.log(isExpired);
 
-const responseSuccessGoogle = (responce) => {
-  console.log(responce)
-}
+  const responseSuccessGoogle = (responce) => {
+    console.log(responce)
+  }
 
-const responseErrorGoogle = (responce) => {
-  
-}
+  const responseErrorGoogle = (responce) => {
+
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -67,13 +67,9 @@ const responseErrorGoogle = (responce) => {
       axios
         .post(`${url}/login`, data)
         .then((value) => {
-          setAuthUser(value.data);
-
-          if (authUser) {
-            localStorage.setItem("token", authUser.token);
-            localStorage.setItem("user", authUser.id);
-            window.location = "/profile";
-          }
+          localStorage.setItem("token", value.data.token);
+          localStorage.setItem("user", value.data.id);
+          window.location = "/profile";
         })
         .catch((err) => {
           console.log(err);
@@ -183,8 +179,8 @@ const responseErrorGoogle = (responce) => {
               >
                 Login
               </Button>
-             
-              
+
+
               <Grid container>
                 <Grid item xs={12} sx={{ textAlign: "center" }}>
                   <Link

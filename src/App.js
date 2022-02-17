@@ -25,42 +25,40 @@ function App() {
 
   return (
     <>
-      {localStorage.getItem("token") ? (
-        //Admin Routes
-        <>
-          <ToastContainer />
-          <BrowserRouter>
-            <ResponsiveDrawer />
-            <Routes>
-              <Route exact path="/profile" element={<Profile />} />
-              <Route exact path="/update/:id" element={<UpdateUser />} />
-              <Route exact path="/dashboard" element={<TopSection />} />
-              <Route exact path="/create-job-post" element={<CreateJob />} />
-              <Route exact path="/job-listing" element={<ShowAllJob />} />
-              <Route exact path="/jobdetails/:id" element={<JobDetails />} />
-              <Route exact path="/all-applicants" element={<AllApplicants />} />
-              <Route exact path="/candidatedetails/:id" element={<CandidateDetails />} />
-              <Route exact path="/logout" element={<Logout />} />
-              <Route exact path="/interview/:id" element={<Interview />} />
-            </Routes>
-          </BrowserRouter>
-        </>
-      ) : (
-        // job seeker routes
-        <>
-          <ToastContainer />
-          <BrowserRouter>
-            <Routes>
-              <Route exact path="/" element={<HomePage />} />
-              <Route exact path="/create-user" element={<Registration />} />
-              <Route exact path="/login" element={<LoginPage />} />
-              <Route exact path="/job/:id" element={<JobApplyForm />} />
-              <Route exact path="/thankyou" element={<ThankYou/>} />
-            </Routes>
-          </BrowserRouter>
-        </>
-      )}
+      <ToastContainer />
+      <BrowserRouter>
+        
+        <Routes>
+          <Route exact path="/profile" element={<Profile />} />
+          <Route exact path="/update/:id" element={<UpdateUser />} />
+          <Route exact path="/dashboard" element={<TopSection />} />
+          <Route exact path="/create-job-post" element={<CreateJob />} />
+          <Route exact path="/job-listing" element={<ShowAllJob />} />
+          <Route exact path="/jobdetails/:id" element={<JobDetails />} />
+          <Route exact path="/all-applicants" element={<AllApplicants />} />
+          <Route exact path="/candidatedetails/:id" element={<CandidateDetails />} />
+          <Route exact path="/logout" element={<Logout />} />
+          <Route exact path="/interview/:id" element={<Interview />} />
+          <Route exact path="/" element={<HomePage />} />
+          <Route exact path="/create-user" element={<Registration />} />
+          <Route exact path="/login" element={<LoginPage />} />
+          <Route exact path="/job/:id" element={<JobApplyForm />} />
+          <Route exact path="/thankyou" element={<ThankYou />} />
+        </Routes>
+      </BrowserRouter>
     </>
+    //   ) : (
+    //     // job seeker routes
+    //     <>
+    //       <ToastContainer />
+    //       <BrowserRouter>
+    //         <Routes>
+
+    //         </Routes>
+    //       </BrowserRouter>
+    //     </>
+    //   )}
+    // </>
   );
 }
 

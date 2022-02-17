@@ -16,7 +16,8 @@ import { Box } from "@mui/system";
 import { Modal } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const Profile = () => {
+const Profile = ({name}) => {
+  console.log(name);
   const style = {
     position: "absolute",
     top: "50%",
@@ -119,7 +120,7 @@ const Profile = () => {
               <hr />
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={4}>
-                  <h5 className="title my-4 mx-0">Profile Deatils</h5>
+                  <h5 className="title my-4 mx-0">Profile Details</h5>
 
                   <Typography
                     variant="h6"

@@ -50,7 +50,10 @@ export default function Registration() {
   // var value = {}
 
   const responseSuccessGoogle = (responce) => {
-    console.log(responce)
+    var name = responce.profileObj.name
+    var email = responce.profileObj.email
+    var pic = responce.profileObj.imageUrl
+    console.log(name,email,pic)
   }
   
   const responseErrorGoogle = (responce) => {
@@ -295,8 +298,9 @@ export default function Registration() {
                 Sign Up
               </Button>
               <GoogleLogin
+              className="text-center w-100"
                 clientId="453891827793-gg8c8uvsofu19gbuhv95e60evked8fc1.apps.googleusercontent.com"
-                buttonText="Login with Google"
+                buttonText="Create Account with Google"
                 onSuccess={responseSuccessGoogle}
                 onFailure={responseErrorGoogle}
                 cookiePolicy={"single_host_origin"}

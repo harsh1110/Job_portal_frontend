@@ -1,5 +1,5 @@
 import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.min.css"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Registration from "./components/LoginSystem/Registration";
 import LoginPage from "./components/LoginSystem/LoginPage";
@@ -22,6 +22,7 @@ import Interview from "./components/Admin/Interview";
 
 
 function App() {
+
   return (
     <>
       {localStorage.getItem("token") ? (

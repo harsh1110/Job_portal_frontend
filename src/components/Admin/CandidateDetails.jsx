@@ -22,6 +22,7 @@ import { init } from "@emailjs/browser";
 import { toast } from "react-toastify";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import LinkIcon from "@mui/icons-material/Link";
+import ResponsiveDrawer from "./SideBar";
 
 const theme = createTheme({
   palette: {
@@ -113,205 +114,208 @@ export default function CandidateDetails() {
       });
   };
   return (
-    <div
-      style={{ marginTop: "-50px" }}
-      className="admin row container text-center candetails"
-    >
-      {candidate.length !== 0 ? (
-        <Grid className="status-card" xs={12} container spacing={2}>
-          <Grid xs={12} sm={6}>
-            <Card
-              className="detail-card"
-              sx={{ height: 650, justifyContent: "center" }}
-            >
-              <CardContent>
-                <Typography
-                  style={{ marginBlock: "30px" }}
-                  variant="h4"
-                  component="div"
-                  color="primary"
-                >
-                  {candidate.designation}
-                </Typography>
-                <Typography
-                  sx={{ fontSize: 20, marginBlock: "50px" }}
-                  color="text.secondary"
-                ></Typography>
-                <Typography
-                  variant="h6"
-                  className="mt-4"
-                  sx={{ textAlign: "left" }}
-                >
-                  <PersonIcon color="primary" />
-                  &nbsp;&nbsp;&nbsp; {candidate.name} ( {candidate.employStatus}{" "}
-                  )
-                </Typography>
-                <Typography
-                  variant="h6"
-                  className="mt-2"
-                  sx={{ textAlign: "left" }}
-                >
-                  <EmailIcon color="primary" /> &nbsp;&nbsp;&nbsp;
-                  {candidate.email}
-                </Typography>
-                <Typography
-                  variant="h6"
-                  className="mt-2"
-                  sx={{ textAlign: "left" }}
-                >
-                  <PhoneIcon color="primary" /> &nbsp;&nbsp;&nbsp;
-                  {candidate.phone}
-                </Typography>
-                <Typography
-                  variant="h6"
-                  className="mt-2"
-                  sx={{ textAlign: "left" }}
-                >
-                  <EventIcon color="primary" />
-                  &nbsp;&nbsp;&nbsp; {candidate.date}
-                </Typography>
-
-                {candidate.Reference.refname === "" ? (
-                  <>
-                    <Typography
-                      variant="h6"
-                      className="mt-2"
-                      sx={{ textAlign: "left" }}
-                    >
-                      <ContactMailIcon color="primary" /> &nbsp;&nbsp;&nbsp; ---
-                      ---
-                    </Typography>
-                  </>
-                ) : (
-                  <>
-                    <Typography
-                      variant="h6"
-                      className="mt-2"
-                      sx={{ textAlign: "left" }}
-                    >
-                      <ContactMailIcon color="primary" /> &nbsp;&nbsp;&nbsp;{" "}
-                      {candidate.Reference.refname} ({" "}
-                      {candidate.Reference.refphone} )
-                    </Typography>
-                  </>
-                )}
-                <Grid style={{ textAlign: "start" }}>
-                  <Typography variant="h6" className="mt-2">
-                    <EqualizerIcon color="primary" />
-                    {candidate.ApplicationStatus === "Pending" ? (
-                      <span className="status text-warning">
-                        &nbsp;&nbsp;&nbsp;{candidate.ApplicationStatus}
-                      </span>
-                    ) : null}
-                    {candidate.ApplicationStatus === "Approve" ? (
-                      <span className="status text-success">
-                        &nbsp;&nbsp;&nbsp;{candidate.ApplicationStatus}
-                      </span>
-                    ) : null}
-                    {candidate.ApplicationStatus === "Reject" ? (
-                      <span className="status text-danger">
-                        &nbsp;&nbsp;&nbsp;{candidate.ApplicationStatus}
-                      </span>
-                    ) : null}
+    <>
+      <ResponsiveDrawer />
+      <div
+        style={{ marginTop: "-50px" }}
+        className="admin row container text-center candetails"
+      >
+        {candidate.length !== 0 ? (
+          <Grid className="status-card" xs={12} container spacing={2}>
+            <Grid xs={12} sm={6}>
+              <Card
+                className="detail-card"
+                sx={{ height: 650, justifyContent: "center" }}
+              >
+                <CardContent>
+                  <Typography
+                    style={{ marginBlock: "30px" }}
+                    variant="h4"
+                    component="div"
+                    color="primary"
+                  >
+                    {candidate.designation}
                   </Typography>
-                </Grid>
-                {candidate.ApplicationStatus === "Approve" ||
-                candidate.ApplicationStatus === "Reject" ? (
-                  <>
-                    <hr />
-                    <div>
-                      <Typography
-                        style={{ marginBlock: "30px" }}
-                        variant="h4"
-                        component="div"
-                        color="primary"
-                      >
-                        Interview Details
-                      </Typography>
+                  <Typography
+                    sx={{ fontSize: 20, marginBlock: "50px" }}
+                    color="text.secondary"
+                  ></Typography>
+                  <Typography
+                    variant="h6"
+                    className="mt-4"
+                    sx={{ textAlign: "left" }}
+                  >
+                    <PersonIcon color="primary" />
+                    &nbsp;&nbsp;&nbsp; {candidate.name} ( {candidate.employStatus}{" "}
+                    )
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    className="mt-2"
+                    sx={{ textAlign: "left" }}
+                  >
+                    <EmailIcon color="primary" /> &nbsp;&nbsp;&nbsp;
+                    {candidate.email}
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    className="mt-2"
+                    sx={{ textAlign: "left" }}
+                  >
+                    <PhoneIcon color="primary" /> &nbsp;&nbsp;&nbsp;
+                    {candidate.phone}
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    className="mt-2"
+                    sx={{ textAlign: "left" }}
+                  >
+                    <EventIcon color="primary" />
+                    &nbsp;&nbsp;&nbsp; {candidate.date}
+                  </Typography>
+
+                  {candidate.Reference.refname === "" ? (
+                    <>
                       <Typography
                         variant="h6"
                         className="mt-2"
                         sx={{ textAlign: "left" }}
                       >
-                        <EventIcon color="primary" /> &nbsp;&nbsp;&nbsp;
-                        {interview.Date}
+                        <ContactMailIcon color="primary" /> &nbsp;&nbsp;&nbsp; ---
+                        ---
                       </Typography>
+                    </>
+                  ) : (
+                    <>
                       <Typography
                         variant="h6"
                         className="mt-2"
                         sx={{ textAlign: "left" }}
                       >
-                        <AccessTimeIcon color="primary" /> &nbsp;&nbsp;&nbsp;
-                        {interview.Time}
+                        <ContactMailIcon color="primary" /> &nbsp;&nbsp;&nbsp;{" "}
+                        {candidate.Reference.refname} ({" "}
+                        {candidate.Reference.refphone} )
                       </Typography>
-                      <Typography
-                        variant="h6"
-                        className="mt-1"
-                        sx={{ textAlign: "left" }}
-                      >
-                        <LinkIcon color="primary" /> &nbsp;&nbsp;&nbsp;
-                        <a
-                          className="text-decoration-none"
-                          href={interview.link}
-                          target="_blank"
-                        >
-                          Join Meeting
-                        </a>
-                      </Typography>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <hr />
+                    </>
+                  )}
+                  <Grid style={{ textAlign: "start" }}>
                     <Typography variant="h6" className="mt-2">
-                      Change Application Status
+                      <EqualizerIcon color="primary" />
+                      {candidate.ApplicationStatus === "Pending" ? (
+                        <span className="status text-warning">
+                          &nbsp;&nbsp;&nbsp;{candidate.ApplicationStatus}
+                        </span>
+                      ) : null}
+                      {candidate.ApplicationStatus === "Approve" ? (
+                        <span className="status text-success">
+                          &nbsp;&nbsp;&nbsp;{candidate.ApplicationStatus}
+                        </span>
+                      ) : null}
+                      {candidate.ApplicationStatus === "Reject" ? (
+                        <span className="status text-danger">
+                          &nbsp;&nbsp;&nbsp;{candidate.ApplicationStatus}
+                        </span>
+                      ) : null}
                     </Typography>
-                    <RadioGroup
-                      onChange={(e) => setapplication(e.target.value)}
-                    >
-                      <FormControlLabel
-                        className="mt--2"
-                        value="Approve"
-                        control={<Radio />}
-                        label="Approve"
-                        onClick={handleStatus}
-                      />
-                      <FormControlLabel
-                        value="Reject"
-                        control={<Radio />}
-                        label="Reject"
-                        onClick={handleStatus}
-                      />
-                    </RadioGroup>
-                    {application !== "" ? (
-                      <Button
-                        className="btn text-white"
-                        onClick={(e) => handleSave(e)}
+                  </Grid>
+                  {candidate.ApplicationStatus === "Approve" ||
+                    candidate.ApplicationStatus === "Reject" ? (
+                    <>
+                      <hr />
+                      <div>
+                        <Typography
+                          style={{ marginBlock: "30px" }}
+                          variant="h4"
+                          component="div"
+                          color="primary"
+                        >
+                          Interview Details
+                        </Typography>
+                        <Typography
+                          variant="h6"
+                          className="mt-2"
+                          sx={{ textAlign: "left" }}
+                        >
+                          <EventIcon color="primary" /> &nbsp;&nbsp;&nbsp;
+                          {interview.Date}
+                        </Typography>
+                        <Typography
+                          variant="h6"
+                          className="mt-2"
+                          sx={{ textAlign: "left" }}
+                        >
+                          <AccessTimeIcon color="primary" /> &nbsp;&nbsp;&nbsp;
+                          {interview.Time}
+                        </Typography>
+                        <Typography
+                          variant="h6"
+                          className="mt-1"
+                          sx={{ textAlign: "left" }}
+                        >
+                          <LinkIcon color="primary" /> &nbsp;&nbsp;&nbsp;
+                          <a
+                            className="text-decoration-none"
+                            href={interview.link}
+                            target="_blank"
+                          >
+                            Join Meeting
+                          </a>
+                        </Typography>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <hr />
+                      <Typography variant="h6" className="mt-2">
+                        Change Application Status
+                      </Typography>
+                      <RadioGroup
+                        onChange={(e) => setapplication(e.target.value)}
                       >
-                        Save
-                      </Button>
-                    ) : (
-                      <Button className="btn text-white" disabled>
-                        Save
-                      </Button>
-                    )}
-                  </>
-                )}
-              </CardContent>
-            </Card>
+                        <FormControlLabel
+                          className="mt--2"
+                          value="Approve"
+                          control={<Radio />}
+                          label="Approve"
+                          onClick={handleStatus}
+                        />
+                        <FormControlLabel
+                          value="Reject"
+                          control={<Radio />}
+                          label="Reject"
+                          onClick={handleStatus}
+                        />
+                      </RadioGroup>
+                      {application !== "" ? (
+                        <Button
+                          className="btn text-white"
+                          onClick={(e) => handleSave(e)}
+                        >
+                          Save
+                        </Button>
+                      ) : (
+                        <Button className="btn text-white" disabled>
+                          Save
+                        </Button>
+                      )}
+                    </>
+                  )}
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid xs={12} sm={6}>
+              <Card
+                className="detail-card"
+                sx={{ height: 650, justifyContent: "center" }}
+              >
+                <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.12.313/build/pdf.worker.min.js">
+                  <Viewer fileUrl={candidate.Resume} />
+                </Worker>
+              </Card>
+            </Grid>
           </Grid>
-          <Grid xs={12} sm={6}>
-            <Card
-              className="detail-card"
-              sx={{ height: 650, justifyContent: "center" }}
-            >
-              <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.12.313/build/pdf.worker.min.js">
-                <Viewer fileUrl={candidate.Resume} />
-              </Worker>
-            </Card>
-          </Grid>
-        </Grid>
-      ) : null}
-    </div>
+        ) : null}
+      </div>
+    </>
   );
 }

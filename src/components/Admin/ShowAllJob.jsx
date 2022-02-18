@@ -25,6 +25,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { Modal } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ResponsiveDrawer from "./SideBar";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -350,6 +351,7 @@ export default function EnhancedTable() {
 
   return (
     <>
+    <ResponsiveDrawer/>
       {alljobs.length === 0 ? (
         <Grid
           item
@@ -651,7 +653,8 @@ export default function EnhancedTable() {
             />
           </Paper>
         </Box>
-      )}
+      )
+      }
     </>
   );
 }

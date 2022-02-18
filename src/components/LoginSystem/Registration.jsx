@@ -23,7 +23,7 @@ import {
   Select,
 } from "@mui/material";
 import url from "../../config";
-import Link from "@mui/material/Link";
+import {Link} from "react-router-dom";
 import GoogleLogin from 'react-google-login'
 import { useNavigate } from "react-router-dom";
 
@@ -78,8 +78,7 @@ export default function Registration() {
     dat.append("pic", pic);
     dat.append("role", role);
     console.log(dat);
-    axios
-      .post(`${url}/add-user`, dat)
+    axios.post(`${url}/add-user`, dat)
       .then((res) => {
         alert("Data send successfully...!!");
         navigate("/login");
@@ -311,7 +310,7 @@ export default function Registration() {
                 <Grid item xs={12} sx={{ textAlign: "center" }}>
                   <Link
                     className="text-decoration-none"
-                    href="/login"
+                    to={"/login"}
                     variant="body2"
                   >
                     {"Already have an account? login"}

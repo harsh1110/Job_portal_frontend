@@ -21,6 +21,7 @@ import {
   createTheme,
   Button,
 } from "@mui/material";
+import ResponsiveDrawer from "./SideBar";
 
 const theme = createTheme({
   palette: {
@@ -85,156 +86,159 @@ const Interview = () => {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <div className="background">
-        <div
-          className="admin row text-center container px-4"
-          style={{
-            justifyContent: "center",
-            background: "url('../../assets/images/background.jpg')",
-          }}
-        >
-          <Grid item xs={12} sm={8} md={5}>
-            <Box
-              className="job-card card p-4"
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              {interview.length === 0 ?
+    <>
+      <ResponsiveDrawer />
+      <ThemeProvider theme={theme}>
+        <div className="background">
+          <div
+            className="admin row text-center container px-4"
+            style={{
+              justifyContent: "center",
+              background: "url('../../assets/images/background.jpg')",
+            }}
+          >
+            <Grid item xs={12} sm={8} md={5}>
+              <Box
+                className="job-card card p-4"
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                {interview.length === 0 ?
 
-                <div>
-                  <Typography
-                    component="h1"
-                    variant="h4"
-                    className="title text-center my-3 purple"
-                    sx={{ alignItems: "center" }}
-                  >
-                    Schedule Interview
-                  </Typography>
+                  <div>
+                    <Typography
+                      component="h1"
+                      variant="h4"
+                      className="title text-center my-3 purple"
+                      sx={{ alignItems: "center" }}
+                    >
+                      Schedule Interview
+                    </Typography>
 
-                  <Form.Control
-                    className="mb-3"
-                    fullWidth
-                    size="lg"
-                    id="designation"
-                    value={data.designation}
-                  />
+                    <Form.Control
+                      className="mb-3"
+                      fullWidth
+                      size="lg"
+                      id="designation"
+                      value={data.designation}
+                    />
 
-                  <Form.Control
-                    className="mb-3"
-                    fullWidth
-                    size="lg"
-                    id="email"
-                    value={data.email}
-                  />
+                    <Form.Control
+                      className="mb-3"
+                      fullWidth
+                      size="lg"
+                      id="email"
+                      value={data.email}
+                    />
 
-                  <TextField
-                    required
-                    fullWidth
-                    id="date"
-                    label="Date"
-                    type="date"
-                    onChange={(e) => setdate(e.target.value)}
-                    sx={{ mb: 3 }}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                  />
+                    <TextField
+                      required
+                      fullWidth
+                      id="date"
+                      label="Date"
+                      type="date"
+                      onChange={(e) => setdate(e.target.value)}
+                      sx={{ mb: 3 }}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                    />
 
-                  <TextField
-                    required
-                    fullWidth
-                    id="time"
-                    label="Time"
-                    type="time"
-                    onChange={(e) => settime(e.target.value)}
-                    sx={{ mb: 3 }}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                  />
+                    <TextField
+                      required
+                      fullWidth
+                      id="time"
+                      label="Time"
+                      type="time"
+                      onChange={(e) => settime(e.target.value)}
+                      sx={{ mb: 3 }}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                    />
 
-                  <TextField
-                    required
-                    fullWidth
-                    id="link"
-                    label="Interview Link"
-                    // type="date"
-                    onChange={(e) => setlink(e.target.value)}
-                    sx={{ mb: 3 }}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                  />
+                    <TextField
+                      required
+                      fullWidth
+                      id="link"
+                      label="Interview Link"
+                      // type="date"
+                      onChange={(e) => setlink(e.target.value)}
+                      sx={{ mb: 3 }}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                    />
 
-                  <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    className="btn"
-                    sx={{ mb: 2 }}
-                    onClick={(e) => handleSubmit(e)}
-                  >
-                    Submit
-                  </Button>
-                  {/* </Box> */}
-                </div>
-                :
-                <div style={{height:"490px"}}>
-                  <Typography
-                    component="h1"
-                    variant="h4"
-                    className="title text-center my-4 purple"
-                    sx={{ alignItems: "center" }}
-                  >
-                    Interview Details
-                  </Typography>
+                    <Button
+                      type="submit"
+                      fullWidth
+                      variant="contained"
+                      className="btn"
+                      sx={{ mb: 2 }}
+                      onClick={(e) => handleSubmit(e)}
+                    >
+                      Submit
+                    </Button>
+                    {/* </Box> */}
+                  </div>
+                  :
+                  <div style={{ height: "490px" }}>
+                    <Typography
+                      component="h1"
+                      variant="h4"
+                      className="title text-center my-4 purple"
+                      sx={{ alignItems: "center" }}
+                    >
+                      Interview Details
+                    </Typography>
 
-                  <Typography
-                    variant="h6"
-                    className="my-4"
-                    sx={{ textAlign: "left" }}
-                  >
-                    <LaptopMacIcon color="primary" />&nbsp;&nbsp;&nbsp; {interview.designation}
-                  </Typography>
-                  <Typography
-                    variant="h6"
-                    className="mt-4"
-                    sx={{ textAlign: "left" }}
-                  >
-                    <EmailIcon color="primary" />&nbsp;&nbsp;&nbsp; {interview.email}
-                  </Typography>
-                  <Typography
-                    variant="h6"
-                    className="mt-4"
-                    sx={{ textAlign: "left" }}
-                  >
-                    <EventIcon color="primary" /> &nbsp;&nbsp;&nbsp;{interview.Date}
-                  </Typography>
-                  <Typography
-                    variant="h6"
-                    className="mt-4"
-                    sx={{ textAlign: "left" }}
-                  >
-                    <AccessTimeIcon color="primary" /> &nbsp;&nbsp;&nbsp;{interview.Time}
-                  </Typography>
-                  <Typography
-                    variant="h6"
-                    className="mt-4"
-                    sx={{ textAlign: "left" }}
-                  >
-                    <LinkIcon color="primary" /> &nbsp;&nbsp;&nbsp;<a className="text-decoration-none" href={interview.link} target="_blank">Join Meeting</a>
-                  </Typography>
+                    <Typography
+                      variant="h6"
+                      className="my-4"
+                      sx={{ textAlign: "left" }}
+                    >
+                      <LaptopMacIcon color="primary" />&nbsp;&nbsp;&nbsp; {interview.designation}
+                    </Typography>
+                    <Typography
+                      variant="h6"
+                      className="mt-4"
+                      sx={{ textAlign: "left" }}
+                    >
+                      <EmailIcon color="primary" />&nbsp;&nbsp;&nbsp; {interview.email}
+                    </Typography>
+                    <Typography
+                      variant="h6"
+                      className="mt-4"
+                      sx={{ textAlign: "left" }}
+                    >
+                      <EventIcon color="primary" /> &nbsp;&nbsp;&nbsp;{interview.Date}
+                    </Typography>
+                    <Typography
+                      variant="h6"
+                      className="mt-4"
+                      sx={{ textAlign: "left" }}
+                    >
+                      <AccessTimeIcon color="primary" /> &nbsp;&nbsp;&nbsp;{interview.Time}
+                    </Typography>
+                    <Typography
+                      variant="h6"
+                      className="mt-4"
+                      sx={{ textAlign: "left" }}
+                    >
+                      <LinkIcon color="primary" /> &nbsp;&nbsp;&nbsp;<a className="text-decoration-none" href={interview.link} target="_blank">Join Meeting</a>
+                    </Typography>
 
-                </div>
-              }
-            </Box>
-          </Grid>
+                  </div>
+                }
+              </Box>
+            </Grid>
+          </div>
         </div>
-      </div>
-    </ThemeProvider>
+      </ThemeProvider>
+    </>
   );
 };
 

@@ -22,6 +22,7 @@ import url from "../../config";
 import { Grid } from "@mui/material";
 import ReportRoundedIcon from "@mui/icons-material/ReportRounded";
 import EventNoteIcon from '@mui/icons-material/EventNote';
+import ResponsiveDrawer from "./SideBar";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -282,6 +283,7 @@ export default function EnhancedTable() {
 
   return (
     <>
+    <ResponsiveDrawer/>
       {data.length === 0 ? (
         <Grid
           item

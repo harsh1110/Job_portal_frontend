@@ -7,6 +7,7 @@ import url from "../../config";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
+import ResponsiveDrawer from "./SideBar"
 
 const theme = createTheme({
     palette: {
@@ -74,6 +75,8 @@ export default function UpdateUser() {
     };
 
     return (
+        <>
+        <ResponsiveDrawer/>
         <ThemeProvider theme={theme}>
             <div className="background">
                 <div
@@ -191,5 +194,6 @@ export default function UpdateUser() {
                 </div>
             </div>
         </ThemeProvider>
+        </>
     );
 }

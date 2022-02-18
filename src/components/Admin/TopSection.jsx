@@ -8,8 +8,11 @@ import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutli
 import url from '../../config';
 import { LineChart } from './LineChart';
 import { PieChart } from './PieChart';
+import { useNavigate } from "react-router-dom"
+import ResponsiveDrawer from './SideBar';
 
 const TopSection = () => {
+    const navigate = useNavigate()
     const id = localStorage.getItem("user")
     const [user, setUser] = useState([]);
     const [totalapplication, settotalapplication] = useState("");
@@ -17,29 +20,35 @@ const TopSection = () => {
     const [approveapplication, setapproveapplication] = useState("");
     const [rejectapplication, setrejectapplication] = useState("");
     useEffect(() => {
-        axios.get(`${url}/user/${id}`,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
+        axios.get(`${url}/user/${id}`, { headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` } })
             .then((res) => {
+                if (res.data.message === "Access Denied") {
+                    navigate("/login")
+                }
+                else{
+                    navigate("/dashboard")
+                }
                 setUser(res.data)
                 // console.log(res.data)
             })
             .catch((err) => console.log(err))
 
-        axios.get(`${url}/job/apply/all`,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
+        axios.get(`${url}/job/apply/all`, { headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` } })
             .then((res) => {
                 settotalapplication(res.data.length)
             })
             .catch((err) => console.log(err))
-        axios.get(`${url}/job/apply/status/Pending`,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
+        axios.get(`${url}/job/apply/status/Pending`, { headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` } })
             .then((res) => {
                 setpendingapplication(res.data.length)
             })
             .catch((err) => console.log(err))
-        axios.get(`${url}/job/apply/status/Approve`,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
+        axios.get(`${url}/job/apply/status/Approve`, { headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` } })
             .then((res) => {
                 setapproveapplication(res.data.length)
             })
             .catch((err) => console.log(err))
-        axios.get(`${url}/job/apply/status/Reject`,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
+        axios.get(`${url}/job/apply/status/Reject`, { headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` } })
             .then((res) => {
                 setrejectapplication(res.data.length)
             })
@@ -51,44 +60,46 @@ const TopSection = () => {
                 <CircularProgress />
             </div>
             :
-        <>
-            <h2 className="text-start title">Hii, {user.name}</h2>
-            <Grid container spacing={{ xs: 4, md: 4 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-                <Grid item xs={12} md={3}>
-                    <div style={{ borderRadius: "15px" }} className="card blue text-center py-2">
-                        <h4 className='blue-icon text-center my-4'><AccountCircleOutlinedIcon /></h4>
-                        <h3 className='number mt-2'>{totalapplication}</h3>
-                        <p className='sub-title mb-4'>Total Applicatios</p>
-                    </div>
+            <>
+
+            <ResponsiveDrawer/>
+                <h2 className="text-start title">Hii, {user.name}</h2>
+                <Grid container spacing={{ xs: 4, md: 4 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                    <Grid item xs={12} md={3}>
+                        <div style={{ borderRadius: "15px" }} className="card blue text-center py-2">
+                            <h4 className='blue-icon text-center my-4'><AccountCircleOutlinedIcon /></h4>
+                            <h3 className='number mt-2'>{totalapplication}</h3>
+                            <p className='sub-title mb-4'>Total Applicatios</p>
+                        </div>
+                    </Grid>
+                    <Grid item xs={12} md={3}>
+                        <div style={{ borderRadius: "15px" }} className="card yellow text-center py-2">
+                            <h4 className='yellow-icon text-center my-4'><AccessTimeIcon /></h4>
+                            <h3 className='number mt-2'>{pendingapplication}</h3>
+                            <p className='sub-title mb-4'>Pending Applications</p>
+                        </div>
+                    </Grid>
+                    <Grid item xs={12} md={3}>
+                        <div style={{ borderRadius: "15px" }} className="card green text-center py-2">
+                            <h4 className='green-icon text-center my-4'><CheckCircleOutlineOutlinedIcon /></h4>
+                            <h3 className='number mt-2'>{approveapplication}</h3>
+                            <p className='sub-title mb-4'>Approved Applications</p>
+                        </div>
+                    </Grid>
+                    <Grid item xs={12} md={3}>
+                        <div style={{ borderRadius: "15px" }} className="card red text-center py-2">
+                            <h4 className='red-icon text-center my-4'><HighlightOffOutlinedIcon /></h4>
+                            <h3 className='number mt-2'>{rejectapplication}</h3>
+                            <p className='sub-title mb-4'>Rejected Application</p>
+                        </div>
+                    </Grid>
                 </Grid>
-                <Grid item xs={12} md={3}>
-                    <div style={{ borderRadius: "15px" }} className="card yellow text-center py-2">
-                        <h4 className='yellow-icon text-center my-4'><AccessTimeIcon /></h4>
-                        <h3 className='number mt-2'>{pendingapplication}</h3>
-                        <p className='sub-title mb-4'>Pending Applications</p>
-                    </div>
-                </Grid>
-                <Grid item xs={12} md={3}>
-                    <div style={{ borderRadius: "15px" }} className="card green text-center py-2">
-                        <h4 className='green-icon text-center my-4'><CheckCircleOutlineOutlinedIcon /></h4>
-                        <h3 className='number mt-2'>{approveapplication}</h3>
-                        <p className='sub-title mb-4'>Approved Applications</p>
-                    </div>
-                </Grid>
-                <Grid item xs={12} md={3}>
-                    <div style={{ borderRadius: "15px" }} className="card red text-center py-2">
-                        <h4 className='red-icon text-center my-4'><HighlightOffOutlinedIcon /></h4>
-                        <h3 className='number mt-2'>{rejectapplication}</h3>
-                        <p className='sub-title mb-4'>Rejected Application</p>
-                    </div>
-                </Grid>
-            </Grid>
-            <div className='mt-4'>
-                <br />
-                <h2 className="text-start title mt-4">Application Tracking</h2>
-                <LineChart />
-            </div>
-                <Grid container spacing={2} style={{marginTop:"100px"}}>
+                <div className='mt-4'>
+                    <br />
+                    <h2 className="text-start title mt-4">Application Tracking</h2>
+                    <LineChart />
+                </div>
+                <Grid container spacing={2} style={{ marginTop: "100px" }}>
                     <Grid item sm={12} xs={12}>
                         <br />
                         <br />
@@ -98,7 +109,7 @@ const TopSection = () => {
                     </Grid>
                     <Grid item sm={6} xs={12}></Grid>
                 </Grid>
-        </>
+            </>
         }
     </div>;
 };

@@ -22,6 +22,7 @@ import url from "../../config";
 import { Grid } from "@mui/material";
 import ReportRoundedIcon from "@mui/icons-material/ReportRounded";
 import EventNoteIcon from '@mui/icons-material/EventNote';
+import ResponsiveDrawer from "./SideBar"
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -104,7 +105,7 @@ function EnhancedTableHead(props) {
         {headCells.map((headCell) => (
           <TableCell
             colSpan={headCell.id === "actions" ? 2 : null}
-            className={headCell.id === "actions"? "fw-bold action":"fw-bold"}
+            className={headCell.id === "actions" ? "fw-bold action" : "fw-bold"}
             key={headCell.id}
             align={headCell.numeric ? "right" : "left"}
             padding={headCell.disablePadding ? "none" : "normal"}
@@ -193,19 +194,19 @@ export default function EnhancedTable() {
   const [alljobs, setAlljobs] = React.useState([]);
   const { id } = useParams();
   const [data, setdata] = React.useState("");
-  
+
   const [ref, setref] = React.useState([]);
   const navigate = useNavigate()
 
   React.useEffect((e) => {
-    axios.get(`${url}/job/apply/all/${id}`,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}}).then((value) => {
+    axios.get(`${url}/job/apply/all/${id}`, { headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` } }).then((value) => {
       setdata(value.data);
       // setref(data.map((i) => i.Reference));
       console.log(ref);
     });
   }, []);
   const handleView = (e, candidateid) => {
-    axios.get(`${url}/job/apply/one/${candidateid}`,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}}).then((res) => {
+    axios.get(`${url}/job/apply/one/${candidateid}`, { headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` } }).then((res) => {
       navigate(`/candidatedetails/${candidateid}`);
     });
   };
@@ -268,6 +269,7 @@ export default function EnhancedTable() {
 
   return (
     <>
+      <ResponsiveDrawer />
       {data.length === 0 ? (
         <Grid
           item

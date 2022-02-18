@@ -87,7 +87,7 @@ function ResponsiveDrawer(props) {
             {/* </Container> */}
             <List>
                 {['Profile', 'Dashboard', 'Create Job Post', "Job Listing","All Applicants", "Log Out"].map((text, index) => (
-                    <Link className='text-decoration-none text-dark' onClick={(e) => (window.location.reload())} to={locations[index]}>
+                    <Link className='text-decoration-none text-dark' to={locations[index]}>
                         {
                             active === locations[index] ?
                                 <ListItem className='active' id={text.slice(0, 2)} name={text} button key={text}>

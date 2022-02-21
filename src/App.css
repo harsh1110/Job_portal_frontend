@@ -50,7 +50,7 @@ body::-webkit-scrollbar-thumb {
   margin-left: 250px !important;
   color: var(--darkblue);
   margin-bottom: 20px !important;
-  margin-top: -50px !important;
+  margin-top: 50px !important;
   text-align: center;
 }
 
@@ -268,6 +268,10 @@ body::-webkit-scrollbar-thumb {
 
 th.action span{
   margin-left: 65px !important;
+}
+
+.button-job{
+  margin-top: 50px;
 }
 /* #reactgooglegraph-1 div div div svg g text{
   font-size: 30px !important;

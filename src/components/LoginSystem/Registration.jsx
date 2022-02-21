@@ -6,22 +6,15 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Button, Form } from "react-bootstrap";
-import { deepPurple, purple } from "@mui/material/colors";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
-import Resizer from "react-image-file-resizer";
 import {
   Card,
   CardMedia,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-} from "@mui/material";
+ } from "@mui/material";
 import url from "../../config";
 import {Link} from "react-router-dom";
 import GoogleLogin from 'react-google-login'

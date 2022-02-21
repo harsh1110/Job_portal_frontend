@@ -15,8 +15,6 @@ import { toast } from "react-toastify";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import url from "../../config";
-import fronturl from "../../config";
-import GoogleLogin from 'react-google-login'
 import { useNavigate } from "react-router-dom";
 
 const theme = createTheme({
@@ -33,11 +31,9 @@ const theme = createTheme({
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
-  const [authUser, setAuthUser] = useState();
   const [toaster, settoaster] = useState(true);
   const navigate = useNavigate()
-  var msg = [];
-
+ 
   // console.log(window.location = );
   // var token = "harsh"
   // const { decodedToken, isExpired } = useJwt(token);
@@ -47,13 +43,7 @@ export default function LoginPage() {
   // console.log(decodedToken);
   // console.log(isExpired);
 
-  const responseSuccessGoogle = (responce) => {
-    console.log(responce)
-  }
-
-  const responseErrorGoogle = (responce) => {
-
-  }
+ 
 
   const handleSubmit = (event) => {
     event.preventDefault();

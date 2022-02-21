@@ -117,8 +117,8 @@ export default function CandidateDetails() {
     <>
       <ResponsiveDrawer />
       <div
-        style={{ marginTop: "-50px" }}
-        className="admin row container text-center candetails"
+        style={{ padding:'40px' }}
+        className="admin row container text-center candetails "
       >
         {candidate.length !== 0 ? (
           <Grid className="status-card" xs={12} container spacing={2}>

@@ -1,13 +1,12 @@
 import React from "react";
 import { useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import {useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import url from "../../config";
 import Form from "react-bootstrap/Form";
 import emailjs from "@emailjs/browser"
 import { init } from '@emailjs/browser';
 import EmailIcon from "@mui/icons-material/Email";
-import PhoneIcon from "@mui/icons-material/Phone";
 import EventIcon from "@mui/icons-material/Event";
 import LaptopMacIcon from '@mui/icons-material/LaptopMac';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
@@ -53,7 +52,7 @@ const Interview = () => {
       .then((value) => {
         setinterview(value.data);
       });
-  }, []);
+  }, [id]);
 
   const handleSubmit = () => {
     const details = {
@@ -228,7 +227,7 @@ const Interview = () => {
                       className="mt-4"
                       sx={{ textAlign: "left" }}
                     >
-                      <LinkIcon color="primary" /> &nbsp;&nbsp;&nbsp;<a className="text-decoration-none" href={interview.link} target="_blank">Join Meeting</a>
+                      <LinkIcon color="primary" /> &nbsp;&nbsp;&nbsp;<a className="text-decoration-none" href={interview.link} rel="noreferrer" target="_blank">Join Meeting</a>
                     </Typography>
 
                   </div>

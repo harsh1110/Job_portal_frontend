@@ -88,11 +88,8 @@ const headCells = [
 
 function EnhancedTableHead(props) {
   const {
-    onSelectAllClick,
     order,
     orderBy,
-    numSelected,
-    rowCount,
     onRequestSort,
   } = props;
   const createSortHandler = (property) => (event) => {
@@ -189,22 +186,17 @@ export default function EnhancedTable() {
   const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [alljobs, setAlljobs] = React.useState([]);
   const { id } = useParams();
   const [data, setdata] = React.useState("");
-
-  const [ref, setref] = React.useState([]);
   const navigate = useNavigate()
 
   React.useEffect((e) => {
     axios.get(`${url}/job/apply/all/${id}`, { headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` } }).then((value) => {
       setdata(value.data);
-      // setref(data.map((i) => i.Reference));
-      console.log(ref);
+      
     });
-  }, []);
+  }, [id]);
   const handleView = (e, candidateid) => {
     axios.get(`${url}/job/apply/one/${candidateid}`, { headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` } }).then((res) => {
       navigate(`/candidatedetails/${candidateid}`);
@@ -257,10 +249,6 @@ export default function EnhancedTable() {
     setPage(0);
   };
 
-  const handleChangeDense = (event) => {
-    setDense(event.target.checked);
-  };
-
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
   // Avoid a layout jump when reaching the last page with empty rows.
@@ -306,7 +294,6 @@ export default function EnhancedTable() {
               <Table
                 sx={{ minWidth: 750 }}
                 aria-labelledby="tableTitle"
-                size={dense ? "small" : "medium"}
               >
                 <EnhancedTableHead
                   numSelected={selected.length}
@@ -394,7 +381,7 @@ export default function EnhancedTable() {
                   {emptyRows > 0 && (
                     <TableRow
                       style={{
-                        height: (dense ? 33 : 53) * emptyRows,
+                        height: 33 * emptyRows,
                       }}
                     >
                       <TableCell colSpan={6} />

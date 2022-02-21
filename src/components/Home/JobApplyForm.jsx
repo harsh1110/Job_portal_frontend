@@ -8,7 +8,6 @@ import { Radio, RadioGroup } from "@mui/material";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Card from "@mui/material/Card";
-import emailjs from "@emailjs/browser";
 import url from "../../config";
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { toast } from "react-toastify";

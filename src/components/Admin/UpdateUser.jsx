@@ -28,7 +28,7 @@ export default function UpdateUser() {
     const [pass, setpass] = useState("");
     const [user, setUser] = useState([]);
     const navigate = useNavigate()
-    if (window.document.referrer === "http://localhost:3000/Create%20Job%20Post") {
+    if (window.location.pathname === "/create-job-post") {
         toast.success("Create Job Successfully")
     }
     const handlePicDelete = (e) => {
@@ -44,7 +44,7 @@ export default function UpdateUser() {
     }
     useEffect(() => {
         fatchData()
-    }, []);
+    });
     const { id } = useParams()
     const fatchData = () => {
         axios.get(`${url}/user/${id}`,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})

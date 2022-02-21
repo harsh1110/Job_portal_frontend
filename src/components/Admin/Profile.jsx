@@ -14,7 +14,6 @@ import { toast } from "react-toastify";
 import url from "../../config";
 import { Box } from "@mui/system";
 import { Modal } from "@mui/material";
-import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from "react-router-dom";
 import ResponsiveDrawer from "./SideBar";
 
@@ -42,9 +41,6 @@ const Profile = ({name}) => {
   const [newname, setnewname] = useState("");
   const [newemail, setnewemail] = useState("");
   const [newphone, setnewphone] = useState("");
-  const [newpass, setnewpass] = useState("");
-  const [newconpass, setnewconpass] = useState("");
-  const [newpic, setnewpic] = useState("");
   const handleClose = () => setOpen(false);
   
 
@@ -66,37 +62,9 @@ const Profile = ({name}) => {
         setRecenteData(res.data.slice(-4).reverse());
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [id]);
 
-  const handleModal = (e, id) => {
-    setOpen(true);
-  };
 
-  const handleEditProfile = (e) => {
-    const id = user._id;
-    var data = new FormData();
-    data.append("name", newname !== "" ? newname : user.name);
-    data.append("email", newemail !== "" ? newemail : user.email);
-    data.append("phone", newphone !== "" ? newphone : user.phone);
-    data.append("pic", newpic);
-    data.append("profile", user.pic);
-    data.append("pass", newpass !== "" ? newpass : user.pass);
-    data.append("conpass", newconpass !== "" ? newconpass : user.conpass);
-
-    axios.post(`${url}/update-user/${id}`, data,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}}).then((res) => {
-      console.log(res);
-    });
-  };
-  const handlePicDelete = (e) => {
-    // e.preventDefault()
-    axios.delete(`${url}/pic/${id}`,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
-      .then((res) => {
-        toast.success("Picture Deleted Successfully")
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }
 
   return (
     <div>
@@ -153,52 +121,6 @@ const Profile = ({name}) => {
                     &nbsp;&nbsp;Edit Profile
                   </Button>
                 </Grid>
-                <Modal
-                  open={open}
-                  onClose={handleClose}
-                  aria-labelledby="modal-modal-title"
-                  aria-describedby="modal-modal-description"
-                >
-                  <Box sx={style}>
-                    <div style={{ textAlign: "center" }}>
-                      <Typography variant="h6" color="blue" className="mb-2">
-                        Edit Profile
-                      </Typography>
-                      <input
-                        fullWidth
-                        defaultValue={user.name}
-                        onChange={(event) => setnewname(event.target.value)}
-                      ></input>
-                      <br />
-                      <br />
-                      <input
-                        defaultValue={user.email}
-                        onChange={(event) => setnewemail(event.target.value)}
-                      ></input>
-                      <br />
-                      <br />
-                      <input
-                        defaultValue={user.phone}
-                        onChange={(event) => setnewphone(event.target.value)}
-                      ></input>
-                      <br />
-                      <br />
-
-                      <br />
-                      <br />
-
-                      <Button
-                        variant="contained"
-                        onClick={(e) => {
-                          handleEditProfile(e);
-                          handleClose();
-                        }}
-                      >
-                        Ok
-                      </Button>
-                    </div>
-                  </Box>
-                </Modal>
                 <Grid item xs={12} sm={8}>
                   <h5 className="title my-4 mx-0">
                     {" "}

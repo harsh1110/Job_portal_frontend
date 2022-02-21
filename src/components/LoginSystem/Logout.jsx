@@ -7,7 +7,7 @@ const Logout = () => {
     localStorage.clear()
     useEffect(() => {
         navigate("/login")
-    }, []);
+    }, [navigate]);
     return (
         <div>
             <div className="text-center">

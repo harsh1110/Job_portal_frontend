@@ -27,11 +27,12 @@ export function LineChart() {
     ]]
     useEffect(() => {
         fetchData()
-    }, []);
+    });
     post.map((value) => {
         if (value.limit !== 0) {
             data.push([value.designation, value.appliedBy, "#2d82f8", `${value.appliedBy}`])
         }
+        return data
     })
 
     const fetchData = () => {

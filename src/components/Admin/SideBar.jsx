@@ -31,7 +31,6 @@ function ResponsiveDrawer(props) {
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const [user, setUser] = React.useState([]);
     const [all, setall] = React.useState([])
-    const navigate = useNavigate()
 
     var jobIds = []
     const handleDrawerToggle = () => {
@@ -55,18 +54,19 @@ function ResponsiveDrawer(props) {
                 console.log(err);
             })
        
-    }, []);
+    },[active, id]);
     const icon = [<PersonIcon />, <DashboardIcon />, <AddIcon />, <TocIcon />,<PeopleIcon/>, <LogoutIcon />]
     const locations = ['/profile', '/dashboard', '/create-job-post', "/job-listing","/all-applicants", "/logout"]
     all.map((job) => {
         jobIds.push(`/jobdetails/${job._id}`);
-        // console.log(jobIds);
+        return jobIds
     })
         jobIds.map((jobpath) => {
             if (active === jobpath) {
                 document.getElementById("Jo").classList.add("active")
                 document.getElementById("Job").classList.add("active")
             }
+            return jobIds
         })
     
     const drawer = (

@@ -2,9 +2,8 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { FormControlLabel, Typography } from "@mui/material";
-import { Card, CardContent, CardActions } from "@mui/material";
+import { Card, CardContent } from "@mui/material";
 import { Button } from "@mui/material";
 import { Grid } from "@mui/material";
 import ContactMailIcon from "@mui/icons-material/ContactMail";
@@ -24,17 +23,6 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import LinkIcon from "@mui/icons-material/Link";
 import ResponsiveDrawer from "./SideBar";
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#2d82f8",
-    },
-    secondary: {
-      main: "rgb(196,209,64)",
-    },
-  },
-});
-
 export default function CandidateDetails() {
   const { id } = useParams();
   const [candidate, setcandidate] = useState([]);
@@ -45,7 +33,7 @@ export default function CandidateDetails() {
   if (window.document.referrer === window.location.href) {
     toast.success("Change Status Successfully");
   }
-
+// eslint-disable-next-line
   React.useEffect((e) => {
     axios
       .get(`http://localhost:5000/job/apply/one/${id}`, {
@@ -62,7 +50,7 @@ export default function CandidateDetails() {
         console.log(value.data);
         setinterview(value.data);
       });
-  }, []);
+  }, [id]);
 
   const handleStatus = (e) => {
     setstatus(e.target.value);
@@ -256,6 +244,7 @@ export default function CandidateDetails() {
                           <a
                             className="text-decoration-none"
                             href={interview.link}
+                            rel="noreferrer"
                             target="_blank"
                           >
                             Join Meeting

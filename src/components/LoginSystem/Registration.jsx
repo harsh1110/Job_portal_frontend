@@ -11,12 +11,9 @@ import { Button, Form } from "react-bootstrap";
 import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
-import {
-  Card,
-  CardMedia,
- } from "@mui/material";
+import { Card, CardMedia } from "@mui/material";
 import url from "../../config";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import GoogleLogin from 'react-google-login'
 import { useNavigate } from "react-router-dom";
 
@@ -38,27 +35,28 @@ export default function Registration() {
   const [pic, setpic] = useState();
   const [pass, setpass] = useState("");
   const [conpass, setconpass] = useState("");
-  const [data, setdata] = useState();
+  const [data, setdata] = useState([]);
   const [key, setKey] = useState("");
   const navigate = useNavigate()
-  
+
   // var value = {}
 
   const responseSuccessGoogle = (responce) => {
     var name = responce.profileObj.name
     var email = responce.profileObj.email
     var pic = responce.profileObj.imageUrl
-    console.log(name,email,pic)
-  }
-  
-  const responseErrorGoogle = (responce) => {
-    
+    console.log(name, email, pic)
   }
 
+
   useEffect(() => {
-    axios.get("http://localhost:5000/all").then((value) => {
-      setdata(value.data);
-    });
+    axios.get(`${url}/all`)
+      .then((value) => {
+        setdata(value.data)
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }, []);
 
   var sendData = () => {
@@ -73,7 +71,7 @@ export default function Registration() {
     console.log(dat);
     axios.post(`${url}/add-user`, dat)
       .then((res) => {
-        alert("Data send successfully...!!");
+        console.log(res);
         navigate("/login");
       })
       .catch((err) => console.log(err));
@@ -99,9 +97,6 @@ export default function Registration() {
     ) {
       alert("fields can not Empty...!!");
     }
-    // else if (!(/[a-zA-Z]{5}/).test(name)) {
-    //     alert("Name is not valid...!!")
-    // }
     else if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9.-]+.[a-zA-Z]$/.test(email)) {
       alert("email is not valid...!!");
     } else if (emaildata.includes(email)) {
@@ -158,11 +153,11 @@ export default function Registration() {
         </Grid>
         <Grid item xs={12} sm={8} md={7} elevation={6} square>
           <Box
-          className="registration-box"
+            className="registration-box"
             sx={{
               my: 4,
               mx: 4,
-              px:20,
+              px: 20,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -292,11 +287,11 @@ export default function Registration() {
                 Sign Up
               </Button>
               <GoogleLogin
-              className="text-center w-100"
+                className="text-center w-100"
                 clientId="453891827793-gg8c8uvsofu19gbuhv95e60evked8fc1.apps.googleusercontent.com"
                 buttonText="Create Account with Google"
                 onSuccess={responseSuccessGoogle}
-                onFailure={responseErrorGoogle}
+                // onFailure={responseErrorGoogle}
                 cookiePolicy={"single_host_origin"}
               />
               <Grid container>

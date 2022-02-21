@@ -33,17 +33,6 @@ export default function LoginPage() {
   const [pass, setPass] = useState("");
   const [toaster, settoaster] = useState(true);
   const navigate = useNavigate()
- 
-  // console.log(window.location = );
-  // var token = "harsh"
-  // const { decodedToken, isExpired } = useJwt(token);
-  // if(authUser){
-  //   token = authUser._id
-  // }
-  // console.log(decodedToken);
-  // console.log(isExpired);
-
- 
 
   const handleSubmit = (event) => {
     event.preventDefault();

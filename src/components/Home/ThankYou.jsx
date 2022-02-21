@@ -1,5 +1,4 @@
 import React from "react";
-import Card from "@mui/material/Card";
 import { Grid, Typography } from "@mui/material";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 

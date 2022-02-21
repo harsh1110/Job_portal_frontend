@@ -3,7 +3,6 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Registration from "./components/LoginSystem/Registration";
 import LoginPage from "./components/LoginSystem/LoginPage";
-import ResponsiveDrawer from "./components/Admin/SideBar";
 import Profile from "./components/Admin/Profile";
 import TopSection from "./components/Admin/TopSection";
 import Logout from "./components/LoginSystem/Logout";

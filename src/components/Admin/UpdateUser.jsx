@@ -44,7 +44,7 @@ export default function UpdateUser() {
     }
     useEffect(() => {
         fatchData()
-    });
+    },[]);
     const { id } = useParams()
     const fatchData = () => {
         axios.get(`${url}/user/${id}`,{headers: {'Authorization': `Bearer ${localStorage.getItem("token")}`}})
